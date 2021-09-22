@@ -27,7 +27,6 @@ import com.rzspider.common.constant.CommonSymbolicConstant;
 import com.rzspider.common.constant.FileMessageConstant;
 import com.rzspider.common.constant.project.CommonGameConstant;
 import com.rzspider.common.utils.StringUtils;
-import com.rzspider.framework.aspectj.lang.annotation.Log;
 import com.rzspider.framework.web.controller.BaseController;
 import com.rzspider.framework.web.page.TableDataInfo;
 import com.rzspider.framework.web.domain.Message;

@@ -1,6 +1,5 @@
 package com.rzspider.project.commontool.toolrun.utils;
 
-import java.io.File;
 import java.util.HashMap;
 
 import org.json.JSONArray;

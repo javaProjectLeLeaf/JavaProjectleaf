@@ -1,7 +1,6 @@
 package com.rzspider.project.blog.blogcolumn.domain;
 
 import com.rzspider.framework.web.domain.BaseEntity;
-import com.rzspider.project.system.menu.domain.Menu;
 
 import java.util.ArrayList;
 import java.util.Date;

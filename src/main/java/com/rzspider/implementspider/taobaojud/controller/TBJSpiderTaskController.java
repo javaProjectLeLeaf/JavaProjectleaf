@@ -2,15 +2,8 @@ package com.rzspider.implementspider.taobaojud.controller;
 
 import java.io.IOException;
 import java.net.MalformedURLException;
-import java.util.List;
 
-import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.FailingHttpStatusCodeException;
-import com.gargoylesoftware.htmlunit.NicelyResynchronizingAjaxController;
-import com.gargoylesoftware.htmlunit.WebClient;
-import com.gargoylesoftware.htmlunit.html.DomElement;
-import com.gargoylesoftware.htmlunit.html.HtmlPage;
-import com.rzspider.framework.aspectj.lang.annotation.Log;
 import com.rzspider.implementspider.taobaojud.domain.TBJLandParams;
 import com.rzspider.implementspider.taobaojud.service.TBJSpiderTaskService;
 

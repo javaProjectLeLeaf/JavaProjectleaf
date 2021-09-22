@@ -1,6 +1,5 @@
 //其他处理
-$(document)
-		.ready(
+$(document).ready(
 				function() {
 					// 处理背景显示
 					var loginbgType = $('#loginbgType').val();
@@ -8,15 +7,8 @@ $(document)
 					if (loginbgType == 0 || loginbgType == 1) {
 						console.log(loginbgName)
 						// 链接显示或者图片显示，base64
-						$("#signin")
-								.css(
-										"background",
-										'url('
-												+ (loginbgName == '' ? '/img/background/login-background.jpg'
-														: loginbgName)
-												+ ') no-repeat center fixed');
+						$("#signin").css("background", 'url(' + (loginbgName == '' ? '/img/background/login-background.jpg' : loginbgName) + ') no-repeat center fixed');
 						$("#signin").css("background-size", 'cover');
-
 					} else if (loginbgType == 2) {
 						// 特效显示
 						if (loginbgName == 0) {

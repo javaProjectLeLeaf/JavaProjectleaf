@@ -18,8 +18,6 @@ import com.rzspider.project.common.file.utilt.FileUtils;
 import com.rzspider.project.system.website.domain.Website;
 import com.rzspider.project.system.website.service.IWebsiteService;
 import com.rzspider.project.tool.straightlinkmanage.domain.Straightlinkmanage;
-import com.rzspider.project.tool.straightlinkmanage.domain.Straightlinkmanage;
-import com.rzspider.project.tool.straightlinkmanage.service.IStraightlinkmanageService;
 
 /**
  * 直链管理详情 服务层实现

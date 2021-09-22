@@ -2,23 +2,17 @@ package com.rzspider.project.spider.spidertask.service;
 
 import java.util.Date;
 import java.util.List;
-import java.util.concurrent.ExecutionException;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.concurrent.Future;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.socket.TextMessage;
 
-import com.itextpdf.text.log.SysoCounter;
 import com.rzspider.common.constant.CommonSymbolicConstant;
 import com.rzspider.common.constant.ReturnMessageConstant;
 import com.rzspider.common.constant.ScheduleConstants;
 import com.rzspider.common.constant.WebSocketConstants;
 import com.rzspider.common.utils.DateUtils;
 import com.rzspider.common.utils.StringUtils;
-import com.rzspider.common.utils.spring.SpringUtils;
 import com.rzspider.framework.websocket.service.WebSocketPushHandler;
 import com.rzspider.project.spider.spidertask.mapper.SpidertaskinfoMapper;
 import com.rzspider.project.common.spiderdata.domain.Spiderdata;
@@ -28,8 +22,6 @@ import com.rzspider.project.spider.spidertask.domain.Spidertaskinfo;
 import com.rzspider.project.spider.spidertask.mainwork.domain.StartSpiderInfo;
 import com.rzspider.project.spider.spidertask.mainwork.service.ICustomspiderRunService;
 import com.rzspider.project.spider.spidertask.mainwork.utils.SpiderTaskThreadUtils;
-import com.rzspider.project.spider.spidertask.service.ISpidertaskinfoService;
-import com.rzspider.project.spider.spidertask.utils.SpiderScheduleJob;
 import com.rzspider.project.spider.spidertask.utils.SpiderScheduleRunnable;
 
 /**

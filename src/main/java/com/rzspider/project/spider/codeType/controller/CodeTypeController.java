@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import com.rzspider.project.spider.codeType.domain.CodeType;
 import com.rzspider.project.spider.codeType.service.ICodeTypeService;
-import com.rzspider.project.spider.spidermanage.domain.SpiderManage;
 import com.rzspider.common.constant.CommonConstant;
 import com.rzspider.framework.aspectj.lang.annotation.Log;
 import com.rzspider.framework.web.controller.BaseController;

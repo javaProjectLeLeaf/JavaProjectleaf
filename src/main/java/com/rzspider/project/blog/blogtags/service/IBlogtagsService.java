@@ -1,6 +1,5 @@
 package com.rzspider.project.blog.blogtags.service;
 
-import com.rzspider.project.blog.blogcolumn.domain.Blogcolumn;
 import com.rzspider.project.blog.blogtags.domain.Blogtags;
 import java.util.List;
 

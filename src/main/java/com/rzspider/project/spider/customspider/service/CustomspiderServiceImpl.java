@@ -1,16 +1,12 @@
 package com.rzspider.project.spider.customspider.service;
 
 import java.io.File;
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.rzspider.common.constant.CommonSymbolicConstant;
-import com.rzspider.common.constant.UserConstants;
 import com.rzspider.common.constant.project.SpiderConstant;
 import com.rzspider.common.utils.StringUtils;
 import com.rzspider.common.utils.security.ShiroUtils;
@@ -19,13 +15,9 @@ import com.rzspider.project.spider.customspider.mapper.CustomspiderMapper;
 import com.rzspider.project.spider.codeType.domain.CodeType;
 import com.rzspider.project.spider.codeType.mapper.CodeTypeMapper;
 import com.rzspider.project.spider.customspider.domain.Customspider;
-import com.rzspider.project.spider.customspider.domain.CustomspiderBackupcode;
-import com.rzspider.project.spider.customspider.domain.FileTree;
-import com.rzspider.project.spider.customspider.service.ICustomspiderService;
 import com.rzspider.project.spider.customspider.utils.BaseCSUtils;
 import com.rzspider.project.spider.spidermanage.domain.SpiderList;
 import com.rzspider.project.spider.spidermanage.mapper.SpiderListMapper;
-import com.rzspider.project.system.dept.domain.Dept;
 import com.rzspider.project.tool.baseset.service.IBasesetService;
 
 /**

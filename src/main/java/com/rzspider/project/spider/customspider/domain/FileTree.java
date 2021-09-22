@@ -1,7 +1,5 @@
 package com.rzspider.project.spider.customspider.domain;
 
-import com.rzspider.framework.web.domain.Message;
-
 public class FileTree {
 	/** 爬虫代码目录 */
 	private String spiderCodeTypeFolder;

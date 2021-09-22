@@ -7,9 +7,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import com.rzspider.common.constant.project.SpiderConstant;
-import com.rzspider.project.spider.customspider.utils.ConsoleSimulator;
 import com.rzspider.project.spider.customspider.utils.RunUtils;
-import com.rzspider.project.spider.customspider.utils.WebSocketConsoleThread;
 
 public class CustomSpiderRunUtils {
 

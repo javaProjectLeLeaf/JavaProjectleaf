@@ -10,7 +10,6 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 import com.rzspider.common.constant.CommonSymbolicConstant;
 import com.rzspider.implementspider.commonutils.SpecificInternalSpiderDataUtils;
-import com.rzspider.implementspider.suzhouhouse.domain.houseshow.HouseShowMessage;
 import com.rzspider.implementspider.suzhouhouse.domain.permitpresale.PermitPresaleMessage;
 import com.rzspider.implementspider.suzhouhouse.domain.permitpresale.PermitPresaleParams;
 import com.rzspider.project.common.spiderdata.domain.ReturnSpiderDataMessage;

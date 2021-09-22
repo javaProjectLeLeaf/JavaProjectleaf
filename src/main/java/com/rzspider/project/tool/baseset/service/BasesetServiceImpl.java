@@ -17,10 +17,8 @@ import com.rzspider.framework.web.domain.Message;
 import com.rzspider.project.tool.baseset.mapper.BasesetMapper;
 import com.rzspider.project.common.file.utilt.FileUtils;
 import com.rzspider.project.common.spiderdata.service.ISpiderdataService;
-import com.rzspider.project.commontool.toolmanage.domain.Toolmanage;
 import com.rzspider.project.spider.customspider.service.ICustomspiderService;
 import com.rzspider.project.tool.baseset.domain.Baseset;
-import com.rzspider.project.tool.baseset.service.IBasesetService;
 import com.rzspider.project.tool.downloadmanage.domain.Downloadmanage;
 import com.rzspider.project.tool.downloadmanage.service.IDownloadmanageService;
 

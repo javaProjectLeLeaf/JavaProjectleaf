@@ -1,11 +1,8 @@
 package com.rzspider.project.spider.spidermanage.service;
 
 import java.util.List;
-import java.util.Set;
 
-import com.rzspider.project.spider.spidermanage.domain.SpiderList;
 import com.rzspider.project.spider.spidermanage.domain.SpiderManage;
-import com.rzspider.project.system.role.domain.Role;
 
 /**
  * 爬虫业务层

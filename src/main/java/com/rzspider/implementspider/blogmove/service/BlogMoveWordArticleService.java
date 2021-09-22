@@ -8,21 +8,15 @@ import java.util.List;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.TransformerException;
 
-import org.jsoup.Jsoup;
-import org.jsoup.nodes.Document;
 import org.springframework.web.socket.TextMessage;
 import org.xml.sax.SAXException;
 
-import com.gargoylesoftware.htmlunit.BrowserVersion;
-import com.gargoylesoftware.htmlunit.WebClient;
-import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.rzspider.common.constant.CommonSymbolicConstant;
 import com.rzspider.common.constant.WebSocketConstants;
 import com.rzspider.common.utils.DateUtils;
 import com.rzspider.common.utils.security.ShiroUtils;
 import com.rzspider.framework.config.FilePathConfig;
 import com.rzspider.framework.websocket.service.WebSocketPushHandler;
-import com.rzspider.implementspider.blogmove.utils.BlogMoveCSDNUtils;
 import com.rzspider.implementspider.blogmove.utils.BlogMoveCommonUtils;
 import com.rzspider.implementspider.blogmove.utils.BlogMoveWordUtils;
 import com.rzspider.project.blog.blogcontent.domain.Blogcontent;

@@ -1,6 +1,5 @@
 package com.rzspider.project.tool.baseset.domain;
 
-import com.rzspider.framework.web.domain.BaseEntity;
 import java.util.Date;
 
 /**

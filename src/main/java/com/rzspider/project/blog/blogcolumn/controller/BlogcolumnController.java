@@ -9,13 +9,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import com.rzspider.project.blog.blogcolumn.domain.Blogcolumn;
 import com.rzspider.project.blog.blogcolumn.service.IBlogcolumnService;
-import com.rzspider.project.blog.blogcontent.domain.Blogcontent;
-import com.rzspider.project.spider.codeType.domain.CodeType;
-import com.rzspider.project.spider.spidermanage.domain.SpiderManage;
 import com.rzspider.project.system.role.service.IRoleService;
 import com.rzspider.common.constant.CommonConstant;
 import com.rzspider.common.constant.UserConstants;
@@ -23,7 +19,6 @@ import com.rzspider.common.utils.OtherUtils;
 import com.rzspider.common.utils.security.ShiroUtils;
 import com.rzspider.framework.aspectj.lang.annotation.Log;
 import com.rzspider.framework.web.controller.BaseController;
-import com.rzspider.framework.web.page.TableDataInfo;
 import com.rzspider.framework.web.domain.Message;
 
 /**

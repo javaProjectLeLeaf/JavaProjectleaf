@@ -1,25 +1,14 @@
 package com.rzspider.project.spider.spidermanage.service;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.rzspider.common.constant.UserConstants;
-import com.rzspider.common.utils.OtherUtils;
 import com.rzspider.common.utils.StringUtils;
 import com.rzspider.common.utils.security.ShiroUtils;
-import com.rzspider.project.spider.spidermanage.domain.SpiderList;
 import com.rzspider.project.spider.spidermanage.domain.SpiderManage;
 import com.rzspider.project.spider.spidermanage.mapper.SpiderManageMapper;
-import com.rzspider.project.system.role.domain.Role;
-import com.rzspider.project.system.role.domain.RoleMenu;
-import com.rzspider.project.system.role.mapper.RoleMapper;
-import com.rzspider.project.system.role.mapper.RoleMenuMapper;
-import com.rzspider.project.system.role.service.IRoleService;
-import com.rzspider.project.system.user.mapper.UserRoleMapper;
 
 /**
  * 爬虫业务层处理

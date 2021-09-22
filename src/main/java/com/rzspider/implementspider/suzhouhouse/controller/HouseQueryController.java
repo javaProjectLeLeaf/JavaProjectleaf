@@ -5,13 +5,10 @@ import java.net.MalformedURLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.poi.xssf.usermodel.XSSFWorkbook;
-
 import com.gargoylesoftware.htmlunit.FailingHttpStatusCodeException;
 import com.rzspider.implementspider.commonutils.JavaCommonSpiderUtils;
 import com.rzspider.implementspider.suzhouhouse.domain.housequery.HouseQueryMessage;
 import com.rzspider.implementspider.suzhouhouse.domain.housequery.HouseQueryParams;
-import com.rzspider.implementspider.suzhouhouse.domain.permitpresale.PermitPresaleMessage;
 import com.rzspider.implementspider.suzhouhouse.service.HouseQueryService;
 
 public class HouseQueryController {

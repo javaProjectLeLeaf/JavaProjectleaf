@@ -1,6 +1,5 @@
 package com.rzspider.project.blog.blogcontent.controller;
 
-import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
@@ -22,7 +21,6 @@ import org.springframework.web.socket.TextMessage;
 import com.rzspider.common.constant.CommonSymbolicConstant;
 import com.rzspider.common.constant.FileExtensionConstant;
 import com.rzspider.common.constant.FileMessageConstant;
-import com.rzspider.common.constant.FileOtherConstant;
 import com.rzspider.common.constant.ReturnMessageConstant;
 import com.rzspider.common.constant.UserConstants;
 import com.rzspider.common.constant.WebSocketConstants;

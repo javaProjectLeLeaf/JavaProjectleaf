@@ -7,7 +7,6 @@ import com.rzspider.common.utils.StringUtils;
 import com.rzspider.common.utils.security.ShiroUtils;
 import com.rzspider.project.blog.blognotice.mapper.BlognoticeMapper;
 import com.rzspider.project.blog.blognotice.domain.Blognotice;
-import com.rzspider.project.blog.blognotice.service.IBlognoticeService;
 
 /**
  * 博客公告 服务层实现

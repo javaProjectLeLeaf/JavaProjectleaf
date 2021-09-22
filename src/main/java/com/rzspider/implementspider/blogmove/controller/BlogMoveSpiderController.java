@@ -1,12 +1,10 @@
 package com.rzspider.implementspider.blogmove.controller;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.net.MalformedURLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.socket.TextMessage;
 
 import com.gargoylesoftware.htmlunit.FailingHttpStatusCodeException;
@@ -27,7 +25,6 @@ import com.rzspider.project.blog.blogcontent.domain.Blogmove;
 import com.rzspider.project.blog.blogcontent.service.BlogmoveServiceImpl;
 import com.rzspider.project.blog.blogcontent.service.IBlogcontentService;
 import com.rzspider.project.blog.blogcontent.service.IBlogmoveService;
-import com.rzspider.project.blog.blogcontent.utils.BlogUtil;
 import com.rzspider.project.blog.blogset.domain.Blogset;
 import com.rzspider.project.blog.blogset.service.IBlogsetService;
 

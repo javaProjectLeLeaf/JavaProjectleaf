@@ -89,7 +89,7 @@ shiro:
 # 代码生成
 gen:
   # 作者
-  author: ricozhou
+  author: Leaf
   # 默认生成包路径 module 需改成自己的模块名称 如 system monitor tool
   packageName: com.rzspider.project.blog
   # 自动去除表前缀，默认是true

@@ -1,7 +1,6 @@
 package com.rzspider.project.book.bookmanage.controller;
 
 import java.io.IOException;
-import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -26,15 +25,12 @@ import com.rzspider.project.book.bookmanage.domain.Bookmanage;
 import com.rzspider.project.book.bookmanage.service.IBookmanageService;
 import com.rzspider.project.book.bookmanage.utils.BookmanageUtils;
 import com.rzspider.project.common.file.utilt.FileUtils;
-import com.rzspider.project.monitor.operlog.domain.OperLog;
-import com.rzspider.project.system.role.service.IRoleService;
 import com.rzspider.project.tool.baseset.service.IBasesetService;
 import com.rzspider.common.constant.CommonSymbolicConstant;
 import com.rzspider.common.constant.FileExtensionConstant;
 import com.rzspider.common.constant.FileMessageConstant;
 import com.rzspider.common.constant.project.BookConstant;
 import com.rzspider.common.utils.FileUploadUtils;
-import com.rzspider.common.utils.OtherUtils;
 import com.rzspider.common.utils.security.ShiroUtils;
 import com.rzspider.framework.aspectj.lang.annotation.Log;
 import com.rzspider.framework.config.FilePathConfig;

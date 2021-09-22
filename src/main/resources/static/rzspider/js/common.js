@@ -1,6 +1,6 @@
 /**
  * 通用方法封装处理
- * Copyright (c) 2018 rzspider 
+ * Copyright (c) 2018 rzspider
  */
 
 /** 消息状态码 */

@@ -13,8 +13,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.rzspider.project.monitor.job.domain.Job;
-import com.rzspider.project.spider.customspider.domain.Customspider;
 import com.rzspider.project.spider.spidermanage.domain.SpiderManage;
 import com.rzspider.project.spider.spidermanage.service.ISpiderManageService;
 import com.rzspider.project.spider.spidertask.domain.Spidertask;

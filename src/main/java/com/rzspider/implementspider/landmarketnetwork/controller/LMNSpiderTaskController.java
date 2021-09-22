@@ -5,16 +5,7 @@ import java.net.MalformedURLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.poi.xssf.usermodel.XSSFWorkbook;
-import org.springframework.beans.factory.annotation.Autowired;
-
-import com.fasterxml.jackson.core.JsonParseException;
-import com.fasterxml.jackson.databind.JsonMappingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.FailingHttpStatusCodeException;
-import com.gargoylesoftware.htmlunit.WebClient;
-import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.rzspider.implementspider.commonutils.JavaCommonSpiderUtils;
 import com.rzspider.implementspider.landmarketnetwork.domain.LMNLandMessageDetail;
 import com.rzspider.implementspider.landmarketnetwork.domain.LMNLandParams;
@@ -22,8 +13,6 @@ import com.rzspider.implementspider.landmarketnetwork.service.HNLMNSpiderTaskSer
 import com.rzspider.implementspider.landmarketnetwork.service.JSLMNSpiderTaskService;
 import com.rzspider.implementspider.landmarketnetwork.service.ZJLMNSpiderTaskService;
 import com.rzspider.implementspider.landmarketnetwork.utils.LMNLandCommonUtils;
-import com.rzspider.project.spider.spidermanage.service.ISpiderListService;
-import com.rzspider.project.spider.spidertask.mainwork.domain.StartSpiderInfo;
 
 public class LMNSpiderTaskController {
 	public JSLMNSpiderTaskService jSlMNSpiderTaskService = new JSLMNSpiderTaskService();

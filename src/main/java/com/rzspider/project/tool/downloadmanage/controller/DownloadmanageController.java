@@ -19,7 +19,6 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.rzspider.project.tool.downloadmanage.domain.Downloadmanage;
 import com.rzspider.project.tool.downloadmanage.service.IDownloadmanageService;
-import com.rzspider.common.constant.FileExtensionConstant;
 import com.rzspider.common.constant.FileMessageConstant;
 import com.rzspider.common.constant.ReturnMessageConstant;
 import com.rzspider.common.utils.FileUploadUtils;

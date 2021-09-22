@@ -3,8 +3,6 @@ package com.rzspider.common.utils;
 import java.util.Iterator;
 import java.util.Map;
 
-import com.rzspider.project.spider.spidertask.service.SpidertaskServiceImpl;
-
 public class MapUtils {
 
 	// 从map中去除某个元素

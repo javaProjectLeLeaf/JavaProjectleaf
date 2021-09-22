@@ -8,8 +8,6 @@ import java.util.UUID;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.TransformerException;
 
-import org.jsoup.Jsoup;
-import org.jsoup.nodes.Document;
 import org.xml.sax.SAXException;
 
 import com.rzspider.common.constant.FileExtensionConstant;

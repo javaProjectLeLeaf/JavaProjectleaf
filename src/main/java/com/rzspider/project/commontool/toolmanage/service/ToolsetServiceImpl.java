@@ -1,9 +1,7 @@
 package com.rzspider.project.commontool.toolmanage.service;
 
-import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import com.rzspider.common.utils.StringUtils;
 import com.rzspider.project.commontool.toolmanage.domain.Toolset;
 import com.rzspider.project.commontool.toolmanage.mapper.ToolsetMapper;
 

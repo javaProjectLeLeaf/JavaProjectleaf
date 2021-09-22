@@ -1,6 +1,5 @@
 package com.rzspider.project.spider.spidermanage.domain;
 
-import java.util.Arrays;
 import com.rzspider.framework.web.domain.BaseEntity;
 
 /**

@@ -1,6 +1,5 @@
 package com.rzspider.project.blog.blogcontent.mapper;
 
-import com.rzspider.project.blog.blogcontent.domain.Blogcontent;
 import com.rzspider.project.blog.blogcontent.domain.BlogcontentTags;
 
 import java.util.List;

@@ -1,8 +1,6 @@
 package com.rzspider.project.tool.downloadmanage.service;
 
-import java.io.ByteArrayOutputStream;
 import java.io.File;
-import java.io.FileInputStream;
 import java.util.List;
 import java.util.UUID;
 
@@ -16,13 +14,11 @@ import com.rzspider.common.utils.ServiceInfoUtil;
 import com.rzspider.common.utils.StringUtils;
 import com.rzspider.common.utils.security.ShiroUtils;
 import com.rzspider.framework.config.FilePathConfig;
-import com.rzspider.framework.config.ResourcesConfig;
 import com.rzspider.project.tool.downloadmanage.mapper.DownloadmanageMapper;
 import com.rzspider.project.common.file.utilt.FileUtils;
 import com.rzspider.project.system.website.domain.Website;
 import com.rzspider.project.system.website.service.IWebsiteService;
 import com.rzspider.project.tool.downloadmanage.domain.Downloadmanage;
-import com.rzspider.project.tool.downloadmanage.service.IDownloadmanageService;
 
 /**
  * 下载管理详情 服务层实现

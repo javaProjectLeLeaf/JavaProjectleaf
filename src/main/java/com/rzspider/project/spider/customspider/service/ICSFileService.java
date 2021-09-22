@@ -1,7 +1,5 @@
 package com.rzspider.project.spider.customspider.service;
 
-import com.rzspider.project.spider.customspider.domain.Customspider;
-import com.rzspider.project.spider.customspider.domain.CustomspiderBackupcode;
 import com.rzspider.project.spider.customspider.domain.FileTree;
 
 import java.util.List;

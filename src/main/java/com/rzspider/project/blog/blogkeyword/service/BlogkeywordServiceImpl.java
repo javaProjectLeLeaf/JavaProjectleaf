@@ -9,8 +9,6 @@ import com.rzspider.common.utils.StringUtils;
 import com.rzspider.common.utils.security.ShiroUtils;
 import com.rzspider.project.blog.blogkeyword.mapper.BlogkeywordMapper;
 import com.rzspider.project.blog.blogkeyword.domain.Blogkeyword;
-import com.rzspider.project.blog.blogkeyword.service.IBlogkeywordService;
-import com.rzspider.project.blog.blogtags.domain.Blogtags;
 
 /**
  * 关键词管理 服务层实现

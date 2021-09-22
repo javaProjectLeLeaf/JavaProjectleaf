@@ -11,7 +11,6 @@ import java.io.FileOutputStream;
 
 import javax.imageio.ImageIO;
 
-import com.rzspider.framework.config.FilePathConfig;
 import com.rzspider.project.common.file.utilt.FileUtils;
 
 /**

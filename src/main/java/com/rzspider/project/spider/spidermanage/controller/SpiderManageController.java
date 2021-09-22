@@ -21,14 +21,10 @@ import com.rzspider.framework.aspectj.lang.annotation.Log;
 import com.rzspider.framework.web.controller.BaseController;
 import com.rzspider.framework.web.domain.Message;
 import com.rzspider.framework.web.page.TableDataInfo;
-import com.rzspider.project.spider.customspider.domain.Customspider;
 import com.rzspider.project.spider.spidermanage.domain.SpiderList;
 import com.rzspider.project.spider.spidermanage.domain.SpiderManage;
 import com.rzspider.project.spider.spidermanage.service.ISpiderListService;
 import com.rzspider.project.spider.spidermanage.service.ISpiderManageService;
-import com.rzspider.project.spider.spidertask.domain.Spidertask;
-import com.rzspider.project.system.role.domain.Role;
-import com.rzspider.project.system.role.service.IRoleService;
 
 /**
  * 爬虫信息

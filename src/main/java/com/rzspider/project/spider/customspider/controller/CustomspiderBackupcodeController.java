@@ -1,8 +1,6 @@
 package com.rzspider.project.spider.customspider.controller;
 
-import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
@@ -20,7 +18,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.rzspider.common.constant.CommonSymbolicConstant;
-import com.rzspider.common.constant.FileExtensionConstant;
 import com.rzspider.common.constant.FileMessageConstant;
 import com.rzspider.common.constant.project.SpiderConstant;
 import com.rzspider.common.constant.project.SpiderMessageConstant;
@@ -28,12 +25,10 @@ import com.rzspider.framework.aspectj.lang.annotation.Log;
 import com.rzspider.framework.web.controller.BaseController;
 import com.rzspider.framework.web.page.TableDataInfo;
 import com.rzspider.project.common.file.utilt.FileUtils;
-import com.rzspider.project.spider.customspider.domain.Customspider;
 import com.rzspider.project.spider.customspider.domain.CustomspiderBackupcode;
 import com.rzspider.project.spider.customspider.domain.FileTree;
 import com.rzspider.project.spider.customspider.service.ICSFileService;
 import com.rzspider.project.spider.customspider.service.ICustomspiderBackupcodeService;
-import com.rzspider.project.spider.spidertask.utils.SpidertaskUtils;
 import com.rzspider.framework.web.domain.Message;
 
 /**

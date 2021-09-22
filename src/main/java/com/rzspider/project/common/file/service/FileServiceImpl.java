@@ -7,7 +7,6 @@ import java.io.File;
 import java.util.List;
 import java.util.Map;
 
-import org.springframework.util.Assert;
 import org.springframework.util.StringUtils;
 
 import com.rzspider.common.constant.CommonSymbolicConstant;

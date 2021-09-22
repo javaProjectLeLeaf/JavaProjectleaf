@@ -3,8 +3,6 @@ package com.rzspider.project.book.bookmanage.service;
 import com.rzspider.project.book.bookmanage.domain.Bookmanage;
 import java.util.List;
 
-import org.springframework.web.multipart.MultipartFile;
-
 /**
  * 图书详情 服务层
  * 

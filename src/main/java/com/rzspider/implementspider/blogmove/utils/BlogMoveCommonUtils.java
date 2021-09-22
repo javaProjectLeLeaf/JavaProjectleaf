@@ -26,7 +26,6 @@ import com.rzspider.common.utils.ImageUtils;
 import com.rzspider.framework.config.FilePathConfig;
 import com.rzspider.project.blog.blogcontent.domain.Blogcontent;
 import com.rzspider.project.blog.blogcontent.domain.Blogmove;
-import com.rzspider.project.blog.blogset.domain.Blogset;
 import com.rzspider.project.common.image.utils.WaterMarkUtils;
 
 /**

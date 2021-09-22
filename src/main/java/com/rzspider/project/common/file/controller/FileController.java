@@ -22,7 +22,6 @@ import com.rzspider.common.constant.FileOtherConstant;
 import com.rzspider.common.constant.OtherConstant;
 import com.rzspider.common.constant.ReturnMessageConstant;
 import com.rzspider.common.utils.FileUploadUtils;
-import com.rzspider.framework.aspectj.lang.annotation.Log;
 import com.rzspider.framework.config.FilePathConfig;
 import com.rzspider.framework.web.domain.Message;
 import com.rzspider.project.common.file.FileType;

@@ -2,12 +2,8 @@ package com.rzspider.project.spider.customspider.service;
 
 import com.rzspider.project.spider.codeType.domain.CodeType;
 import com.rzspider.project.spider.customspider.domain.Customspider;
-import com.rzspider.project.spider.customspider.domain.CustomspiderBackupcode;
-import com.rzspider.project.spider.customspider.domain.FileTree;
 
-import java.io.ByteArrayOutputStream;
 import java.util.List;
-import java.util.Map;
 
 /**
  * 自定义爬虫详情 服务层

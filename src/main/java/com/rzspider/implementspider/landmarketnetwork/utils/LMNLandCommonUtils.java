@@ -1,25 +1,11 @@
 package com.rzspider.implementspider.landmarketnetwork.utils;
 
-import java.io.IOException;
-import java.net.MalformedURLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
-
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.gargoylesoftware.htmlunit.BrowserVersion;
-import com.gargoylesoftware.htmlunit.FailingHttpStatusCodeException;
-import com.gargoylesoftware.htmlunit.WebClient;
-import com.gargoylesoftware.htmlunit.html.HtmlElement;
-import com.gargoylesoftware.htmlunit.html.HtmlPage;
-import com.rzspider.common.utils.spring.SpringUtils;
 import com.rzspider.implementspider.landmarketnetwork.domain.LMNLandMessageDetail;
-import com.rzspider.implementspider.landmarketnetwork.domain.LMNLandParams;
-import com.rzspider.project.common.spiderdata.domain.Spiderdata;
-import com.rzspider.project.common.spiderdata.service.ISpiderdataService;
-import com.rzspider.project.common.spiderdata.service.SpiderdataServiceImpl;
 
 public class LMNLandCommonUtils {
 

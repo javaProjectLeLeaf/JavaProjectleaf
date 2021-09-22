@@ -2,7 +2,6 @@ package com.rzspider.project.commontool.toolrun.controller;
 
 import java.util.List;
 
-import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,7 +11,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.rzspider.framework.aspectj.lang.annotation.Log;
 import com.rzspider.project.commontool.toolmanage.domain.Toolmanage;
 import com.rzspider.project.commontool.toolmanage.service.IToolmanageService;
 

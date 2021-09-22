@@ -3,7 +3,6 @@ package com.rzspider.project.spider.codeType.service;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import com.rzspider.common.utils.StringUtils;
 import com.rzspider.project.spider.codeType.domain.CodeTypeData;
 import com.rzspider.project.spider.codeType.mapper.CodeTypeDataMapper;
 

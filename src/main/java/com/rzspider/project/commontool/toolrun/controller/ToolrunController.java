@@ -2,21 +2,14 @@ package com.rzspider.project.commontool.toolrun.controller;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
 import java.util.UUID;
 
 import javax.imageio.stream.FileImageInputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.apache.commons.io.IOUtils;
-import org.apache.shiro.authz.annotation.RequiresPermissions;
-import org.apache.tomcat.util.http.fileupload.FileUploadBase.FileSizeLimitExceededException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.transaction.annotation.Transactional;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -30,12 +23,9 @@ import com.rzspider.common.constant.FileExtensionConstant;
 import com.rzspider.common.constant.FileMessageConstant;
 import com.rzspider.common.constant.GetMessageConstant;
 import com.rzspider.common.constant.ReturnMessageConstant;
-import com.rzspider.common.constant.project.CommonToolConstant;
-import com.rzspider.common.constant.project.SpiderConstant;
 import com.rzspider.common.constant.project.ToolrunConstant;
 import com.rzspider.common.utils.FileUploadUtils;
 import com.rzspider.common.utils.ImageUtils;
-import com.rzspider.common.utils.StringUtils;
 import com.rzspider.framework.aspectj.lang.annotation.Log;
 import com.rzspider.framework.config.FilePathConfig;
 import com.rzspider.framework.web.controller.BaseController;
@@ -49,7 +39,6 @@ import com.rzspider.project.commontool.toolrun.domain.ImgToChar;
 import com.rzspider.project.commontool.toolrun.domain.MatchRegularExpression;
 import com.rzspider.project.commontool.toolrun.domain.ORCode;
 import com.rzspider.project.commontool.toolrun.service.IToolrunService;
-import com.rzspider.project.spider.customspider.domain.FileTree;
 
 /**
  * 通用工具运行 信息操作处理

@@ -23,7 +23,6 @@ import com.rzspider.common.constant.RegularExpressionConstant;
 import com.rzspider.common.constant.project.SpiderConstant;
 import com.rzspider.common.utils.StringUtils;
 import com.rzspider.common.utils.SystemInfoUtils;
-import com.rzspider.framework.config.FilePathConfig;
 import com.rzspider.project.common.file.utilt.FileUtils;
 import com.rzspider.project.spider.customspider.domain.Customspider;
 import com.rzspider.project.spider.customspider.domain.FileTree;

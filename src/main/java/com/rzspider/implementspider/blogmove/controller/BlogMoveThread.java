@@ -1,7 +1,5 @@
 package com.rzspider.implementspider.blogmove.controller;
 
-import java.io.PrintWriter;
-
 import com.rzspider.project.blog.blogcontent.domain.Blogmove;
 
 /**

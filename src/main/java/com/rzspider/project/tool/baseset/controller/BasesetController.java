@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.rzspider.project.commontool.toolmanage.domain.Toolmanage;
 import com.rzspider.project.tool.baseset.domain.Baseset;
 import com.rzspider.project.tool.baseset.service.IBasesetService;
 import com.rzspider.common.constant.CommonConstant;

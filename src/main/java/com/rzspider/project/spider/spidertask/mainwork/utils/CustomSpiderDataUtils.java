@@ -3,22 +3,15 @@ package com.rzspider.project.spider.spidertask.mainwork.utils;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.Map.Entry;
 
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 import java.util.Set;
 
-import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.alibaba.fastjson.TypeReference;
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.itextpdf.text.log.SysoCounter;
 import com.rzspider.project.common.spiderdata.domain.Spiderdata;
 
 public class CustomSpiderDataUtils {

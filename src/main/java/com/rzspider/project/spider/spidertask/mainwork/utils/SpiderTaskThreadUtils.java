@@ -4,7 +4,6 @@ import java.util.Iterator;
 import java.util.Map;
 
 import com.rzspider.common.constant.project.SpiderConstant;
-import com.rzspider.project.spider.customspider.utils.WebSocketConsoleThread;
 import com.rzspider.project.spider.spidertask.mainwork.runutils.TaskConsoleSimulator;
 import com.rzspider.project.spider.spidertask.service.SpidertaskServiceImpl;
 

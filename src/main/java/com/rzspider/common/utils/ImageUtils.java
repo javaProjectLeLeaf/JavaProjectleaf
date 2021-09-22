@@ -1,7 +1,6 @@
 package com.rzspider.common.utils;
 
 import java.awt.Color;
-import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.geom.AffineTransform;
@@ -10,9 +9,7 @@ import java.awt.image.BufferedImage;
 import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -24,7 +21,6 @@ import com.rzspider.common.constant.CommonSymbolicConstant;
 import com.rzspider.common.constant.FileExtensionConstant;
 import com.rzspider.common.constant.FileOtherConstant;
 import com.rzspider.common.constant.RegularExpressionConstant;
-import com.rzspider.common.constant.project.ToolrunConstant;
 import com.rzspider.framework.config.FilePathConfig;
 import com.rzspider.project.common.checkutils.CheckStringUtils;
 import com.rzspider.project.common.image.gifdecoder.AnimatedGifEncoder;

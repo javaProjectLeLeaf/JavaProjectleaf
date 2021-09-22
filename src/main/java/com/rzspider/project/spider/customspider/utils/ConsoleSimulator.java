@@ -4,18 +4,13 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.io.OutputStream;
 import java.io.UnsupportedEncodingException;
 
-import org.springframework.web.socket.TextMessage;
-
-import com.itextpdf.text.log.SysoCounter;
 import com.rzspider.common.constant.CodingConstant;
 import com.rzspider.common.constant.CommonSymbolicConstant;
 import com.rzspider.common.utils.spring.SpringUtils;
 import com.rzspider.project.spider.customspider.domain.Customspider;
 import com.rzspider.project.spider.customspider.service.ICustomspiderService;
-import com.rzspider.project.spider.spidertask.service.ISpidertaskService;
 
 //另起线程截取程序流
 public class ConsoleSimulator implements Runnable {

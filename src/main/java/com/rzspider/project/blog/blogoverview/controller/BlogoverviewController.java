@@ -1,7 +1,5 @@
 package com.rzspider.project.blog.blogoverview.controller;
 
-import java.util.List;
-
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -11,8 +9,6 @@ import org.springframework.web.bind.annotation.*;
 import com.rzspider.framework.web.controller.BaseController;
 import com.rzspider.project.blog.blogoverview.domain.Blogoverview;
 import com.rzspider.project.blog.blogoverview.service.IBlogoverviewService;
-import com.rzspider.project.blog.blogset.domain.Blogset;
-import com.rzspider.project.blog.blogset.service.IBlogsetService;
 
 /**
  * 博客网站 信息操作处理

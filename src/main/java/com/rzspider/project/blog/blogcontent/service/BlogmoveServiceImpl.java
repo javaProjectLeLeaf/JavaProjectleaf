@@ -8,17 +8,14 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.itextpdf.text.log.SysoCounter;
 import com.rzspider.common.utils.DateUtils;
 import com.rzspider.common.utils.MapUtils;
-import com.rzspider.common.utils.StringUtils;
 import com.rzspider.common.utils.ThreadUtils;
 import com.rzspider.common.utils.security.ShiroUtils;
 import com.rzspider.implementspider.blogmove.controller.BlogMoveSpiderController;
 import com.rzspider.implementspider.blogmove.controller.BlogMoveThread;
 import com.rzspider.project.blog.blogcontent.mapper.BlogmoveMapper;
 import com.rzspider.project.blog.blogcontent.domain.Blogmove;
-import com.rzspider.project.blog.blogcontent.service.IBlogmoveService;
 
 /**
  * 博客搬家详情 服务层实现

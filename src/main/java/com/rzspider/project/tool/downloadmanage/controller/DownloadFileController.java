@@ -6,7 +6,6 @@ import java.util.Date;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.io.IOUtils;
-import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,7 +15,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.rzspider.common.constant.CommonSymbolicConstant;
 import com.rzspider.common.constant.FileMessageConstant;
-import com.rzspider.common.constant.project.CommonToolConstant;
 import com.rzspider.common.constant.project.ToolConstant;
 import com.rzspider.common.utils.DateUtils;
 import com.rzspider.framework.aspectj.lang.annotation.Log;

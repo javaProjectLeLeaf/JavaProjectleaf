@@ -18,7 +18,6 @@ import com.rzspider.common.constant.UserConstants;
 import com.rzspider.common.utils.OtherUtils;
 import com.rzspider.common.utils.security.ShiroUtils;
 import com.rzspider.framework.web.controller.BaseController;
-import com.rzspider.framework.web.page.TableDataInfo;
 import com.rzspider.framework.web.domain.Message;
 
 /**

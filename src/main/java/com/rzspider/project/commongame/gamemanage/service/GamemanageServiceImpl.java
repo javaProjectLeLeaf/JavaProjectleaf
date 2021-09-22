@@ -18,8 +18,6 @@ import com.rzspider.framework.web.domain.Message;
 import com.rzspider.project.commongame.gamemanage.mapper.GamemanageMapper;
 import com.rzspider.project.common.file.utilt.FileUtils;
 import com.rzspider.project.commongame.gamemanage.domain.Gamemanage;
-import com.rzspider.project.commongame.gamemanage.service.IGamemanageService;
-import com.rzspider.project.spider.spidermanage.domain.SpiderManage;
 
 /**
  * 通用游戏管理 服务层实现

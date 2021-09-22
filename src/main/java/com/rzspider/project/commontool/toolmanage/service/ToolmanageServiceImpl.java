@@ -18,8 +18,6 @@ import com.rzspider.framework.web.domain.Message;
 import com.rzspider.project.commontool.toolmanage.mapper.ToolmanageMapper;
 import com.rzspider.project.common.file.utilt.FileUtils;
 import com.rzspider.project.commontool.toolmanage.domain.Toolmanage;
-import com.rzspider.project.commontool.toolmanage.service.IToolmanageService;
-import com.rzspider.project.spider.spidermanage.domain.SpiderManage;
 
 /**
  * 通用工具管理 服务层实现

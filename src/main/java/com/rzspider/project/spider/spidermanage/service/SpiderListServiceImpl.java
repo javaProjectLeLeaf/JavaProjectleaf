@@ -9,8 +9,6 @@ import com.rzspider.common.utils.StringUtils;
 import com.rzspider.project.spider.spidermanage.mapper.SpiderListMapper;
 import com.rzspider.project.spider.customspider.domain.Customspider;
 import com.rzspider.project.spider.spidermanage.domain.SpiderList;
-import com.rzspider.project.spider.spidermanage.domain.SpiderManage;
-import com.rzspider.project.spider.spidermanage.service.ISpiderListService;
 import com.rzspider.project.spider.spidertask.utils.SpidertaskUtils;
 
 /**

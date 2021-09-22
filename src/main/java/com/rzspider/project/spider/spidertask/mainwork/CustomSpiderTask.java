@@ -11,11 +11,9 @@ import com.rzspider.common.utils.StringUtils;
 import com.rzspider.common.utils.spring.SpringUtils;
 import com.rzspider.framework.config.FilePathConfig;
 import com.rzspider.project.spider.customspider.domain.Customspider;
-import com.rzspider.project.spider.customspider.service.ICSFileService;
 import com.rzspider.project.spider.customspider.service.ICustomspiderService;
 import com.rzspider.project.spider.spidertask.mainwork.domain.StartSpiderInfo;
 import com.rzspider.project.spider.spidertask.mainwork.service.ICustomspiderRunService;
-import com.rzspider.project.spider.spidertask.service.ISpidertaskService;
 
 /**
  * 定时任务调度

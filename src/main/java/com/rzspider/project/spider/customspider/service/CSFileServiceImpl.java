@@ -9,36 +9,23 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.gargoylesoftware.htmlunit.javascript.host.Console;
 import com.rzspider.common.constant.CMDConstant;
 import com.rzspider.common.constant.CommonSymbolicConstant;
 import com.rzspider.common.constant.FileExtensionConstant;
 import com.rzspider.common.constant.RegularExpressionConstant;
-import com.rzspider.common.constant.UserConstants;
 import com.rzspider.common.constant.project.SpiderConstant;
 import com.rzspider.common.utils.MapUtils;
 import com.rzspider.common.utils.StringUtils;
 import com.rzspider.common.utils.SystemInfoUtils;
-import com.rzspider.common.utils.security.ShiroUtils;
 import com.rzspider.framework.config.FilePathConfig;
-import com.rzspider.project.spider.customspider.mapper.CustomspiderMapper;
 import com.rzspider.project.spider.customspider.mapper.FileTreeMapper;
 import com.rzspider.project.common.file.utilt.FileUtils;
-import com.rzspider.project.spider.codeType.domain.CodeType;
-import com.rzspider.project.spider.codeType.mapper.CodeTypeMapper;
 import com.rzspider.project.spider.codeType.service.ICodeTypeService;
 import com.rzspider.project.spider.customspider.domain.Customspider;
-import com.rzspider.project.spider.customspider.domain.CustomspiderBackupcode;
 import com.rzspider.project.spider.customspider.domain.FileTree;
-import com.rzspider.project.spider.customspider.service.ICustomspiderService;
 import com.rzspider.project.spider.customspider.utils.BaseCSUtils;
 import com.rzspider.project.spider.customspider.utils.CompilerUtils;
-import com.rzspider.project.spider.customspider.utils.ConsoleSimulator;
 import com.rzspider.project.spider.customspider.utils.RunUtils;
-import com.rzspider.project.spider.spidermanage.domain.SpiderList;
-import com.rzspider.project.spider.spidermanage.mapper.SpiderListMapper;
-import com.rzspider.project.spider.spidermanage.service.ISpiderListService;
-import com.rzspider.project.tool.baseset.service.IBasesetService;
 
 /**
  * 自定义爬虫文件操作 服务层实现

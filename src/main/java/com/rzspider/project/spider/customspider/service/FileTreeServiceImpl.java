@@ -6,7 +6,6 @@ import org.springframework.stereotype.Service;
 import com.rzspider.common.utils.StringUtils;
 import com.rzspider.project.spider.customspider.mapper.FileTreeMapper;
 import com.rzspider.project.spider.customspider.domain.FileTree;
-import com.rzspider.project.spider.customspider.service.IFileTreeService;
 
 /**
  * 文件树 服务层实现

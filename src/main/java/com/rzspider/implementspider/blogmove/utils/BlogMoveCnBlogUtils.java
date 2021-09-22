@@ -1,18 +1,6 @@
 package com.rzspider.implementspider.blogmove.utils;
 
-import java.awt.Color;
-import java.awt.Font;
-import java.io.BufferedInputStream;
 import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.net.URLConnection;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
@@ -22,17 +10,11 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
-import com.rzspider.common.constant.CommonSymbolicConstant;
-import com.rzspider.common.constant.FileExtensionConstant;
-import com.rzspider.common.constant.FileOtherConstant;
 import com.rzspider.common.utils.DateUtils;
-import com.rzspider.common.utils.ImageUtils;
 import com.rzspider.framework.config.FilePathConfig;
 import com.rzspider.project.blog.blogcontent.domain.Blogcontent;
 import com.rzspider.project.blog.blogcontent.domain.Blogmove;
-import com.rzspider.project.blog.blogset.domain.Blogset;
 import com.rzspider.project.common.file.utilt.FileUtils;
-import com.rzspider.project.common.image.utils.WaterMarkUtils;
 
 /**
  * @author ricozhou

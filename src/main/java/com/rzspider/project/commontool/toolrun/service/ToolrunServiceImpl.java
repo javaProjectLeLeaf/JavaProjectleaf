@@ -1,14 +1,11 @@
 package com.rzspider.project.commontool.toolrun.service;
 
-import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.io.File;
-import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Hashtable;
 import java.util.List;
-import java.util.UUID;
 
 import javax.imageio.ImageIO;
 
@@ -18,10 +15,8 @@ import org.springframework.stereotype.Service;
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.EncodeHintType;
 import com.google.zxing.MultiFormatWriter;
-import com.google.zxing.WriterException;
 import com.google.zxing.common.BitMatrix;
 import com.google.zxing.qrcode.decoder.ErrorCorrectionLevel;
-import com.itextpdf.text.log.SysoCounter;
 import com.rzspider.common.constant.CodingConstant;
 import com.rzspider.common.constant.CommonSymbolicConstant;
 import com.rzspider.common.constant.FileExtensionConstant;

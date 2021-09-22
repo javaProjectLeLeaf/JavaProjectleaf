@@ -1,6 +1,5 @@
 package com.rzspider.project.tool.baseset.service;
 
-import java.util.ArrayList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,7 +15,6 @@ import com.rzspider.project.tool.baseset.domain.Baseset;
 import com.rzspider.project.tool.baseset.domain.MusicInfo;
 import com.rzspider.project.tool.baseset.domain.Musiclist;
 import com.rzspider.project.tool.baseset.domain.NECMusicInfo;
-import com.rzspider.project.tool.baseset.service.IMusiclistService;
 import com.rzspider.project.tool.baseset.utils.MusicUtils;
 
 /**

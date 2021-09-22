@@ -1,12 +1,9 @@
 package com.rzspider.project.common.spiderdata.service;
 
-import java.io.ByteArrayOutputStream;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.List;
 
-import org.apache.poi.xssf.usermodel.XSSFWorkbook;
-import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.ReflectionUtils;
@@ -21,7 +18,6 @@ import com.rzspider.project.common.spiderdata.mapper.SpiderdataMapper;
 import com.rzspider.project.spider.spidertask.domain.Spidertask;
 import com.rzspider.project.spider.spidertask.domain.Spidertaskinfo;
 import com.rzspider.project.spider.spidertask.mainwork.domain.StartSpiderInfo;
-import com.rzspider.project.spider.spidertask.mainwork.utils.InternalSpiderDataUtils;
 import com.rzspider.project.spider.spidertask.service.ISpidertaskService;
 
 /**

@@ -2,9 +2,7 @@ package com.rzspider.project.spider.spidermanage.mapper;
 
 import java.util.List;
 
-import com.rzspider.project.spider.spidermanage.domain.SpiderList;
 import com.rzspider.project.spider.spidermanage.domain.SpiderManage;
-import com.rzspider.project.system.role.domain.Role;
 
 /**
  * 爬虫表 数据层

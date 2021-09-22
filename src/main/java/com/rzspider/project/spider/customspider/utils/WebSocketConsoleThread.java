@@ -2,18 +2,14 @@ package com.rzspider.project.spider.customspider.utils;
 
 import org.springframework.web.socket.TextMessage;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.rzspider.common.constant.CommonConstant;
 import com.rzspider.common.constant.WebSocketConstants;
 import com.rzspider.common.constant.project.SpiderConstant;
-import com.rzspider.common.utils.MapUtils;
 import com.rzspider.common.utils.spring.SpringUtils;
 import com.rzspider.framework.websocket.domain.ReturnMessage;
 import com.rzspider.framework.websocket.service.WebSocketPushHandler;
-import com.rzspider.project.spider.customspider.domain.Customspider;
 import com.rzspider.project.spider.customspider.domain.FileTree;
-import com.rzspider.project.spider.customspider.service.CSFileServiceImpl;
 import com.rzspider.project.spider.customspider.service.ICSFileService;
 
 //发送线程

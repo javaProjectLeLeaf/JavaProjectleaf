@@ -5,14 +5,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.rzspider.common.constant.CommonConstant;
-import com.rzspider.common.constant.UserConstants;
 import com.rzspider.common.constant.project.BlogConstant;
 import com.rzspider.common.utils.StringUtils;
 import com.rzspider.common.utils.security.ShiroUtils;
 import com.rzspider.project.blog.blogcolumn.mapper.BlogcolumnMapper;
 import com.rzspider.project.blog.blogcolumn.domain.Blogcolumn;
-import com.rzspider.project.blog.blogcolumn.service.IBlogcolumnService;
-import com.rzspider.project.spider.spidermanage.domain.SpiderManage;
 
 /**
  * 博客专栏管理 服务层实现

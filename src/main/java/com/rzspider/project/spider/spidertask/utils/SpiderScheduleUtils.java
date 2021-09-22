@@ -13,7 +13,6 @@ import org.quartz.TriggerKey;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.itextpdf.text.log.SysoCounter;
 import com.rzspider.common.constant.ScheduleConstants;
 import com.rzspider.common.constant.project.SpiderConstant;
 import com.rzspider.project.spider.spidertask.domain.Spidertask;

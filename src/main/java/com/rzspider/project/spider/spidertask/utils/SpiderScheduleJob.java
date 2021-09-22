@@ -1,11 +1,8 @@
 package com.rzspider.project.spider.spidertask.utils;
 
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-import java.util.concurrent.Future;
+
 import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
 import org.slf4j.Logger;
@@ -15,8 +12,6 @@ import org.springframework.scheduling.quartz.QuartzJobBean;
 import com.rzspider.common.constant.CommonSymbolicConstant;
 import com.rzspider.common.constant.ScheduleConstants;
 import com.rzspider.common.utils.spring.SpringUtils;
-import com.rzspider.framework.web.domain.Message;
-import com.rzspider.project.common.spiderdata.domain.Spiderdata;
 import com.rzspider.project.spider.spidermanage.domain.SpiderList;
 import com.rzspider.project.spider.spidermanage.service.ISpiderListService;
 import com.rzspider.project.spider.spidertask.domain.Spidertask;

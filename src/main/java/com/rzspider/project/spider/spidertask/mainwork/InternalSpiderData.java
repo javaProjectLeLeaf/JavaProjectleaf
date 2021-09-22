@@ -1,22 +1,11 @@
 package com.rzspider.project.spider.spidertask.mainwork;
 
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.net.MalformedURLException;
 import java.util.List;
 
-import org.apache.poi.xssf.usermodel.XSSFCell;
-import org.apache.poi.xssf.usermodel.XSSFRow;
-import org.apache.poi.xssf.usermodel.XSSFSheet;
-import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.stereotype.Component;
 
-import com.gargoylesoftware.htmlunit.FailingHttpStatusCodeException;
-import com.rzspider.common.constant.CommonSymbolicConstant;
 import com.rzspider.implementspider.landmarketnetwork.data.LMNSpiderDataExport;
-import com.rzspider.implementspider.landmarketnetwork.domain.LMNLandMessageDetail;
 import com.rzspider.implementspider.landmarketnetwork.domain.LMNLandParams;
-import com.rzspider.implementspider.suzhouhouse.controller.HouseShowController;
 import com.rzspider.implementspider.suzhouhouse.data.HouseQueryDataExport;
 import com.rzspider.implementspider.suzhouhouse.data.HouseShowDataExport;
 import com.rzspider.implementspider.suzhouhouse.data.MegAnnoAndTradeMegDataExport;
@@ -25,7 +14,6 @@ import com.rzspider.implementspider.suzhouhouse.domain.housequery.HouseQueryPara
 import com.rzspider.implementspider.suzhouhouse.domain.houseshow.HouseShowParams;
 import com.rzspider.implementspider.suzhouhouse.domain.permitpresale.PermitPresaleParams;
 import com.rzspider.implementspider.taobaojud.data.TBJSpiderDataExport;
-import com.rzspider.implementspider.taobaojud.domain.TBJLandMessageDetail;
 import com.rzspider.project.common.spiderdata.domain.ReturnSpiderDataMessage;
 import com.rzspider.project.common.spiderdata.domain.Spiderdata;
 import com.rzspider.project.spider.spidertask.mainwork.domain.StartSpiderInfo;

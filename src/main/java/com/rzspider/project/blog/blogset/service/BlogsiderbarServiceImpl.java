@@ -11,7 +11,6 @@ import com.rzspider.common.utils.StringUtils;
 import com.rzspider.project.blog.blogset.mapper.BlogsiderbarMapper;
 import com.rzspider.project.blog.blogset.domain.Blogset;
 import com.rzspider.project.blog.blogset.domain.Blogsiderbar;
-import com.rzspider.project.blog.blogset.service.IBlogsiderbarService;
 
 /**
  * 博客侧边栏 服务层实现

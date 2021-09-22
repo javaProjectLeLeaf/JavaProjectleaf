@@ -3,17 +3,13 @@ package com.rzspider.project.blog.blogcontent.controller;
 import java.awt.Color;
 import java.awt.Font;
 import java.io.File;
-import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
 import org.apache.shiro.authz.annotation.RequiresPermissions;
-import org.apache.tomcat.util.http.fileupload.FileUploadBase.FileSizeLimitExceededException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
@@ -25,13 +21,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.socket.TextMessage;
 
 import com.rzspider.project.blog.blogcontent.domain.Blogcontent;
 import com.rzspider.project.blog.blogcontent.domain.BlogcontentRecommend;
-import com.rzspider.project.blog.blogcontent.domain.Blogmove;
 import com.rzspider.project.blog.blogcontent.service.IBlogcontentService;
-import com.rzspider.project.blog.blogcontent.utils.BlogUtil;
 import com.rzspider.project.blog.blogset.domain.Blogset;
 import com.rzspider.project.blog.blogset.service.IBlogsetService;
 import com.rzspider.project.blog.blogtags.domain.Blogtags;
@@ -42,7 +35,6 @@ import com.rzspider.project.common.file.service.IFileService;
 import com.rzspider.project.common.file.utilt.FileUtils;
 import com.rzspider.project.common.image.utils.WaterMarkUtils;
 import com.rzspider.project.system.role.service.IRoleService;
-import com.gargoylesoftware.htmlunit.javascript.host.Console;
 import com.rzspider.common.constant.CommonConstant;
 import com.rzspider.common.constant.CommonSymbolicConstant;
 import com.rzspider.common.constant.FileExtensionConstant;
@@ -50,7 +42,6 @@ import com.rzspider.common.constant.FileMessageConstant;
 import com.rzspider.common.constant.FileOtherConstant;
 import com.rzspider.common.constant.ReturnMessageConstant;
 import com.rzspider.common.constant.UserConstants;
-import com.rzspider.common.constant.WebSocketConstants;
 import com.rzspider.common.constant.project.BlogConstant;
 import com.rzspider.common.utils.FileUploadUtils;
 import com.rzspider.common.utils.ImageUtils;
@@ -60,8 +51,6 @@ import com.rzspider.framework.aspectj.lang.annotation.Log;
 import com.rzspider.framework.config.FilePathConfig;
 import com.rzspider.framework.web.controller.BaseController;
 import com.rzspider.framework.web.page.TableDataInfo;
-import com.rzspider.framework.websocket.service.WebSocketPushHandler;
-import com.rzspider.implementspider.blogmove.controller.BlogMoveSpiderController;
 import com.rzspider.framework.web.domain.Message;
 
 /**

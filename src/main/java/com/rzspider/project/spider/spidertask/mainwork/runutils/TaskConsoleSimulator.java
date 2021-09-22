@@ -6,13 +6,10 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
 
-import com.itextpdf.text.log.SysoCounter;
 import com.rzspider.common.constant.CodingConstant;
 import com.rzspider.common.constant.CommonSymbolicConstant;
 import com.rzspider.common.constant.RegularExpressionConstant;
 import com.rzspider.common.utils.spring.SpringUtils;
-import com.rzspider.project.spider.customspider.domain.Customspider;
-import com.rzspider.project.spider.customspider.service.ICustomspiderService;
 import com.rzspider.project.spider.spidertask.mainwork.domain.StartSpiderInfo;
 import com.rzspider.project.spider.spidertask.service.ISpidertaskinfoService;
 

@@ -4,7 +4,6 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.concurrent.ExecutorService;
 
 import javax.annotation.PostConstruct;
 
@@ -20,13 +19,10 @@ import com.rzspider.common.utils.StringUtils;
 import com.rzspider.common.utils.security.ShiroUtils;
 import com.rzspider.project.spider.spidertask.mapper.SpidertaskMapper;
 import com.rzspider.project.spider.spidertask.mapper.SpidertaskinfoMapper;
-import com.rzspider.project.monitor.job.domain.Job;
-import com.rzspider.project.monitor.job.util.ScheduleUtils;
 import com.rzspider.project.spider.spidermanage.domain.SpiderManage;
 import com.rzspider.project.spider.spidermanage.service.ISpiderManageService;
 import com.rzspider.project.spider.spidertask.domain.Spidertask;
 import com.rzspider.project.spider.spidertask.domain.Spidertaskinfo;
-import com.rzspider.project.spider.spidertask.service.ISpidertaskService;
 import com.rzspider.project.spider.spidertask.utils.SpiderScheduleUtils;
 import com.rzspider.project.spider.spidertask.utils.SpidertaskUtils;
 import com.rzspider.project.system.role.service.IRoleService;

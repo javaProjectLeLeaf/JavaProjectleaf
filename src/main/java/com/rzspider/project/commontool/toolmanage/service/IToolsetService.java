@@ -1,7 +1,6 @@
 package com.rzspider.project.commontool.toolmanage.service;
 
 import com.rzspider.project.commontool.toolmanage.domain.Toolset;
-import java.util.List;
 
 /**
  * 通用工具管理工具设置 服务层

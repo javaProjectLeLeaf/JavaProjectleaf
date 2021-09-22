@@ -2,7 +2,6 @@ package com.rzspider.project.spider.customspider.controller;
 
 import java.io.File;
 import java.util.List;
-import java.util.Map;
 
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +19,6 @@ import com.rzspider.project.spider.codeType.domain.CodeType;
 import com.rzspider.project.spider.codeType.service.ICodeTypeService;
 import com.rzspider.project.spider.customspider.domain.Customspider;
 import com.rzspider.project.spider.customspider.service.ICustomspiderService;
-import com.rzspider.project.spider.spidermanage.domain.SpiderManage;
 import com.rzspider.project.spider.spidermanage.service.ISpiderListService;
 import com.rzspider.project.spider.spidertask.utils.SpidertaskUtils;
 import com.rzspider.common.constant.CommonConstant;

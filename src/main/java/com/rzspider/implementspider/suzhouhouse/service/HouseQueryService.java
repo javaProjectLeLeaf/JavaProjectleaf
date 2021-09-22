@@ -7,10 +7,8 @@ import java.util.List;
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.FailingHttpStatusCodeException;
 import com.gargoylesoftware.htmlunit.WebClient;
-import com.gargoylesoftware.htmlunit.html.DomElement;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlForm;
-import com.gargoylesoftware.htmlunit.html.HtmlKeyboard;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.html.HtmlRadioButtonInput;
 import com.gargoylesoftware.htmlunit.html.HtmlSelect;
@@ -22,8 +20,6 @@ import com.rzspider.implementspider.suzhouhouse.domain.housequery.HouseQueryComp
 import com.rzspider.implementspider.suzhouhouse.domain.housequery.HouseQueryDetailInfo;
 import com.rzspider.implementspider.suzhouhouse.domain.housequery.HouseQueryMessage;
 import com.rzspider.implementspider.suzhouhouse.domain.housequery.HouseQueryParams;
-import com.rzspider.implementspider.suzhouhouse.domain.houseshow.HouseShowCompanyInfo;
-import com.rzspider.implementspider.suzhouhouse.domain.houseshow.HouseShowMessage;
 import com.rzspider.implementspider.suzhouhouse.utils.HouseCommonUtils;
 
 public class HouseQueryService {

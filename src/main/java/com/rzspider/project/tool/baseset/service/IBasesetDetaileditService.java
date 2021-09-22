@@ -1,7 +1,6 @@
 package com.rzspider.project.tool.baseset.service;
 
 import com.rzspider.project.tool.baseset.domain.Baseset;
-import java.util.List;
 
 /**
  * 基础设置详情 服务层

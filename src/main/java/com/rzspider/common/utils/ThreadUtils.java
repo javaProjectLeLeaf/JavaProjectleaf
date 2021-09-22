@@ -1,6 +1,5 @@
 package com.rzspider.common.utils;
 
-import java.util.Iterator;
 import java.util.Map;
 
 /**

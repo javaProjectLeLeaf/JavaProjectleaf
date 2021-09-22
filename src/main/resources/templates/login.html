@@ -3,9 +3,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="utf-8">
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
-
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
     <title>[[${websiteTitleName}]]</title>
     <meta name="keywords" content="Spider">
     <meta name="description" content="RZSpider">
@@ -121,12 +119,9 @@
         th:src="@{/rzspider/otherlogin.js}"></script>
 <script th:inline="javascript">
     var websiteCopyrightInformation = [[${websiteCopyrightInformation}]];
-    if (websiteCopyrightInformation == null || websiteCopyrightInformation == '') {
-        websiteCopyrightInformation = 'Copyright©2021 Powered by <a href="https://github.com/leafyt/javaProject" target="_blank">JavaProject</a>浙ICP备13022084号-1';
-    }
+    if (websiteCopyrightInformation == null || websiteCopyrightInformation == '') {websiteCopyrightInformation = 'Copyright©2021 Powered by <a href="https://github.com/javaProjectLeLeaf/JavaProjectleaf" target="_blank">JavaProject</a>浙ICP备13022084号-1';}
     // 添加
-    document.getElementById('websiteCopyrightInformation').insertAdjacentHTML(
-        'afterBegin', websiteCopyrightInformation)
+    document.getElementById('websiteCopyrightInformation').insertAdjacentHTML('afterBegin', websiteCopyrightInformation)
 </script>
 </body>
 </html>

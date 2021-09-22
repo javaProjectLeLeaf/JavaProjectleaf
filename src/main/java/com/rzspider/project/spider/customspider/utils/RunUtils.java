@@ -1,22 +1,14 @@
 package com.rzspider.project.spider.customspider.utils;
 
-import java.io.BufferedReader;
 import java.io.File;
-import java.io.IOException;
 import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.lang.reflect.Field;
-import java.nio.charset.Charset;
 import java.util.HashMap;
 import java.util.Map;
 
-import com.itextpdf.text.log.SysoCounter;
 import com.rzspider.common.constant.OtherConstant;
 import com.rzspider.common.constant.project.SpiderConstant;
-import com.rzspider.framework.config.FilePathConfig;
-import com.rzspider.project.common.file.utilt.FileUtils;
-import com.rzspider.project.spider.customspider.domain.FileTree;
 
 public class RunUtils {
 	// 运行代码有两种方式，一种是通过反射动态运行，一种是另起进程，这里选择另起进程

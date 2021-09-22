@@ -1,14 +1,11 @@
 package com.rzspider.project.commontool.toolmanage.controller;
 
 import java.io.File;
-import java.util.Date;
 import java.util.List;
-import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.shiro.authz.annotation.RequiresPermissions;
-import org.apache.tomcat.util.http.fileupload.FileUploadBase.FileSizeLimitExceededException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
@@ -21,19 +18,14 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.rzspider.project.common.file.FileType;
-import com.rzspider.project.common.file.domain.FileDao;
 import com.rzspider.project.common.file.service.IFileService;
 import com.rzspider.project.common.file.utilt.FileUtils;
 import com.rzspider.project.commontool.toolmanage.domain.Toolmanage;
 import com.rzspider.project.commontool.toolmanage.service.IToolmanageService;
-import com.rzspider.project.spider.codeType.domain.CodeType;
-import com.rzspider.project.spider.spidermanage.domain.SpiderManage;
 import com.rzspider.common.constant.CommonConstant;
 import com.rzspider.common.constant.FileMessageConstant;
 import com.rzspider.common.constant.project.CommonToolConstant;
 import com.rzspider.common.utils.FileUploadUtils;
-import com.rzspider.common.utils.StringUtils;
 import com.rzspider.framework.aspectj.lang.annotation.Log;
 import com.rzspider.framework.config.FilePathConfig;
 import com.rzspider.framework.web.controller.BaseController;

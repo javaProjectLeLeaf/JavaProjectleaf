@@ -1,10 +1,8 @@
 package ${package}.domain;
 
-import com.rzspider.framework.web.domain.BaseEntity;
 #foreach ($column in $columns)
 #if($column.attrType == 'Date')
-import java.util.Date;
-#break
+    #break
 #end
 #end
 
