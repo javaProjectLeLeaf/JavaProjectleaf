@@ -4,7 +4,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.rzspider.project.system.role.mapper.RoleMapper">
 
-	<resultMap type="Role" id="RoleResult">
+	<resultMap type="com.rzspider.project.system.role.domain.Role" id="RoleResult">
 		<result     property="roleId"       column="role_id"        />
 		<result property="roleName"     column="role_name"      />
 		<result property="roleKey"      column="role_key"       />
@@ -17,7 +17,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result property="remark"       column="remark"         />
 	</resultMap>
 	
-	<select id="selectRoleList" parameterType="Role" resultMap="RoleResult">
+	<select id="selectRoleList" parameterType="com.rzspider.project.system.role.domain.Role" resultMap="RoleResult">
 		select role_id, role_name, role_key, role_sort, status, create_time, remark from sys_role
 		<where>
 			<if test="searchValue != null and searchValue != ''">
@@ -60,7 +60,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         </foreach> 
  	</delete>
  	
- 	<update id="updateRole" parameterType="Role">
+ 	<update id="updateRole" parameterType="com.rzspider.project.system.role.domain.Role">
  		update sys_role
  		<set>
  			<if test="roleName != null and roleName != ''">role_name = #{roleName},</if>
@@ -75,7 +75,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  		<if test="roleId != null">and role_id = #{roleId}</if>
 	</update>
  	
- 	<insert id="insertRole" parameterType="Role" useGeneratedKeys="true" keyProperty="roleId">
+ 	<insert id="insertRole" parameterType="com.rzspider.project.system.role.domain.Role" useGeneratedKeys="true" keyProperty="roleId">
  		insert into sys_role(
  			<if test="roleId != null and roleId != 0">role_id,</if>
  			<if test="roleName != null and roleName != ''">role_name,</if>

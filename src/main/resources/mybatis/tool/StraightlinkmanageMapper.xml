@@ -5,7 +5,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <mapper
 	namespace="com.rzspider.project.tool.straightlinkmanage.mapper.StraightlinkmanageMapper">
 
-	<resultMap type="Straightlinkmanage" id="StraightlinkmanageResult">
+	<resultMap type="com.rzspider.project.tool.straightlinkmanage.domain.Straightlinkmanage" id="StraightlinkmanageResult">
 		<result property="straightlinkmanageId" column="straightlinkmanage_id" />
 		<result property="straightlinkFileName" column="straightlink_file_name" />
 		<result property="straightlinkFileUuidName" column="straightlink_file_uuid_name" />
@@ -37,7 +37,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		#{straightlinkmanageId}
 	</select>
 
-	<select id="selectStraightlinkmanageList" parameterType="Straightlinkmanage"
+	<select id="selectStraightlinkmanageList" parameterType="com.rzspider.project.tool.straightlinkmanage.domain.Straightlinkmanage"
 		resultMap="StraightlinkmanageResult">
 		select straightlinkmanage_id, straightlink_file_name,
 		straightlink_file_uuid_name, straightlink_file_type,
@@ -82,7 +82,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		</where>
 	</select>
 
-	<insert id="insertStraightlinkmanage" parameterType="Straightlinkmanage">
+	<insert id="insertStraightlinkmanage" parameterType="com.rzspider.project.tool.straightlinkmanage.domain.Straightlinkmanage">
 		insert into
 		tool_straightlinkmanage (
 		straightlink_file_name,
@@ -115,7 +115,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		)
 	</insert>
 
-	<update id="updateStraightlinkmanage" parameterType="Straightlinkmanage">
+	<update id="updateStraightlinkmanage" parameterType="com.rzspider.project.tool.straightlinkmanage.domain.Straightlinkmanage">
 		update tool_straightlinkmanage
 		<set>
 			straightlink_file_name = #{straightlinkFileName},

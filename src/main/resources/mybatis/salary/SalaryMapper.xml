@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.rzspider.project.salary.salarymanage.mapper.SalaryMapper">
+    <resultMap id="BaseResultMap" type="com.rzspider.project.salary.salarymanage.domain.Salary">
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="sbmc" jdbcType="VARCHAR" property="sbmc"/>
+        <result column="ggxh" jdbcType="VARCHAR" property="ggxh"/>
+        <result column="fsss" jdbcType="VARCHAR" property="fsss"/>
+        <result column="code" jdbcType="VARCHAR" property="code"/>
+        <result column="cdate" jdbcType="TIMESTAMP" property="cdate"/>
+        <result column="dj" jdbcType="VARCHAR" property="dj"/>
+        <result column="number" jdbcType="INTEGER" property="number"/>
+        <result column="bz" jdbcType="VARCHAR" property="bz"/>
+        <result column="zt" jdbcType="INTEGER" property="zt"/>
+        <result column="by1" jdbcType="VARCHAR" property="by1"/>
+        <result column="by2" jdbcType="VARCHAR" property="by2"/>
+        <result column="by3" jdbcType="VARCHAR" property="by3"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    id, sbmc, ggxh, fsss, code, cdate, dj, number, bz, zt, by1, by2, by3
+  </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from salary
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from salary
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+    <insert id="insert" parameterType="com.rzspider.project.salary.salarymanage.domain.Salary">
+    insert into salary (id, sbmc, ggxh, 
+      fsss, code, cdate, 
+      dj, number, bz, zt, 
+      by1, by2, by3)
+    values (#{id,jdbcType=INTEGER}, #{sbmc,jdbcType=VARCHAR}, #{ggxh,jdbcType=VARCHAR}, 
+      #{fsss,jdbcType=VARCHAR}, #{code,jdbcType=VARCHAR}, #{cdate,jdbcType=TIMESTAMP}, 
+      #{dj,jdbcType=VARCHAR}, #{number,jdbcType=INTEGER}, #{bz,jdbcType=VARCHAR}, #{zt,jdbcType=INTEGER}, 
+      #{by1,jdbcType=VARCHAR}, #{by2,jdbcType=VARCHAR}, #{by3,jdbcType=VARCHAR})
+  </insert>
+    <insert id="insertSelective" parameterType="com.rzspider.project.salary.salarymanage.domain.Salary">
+        insert into salary
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="sbmc != null">
+                sbmc,
+            </if>
+            <if test="ggxh != null">
+                ggxh,
+            </if>
+            <if test="fsss != null">
+                fsss,
+            </if>
+            <if test="code != null">
+                code,
+            </if>
+            <if test="cdate != null">
+                cdate,
+            </if>
+            <if test="dj != null">
+                dj,
+            </if>
+            <if test="number != null">
+                number,
+            </if>
+            <if test="bz != null">
+                bz,
+            </if>
+            <if test="zt != null">
+                zt,
+            </if>
+            <if test="by1 != null">
+                by1,
+            </if>
+            <if test="by2 != null">
+                by2,
+            </if>
+            <if test="by3 != null">
+                by3,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=INTEGER},
+            </if>
+            <if test="sbmc != null">
+                #{sbmc,jdbcType=VARCHAR},
+            </if>
+            <if test="ggxh != null">
+                #{ggxh,jdbcType=VARCHAR},
+            </if>
+            <if test="fsss != null">
+                #{fsss,jdbcType=VARCHAR},
+            </if>
+            <if test="code != null">
+                #{code,jdbcType=VARCHAR},
+            </if>
+            <if test="cdate != null">
+                #{cdate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="dj != null">
+                #{dj,jdbcType=VARCHAR},
+            </if>
+            <if test="number != null">
+                #{number,jdbcType=INTEGER},
+            </if>
+            <if test="bz != null">
+                #{bz,jdbcType=VARCHAR},
+            </if>
+            <if test="zt != null">
+                #{zt,jdbcType=INTEGER},
+            </if>
+            <if test="by1 != null">
+                #{by1,jdbcType=VARCHAR},
+            </if>
+            <if test="by2 != null">
+                #{by2,jdbcType=VARCHAR},
+            </if>
+            <if test="by3 != null">
+                #{by3,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.rzspider.project.salary.salarymanage.domain.Salary">
+        update salary
+        <set>
+            <if test="sbmc != null">
+                sbmc = #{sbmc,jdbcType=VARCHAR},
+            </if>
+            <if test="ggxh != null">
+                ggxh = #{ggxh,jdbcType=VARCHAR},
+            </if>
+            <if test="fsss != null">
+                fsss = #{fsss,jdbcType=VARCHAR},
+            </if>
+            <if test="code != null">
+                code = #{code,jdbcType=VARCHAR},
+            </if>
+            <if test="cdate != null">
+                cdate = #{cdate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="dj != null">
+                dj = #{dj,jdbcType=VARCHAR},
+            </if>
+            <if test="number != null">
+                number = #{number,jdbcType=INTEGER},
+            </if>
+            <if test="bz != null">
+                bz = #{bz,jdbcType=VARCHAR},
+            </if>
+            <if test="zt != null">
+                zt = #{zt,jdbcType=INTEGER},
+            </if>
+            <if test="by1 != null">
+                by1 = #{by1,jdbcType=VARCHAR},
+            </if>
+            <if test="by2 != null">
+                by2 = #{by2,jdbcType=VARCHAR},
+            </if>
+            <if test="by3 != null">
+                by3 = #{by3,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.rzspider.project.salary.salarymanage.domain.Salary">
+    update salary
+    set sbmc = #{sbmc,jdbcType=VARCHAR},
+      ggxh = #{ggxh,jdbcType=VARCHAR},
+      fsss = #{fsss,jdbcType=VARCHAR},
+      code = #{code,jdbcType=VARCHAR},
+      cdate = #{cdate,jdbcType=TIMESTAMP},
+      dj = #{dj,jdbcType=VARCHAR},
+      number = #{number,jdbcType=INTEGER},
+      bz = #{bz,jdbcType=VARCHAR},
+      zt = #{zt,jdbcType=INTEGER},
+      by1 = #{by1,jdbcType=VARCHAR},
+      by2 = #{by2,jdbcType=VARCHAR},
+      by3 = #{by3,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -4,7 +4,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.rzspider.project.spider.spidertask.mapper.SpidertaskMapper">
 
-	<resultMap type="Spidertask" id="SpidertaskResult">
+	<resultMap type="com.rzspider.project.spider.spidertask.domain.Spidertask" id="SpidertaskResult">
 		<result property="taskId" column="task_id" />
 		<result property="taskName" column="task_name" />
 		<result property="spiderId" column="spider_id" />
@@ -47,7 +47,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		#{taskId}
 	</select>
 
-	<select id="selectSpidertaskList" parameterType="Spidertask"
+	<select id="selectSpidertaskList" parameterType="com.rzspider.project.spider.spidertask.domain.Spidertask"
 		resultMap="SpidertaskResult">
 		select task_id, task_name, spider_id, spider_back_id,
 		spider_name,spider_type,
@@ -86,14 +86,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		</where>
 	</select>
 
-	<select id="checkTaskNameUnique" parameterType="spidertask"
+	<select id="checkTaskNameUnique" parameterType="com.rzspider.project.spider.spidertask.domain.Spidertask"
 		resultMap="SpidertaskResult">
 		select task_id, task_name
 		from spider_spidertask where
 		task_name=#{taskName} and create_by = #{createBy}
 	</select>
 
-	<insert id="insertSpidertask" parameterType="Spidertask"
+	<insert id="insertSpidertask" parameterType="com.rzspider.project.spider.spidertask.domain.Spidertask"
 		useGeneratedKeys="true" keyProperty="taskId">
 		insert into spider_spidertask (
 		<if test="taskId != null and taskId != '' ">task_id, </if>
@@ -142,7 +142,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		)
 	</insert>
 
-	<update id="updateSpidertask" parameterType="Spidertask">
+	<update id="updateSpidertask" parameterType="com.rzspider.project.spider.spidertask.domain.Spidertask">
 		update spider_spidertask
 		<set>
 			<if test="taskName != null and taskName != ''">task_name = #{taskName}, </if>
@@ -173,7 +173,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		where task_id = #{taskId}
 	</update>
 
-	<update id="updateSpidertaskParams" parameterType="Spidertask">
+	<update id="updateSpidertaskParams" parameterType="com.rzspider.project.spider.spidertask.domain.Spidertask">
 		update spider_spidertask
 		<set>
 			spider_default_params_all =
@@ -184,14 +184,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		where task_id = #{taskId}
 	</update>
 
-	<update id="updateSpidertaskCronExpression" parameterType="Spidertask">
+	<update id="updateSpidertaskCronExpression" parameterType="com.rzspider.project.spider.spidertask.domain.Spidertask">
 		update spider_spidertask
 		<set>
 			cron_expression = #{cronExpression}
 		</set>
 		where task_id = #{taskId}
 	</update>
-	<update id="updateSpiderJobStatus" parameterType="Spidertask">
+	<update id="updateSpiderJobStatus" parameterType="com.rzspider.project.spider.spidertask.domain.Spidertask">
 		update spider_spidertask
 		<set>
 			job_status = #{jobStatus}

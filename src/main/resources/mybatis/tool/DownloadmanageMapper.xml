@@ -5,7 +5,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <mapper
 	namespace="com.rzspider.project.tool.downloadmanage.mapper.DownloadmanageMapper">
 
-	<resultMap type="Downloadmanage" id="DownloadmanageResult">
+	<resultMap type="com.rzspider.project.tool.downloadmanage.domain.Downloadmanage" id="DownloadmanageResult">
 		<result property="downloadmanageId" column="downloadmanage_id" />
 		<result property="downloadFileName" column="download_file_name" />
 		<result property="downloadFileUuidName" column="download_file_uuid_name" />
@@ -62,7 +62,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		download_file_url_key = #{downloadFileUrlKey}
 	</select>
 
-	<select id="selectDownloadmanageList" parameterType="Downloadmanage"
+	<select id="selectDownloadmanageList" parameterType="com.rzspider.project.tool.downloadmanage.domain.Downloadmanage"
 		resultMap="DownloadmanageResult">
 		select downloadmanage_id, download_file_name, download_file_uuid_name,
 		download_file_type, download_file_extension_name,
@@ -109,7 +109,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		</where>
 	</select>
 
-	<insert id="insertDownloadmanage" parameterType="Downloadmanage">
+	<insert id="insertDownloadmanage" parameterType="com.rzspider.project.tool.downloadmanage.domain.Downloadmanage">
 		insert into
 		tool_downloadmanage (
 		download_file_name,
@@ -146,7 +146,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		)
 	</insert>
 
-	<update id="updateDownloadmanage" parameterType="Downloadmanage">
+	<update id="updateDownloadmanage" parameterType="com.rzspider.project.tool.downloadmanage.domain.Downloadmanage">
 		update tool_downloadmanage
 		<set>
 			download_file_name = #{downloadFileName},

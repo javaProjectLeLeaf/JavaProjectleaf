@@ -4,7 +4,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.rzspider.project.system.dict.mapper.DictTypeMapper">
 
-	<resultMap type="DictType" id="DictTypeResult">
+	<resultMap type="com.rzspider.project.system.dict.domain.DictType" id="DictTypeResult">
 		<id     property="dictId"     column="dict_id"     />
 		<result property="dictName"   column="dict_name"   />
 		<result property="dictType"   column="dict_type"   />
@@ -16,7 +16,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</resultMap>
 	
 
-	<select id="selectDictTypeList" parameterType="DictType" resultMap="DictTypeResult">
+	<select id="selectDictTypeList" parameterType="com.rzspider.project.system.dict.domain.DictType" resultMap="DictTypeResult">
 		select dict_id, dict_name, dict_type, status, create_by, create_time, remark  from sys_dict_type
 		<where>
 			<if test="searchValue != null and searchValue != ''">
@@ -48,7 +48,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         </foreach> 
  	</delete>
 
- 	<update id="updateDictType" parameterType="DictType">
+ 	<update id="updateDictType" parameterType="com.rzspider.project.system.dict.domain.DictType">
  		update sys_dict_type
  		<set>
  			<if test="dictName != null and dictName != ''">dict_name = #{dictName},</if>
@@ -62,7 +62,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  		<if test="dictId != null and dictId  != ''">and dict_id = #{dictId}</if>
 	</update>
  	
- 	<insert id="insertDictType" parameterType="DictType">
+ 	<insert id="insertDictType" parameterType="com.rzspider.project.system.dict.domain.DictType">
  		insert into sys_dict_type(
  			<if test="dictName != null and dictName != ''">dict_name,</if>
  			<if test="dictType != null and dictType != ''">dict_type,</if>

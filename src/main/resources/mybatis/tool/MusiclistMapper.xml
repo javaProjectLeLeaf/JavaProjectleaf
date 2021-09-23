@@ -4,7 +4,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.rzspider.project.tool.baseset.mapper.MusiclistMapper">
 
-	<resultMap type="Musiclist" id="MusiclistResult">
+	<resultMap type="com.rzspider.project.tool.baseset.domain.Musiclist" id="MusiclistResult">
 		<result property="musicId" column="music_id" />
 		<result property="basesetId" column="baseset_id" />
 		<result property="title" column="title" />
@@ -18,7 +18,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result property="updateTime" column="update_time" />
 		<result property="remark" column="remark" />
 	</resultMap>
-	<resultMap type="MusicInfo" id="MusicInfolistResult">
+	<resultMap type="com.rzspider.project.tool.baseset.domain.MusicInfo" id="MusicInfolistResult">
 		<result property="title" column="title" />
 		<result property="author" column="author" />
 		<result property="url" column="url" />
@@ -43,7 +43,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		baseset_id = #{basesetId}
 	</select>
 
-	<select id="selectMusiclistList" parameterType="Musiclist"
+	<select id="selectMusiclistList" parameterType="com.rzspider.project.tool.baseset.domain.Musiclist"
 		resultMap="MusiclistResult">
 		select music_id, baseset_id, title, author, url, pic,lrc, create_by,
 		create_time, update_by, update_time, remark from music_musiclist
@@ -69,7 +69,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		</where>
 	</select>
 
-	<insert id="insertMusiclist" parameterType="Musiclist">
+	<insert id="insertMusiclist" parameterType="com.rzspider.project.tool.baseset.domain.Musiclist">
 		insert into music_musiclist (
 		<if test="title != null and title != '' ">title, </if>
 		<if test="author != null and author != '' ">author, </if>
@@ -95,7 +95,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		)
 	</insert>
 
-	<update id="updateMusiclist" parameterType="Musiclist">
+	<update id="updateMusiclist" parameterType="com.rzspider.project.tool.baseset.domain.Musiclist">
 		update music_musiclist
 		<set>
 			<if test="title != null and title != ''">title = #{title}, </if>

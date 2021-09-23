@@ -4,7 +4,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.rzspider.project.system.user.mapper.UserMapper">
 
-	<resultMap type="User" id="UserResult">
+	<resultMap type="com.rzspider.project.system.user.domain.User" id="UserResult">
 		<id     property="userId"       column="user_id"      />
 		<result property="deptId"       column="dept_id"      />
 		<result property="loginName"    column="login_name"   />
@@ -24,10 +24,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result property="createTime"   column="create_time"  />
 		<result property="updateBy"     column="update_by"    />
 		<result property="updateTime"   column="update_time"  />
-		<association property="dept"    column="dept_id" javaType="Dept" resultMap="deptResult"/>
+		<association property="dept"    column="dept_id" javaType="com.rzspider.project.system.dept.domain.Dept" resultMap="deptResult"/>
 	</resultMap>
 	
-	<resultMap id="deptResult" type="Dept">
+	<resultMap id="deptResult" type="com.rzspider.project.system.dept.domain.Dept">
 		<id     property="deptId"   column="dept_id"     />
 		<result property="parentId" column="parent_id"   />
 		<result property="deptName" column="dept_name"   />
@@ -35,7 +35,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result property="status"   column="dept_status" />
 	</resultMap>
 	
-	<select id="selectUserList" parameterType="User" resultMap="UserResult">
+	<select id="selectUserList" parameterType="com.rzspider.project.system.user.domain.User" resultMap="UserResult">
 		select user_id, dept_id, login_name, user_name, email, phonenumber, password, sex, avatar, salt, user_type, status, refuse_des, create_by, create_time from sys_user
 		<where>
 			<if test="searchValue != null and searchValue != ''">
@@ -106,7 +106,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         </foreach> 
  	</delete>
  	
- 	<update id="updateUser" parameterType="User">
+ 	<update id="updateUser" parameterType="com.rzspider.project.system.user.domain.User">
  		update sys_user
  		<set>
  			<if test="deptId != null and deptId != 0">dept_id = #{deptId},</if>
@@ -129,7 +129,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  		<if test="userId != null and userId  != ''">and user_id = #{userId}</if>
 	</update>
  	
- 	<insert id="insertUser" parameterType="User" useGeneratedKeys="true" keyProperty="userId">
+ 	<insert id="insertUser" parameterType="com.rzspider.project.system.user.domain.User" useGeneratedKeys="true" keyProperty="userId">
  		insert into sys_user(
  			<if test="userId != null and userId != 0">user_id,</if>
  			<if test="deptId != null and deptId != 0">dept_id,</if>

@@ -4,7 +4,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.rzspider.project.system.website.mapper.WebsiteMapper">
 
-	<resultMap type="Website" id="WebsiteResult">
+	<resultMap type="com.rzspider.project.system.website.domain.Website" id="WebsiteResult">
 		<result property="websiteId" column="website_id" />
 		<result property="websiteTitleName" column="website_title_name" />
 		<result property="websiteIco" column="website_ico" />
@@ -44,7 +44,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		website_id = #{websiteId}
 	</select>
 
-	<select id="selectWebsiteList" parameterType="Website"
+	<select id="selectWebsiteList" parameterType="com.rzspider.project.system.website.domain.Website"
 		resultMap="WebsiteResult">
 		select website_id, website_title_name,website_ico, website_des,
 		website_domain_name, website_public_ip, website_public_port,
@@ -84,7 +84,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		</where>
 	</select>
 
-	<select id="selectSomeWebsiteList" parameterType="Website"
+	<select id="selectSomeWebsiteList" parameterType="com.rzspider.project.system.website.domain.Website"
 		resultMap="WebsiteResult">
 		select website_id, website_title_name, website_des,
 		website_domain_name, website_public_ip, website_public_port,
@@ -94,7 +94,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		create_time, update_by, update_time, remark from sys_website
 	</select>
 
-	<insert id="insertWebsite" parameterType="Website">
+	<insert id="insertWebsite" parameterType="com.rzspider.project.system.website.domain.Website">
 		insert into sys_website
 		(
 		website_title_name,
@@ -124,7 +124,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		)
 	</insert>
 
-	<update id="updateWebsite" parameterType="Website">
+	<update id="updateWebsite" parameterType="com.rzspider.project.system.website.domain.Website">
 		update sys_website
 		<set>
 			website_title_name = #{websiteTitleName},
@@ -146,7 +146,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		where website_id = #{websiteId}
 	</update>
 
-	<insert id="insertMail" parameterType="Website">
+	<insert id="insertMail" parameterType="com.rzspider.project.system.website.domain.Website">
 		insert into sys_website
 		(
 		website_mail_smtp_url,
@@ -171,7 +171,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		)
 	</insert>
 
-	<update id="updateMail" parameterType="Website">
+	<update id="updateMail" parameterType="com.rzspider.project.system.website.domain.Website">
 		update sys_website
 		<set>
 			website_mail_smtp_url = #{websiteMailSmtpUrl},

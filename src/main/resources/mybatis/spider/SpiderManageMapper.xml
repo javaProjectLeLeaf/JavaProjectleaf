@@ -4,7 +4,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper
 	namespace="com.rzspider.project.spider.spidermanage.mapper.SpiderManageMapper">
-	<resultMap type="SpiderManage" id="SpiderManageResult">
+	<resultMap type="com.rzspider.project.spider.spidermanage.domain.SpiderManage" id="SpiderManageResult">
 		<id property="spiderId" column="spider_id" />
 		<result property="spiderBackId" column="spider_back_id" />
 		<result property="spiderName" column="spider_name" />
@@ -22,7 +22,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result property="remark" column="remark" />
 	</resultMap>
 
-	<select id="selectSpiderManageList" parameterType="SpiderManage"
+	<select id="selectSpiderManageList" parameterType="com.rzspider.project.spider.spidermanage.domain.SpiderManage"
 		resultMap="SpiderManageResult">
 		select spider_id,spider_back_id, spider_name,
 		spider_Type,create_Type,spider_Des,
@@ -31,7 +31,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		create_time,
 		remark from spider_spidermanage
 	</select>
-	<select id="selectSpiderManageList2" parameterType="SpiderManage"
+	<select id="selectSpiderManageList2" parameterType="com.rzspider.project.spider.spidermanage.domain.SpiderManage"
 		resultMap="SpiderManageResult">
 		select spider_id,spider_back_id, spider_name,
 		spider_Type,create_Type,spider_Des,
@@ -49,7 +49,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			</if>
 		</where>
 	</select>
-	<select id="selectSpiderManageList3" parameterType="SpiderManage"
+	<select id="selectSpiderManageList3" parameterType="com.rzspider.project.spider.spidermanage.domain.SpiderManage"
 		resultMap="SpiderManageResult">
 		select spider_id,spider_back_id, spider_name,
 		spider_Type,create_Type,spider_Des,
@@ -84,14 +84,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		task_id =#{taskId})
 	</select>
 
-	<select id="checkSpiderNameUnique" parameterType="SpiderManage"
+	<select id="checkSpiderNameUnique" parameterType="com.rzspider.project.spider.spidermanage.domain.SpiderManage"
 		resultMap="SpiderManageResult">
 		select spider_id,spider_back_id, spider_name,status,
 		create_time
 		from spider_spidermanage where spider_name=#{spiderName}
 	</select>
 
-	<select id="selectSpiderManageByName" parameterType="SpiderManage"
+	<select id="selectSpiderManageByName" parameterType="com.rzspider.project.spider.spidermanage.domain.SpiderManage"
 		resultMap="SpiderManageResult">
 		select
 		spider_id,spider_back_id,
@@ -101,7 +101,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		spider_name=#{spiderName}
 	</select>
 
-	<select id="checkSpiderBackIdUnique" parameterType="SpiderManage"
+	<select id="checkSpiderBackIdUnique" parameterType="com.rzspider.project.spider.spidermanage.domain.SpiderManage"
 		resultMap="SpiderManageResult">
 		select
 		spider_id,spider_back_id, spider_name,status,
@@ -111,7 +111,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		spider_back_id=#{spiderBackId}
 	</select>
 
-	<insert id="insertSpider" parameterType="SpiderManage"
+	<insert id="insertSpider" parameterType="com.rzspider.project.spider.spidermanage.domain.SpiderManage"
 		useGeneratedKeys="true" keyProperty="spiderId">
 		insert into spider_spidermanage(
 		<if test="spiderId != null and spiderId != 0">spider_id,</if>
@@ -156,7 +156,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		#{spiderId}
 	</select>
 
-	<update id="updateSpiderManage" parameterType="SpiderManage">
+	<update id="updateSpiderManage" parameterType="com.rzspider.project.spider.spidermanage.domain.SpiderManage">
 		update spider_spidermanage
 		<set>
 			<if test="spiderBackId != null and spiderBackId != 0">spider_back_id=#{spiderBackId},</if>
@@ -177,7 +177,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		where 1=1
 		<if test="spiderId != null">and spider_id = #{spiderId}</if>
 	</update>
-	<update id="updateSpidermanageParams" parameterType="SpiderManage">
+	<update id="updateSpidermanageParams" parameterType="com.rzspider.project.spider.spidermanage.domain.SpiderManage">
 		update spider_spidermanage
 		<set>
 			<if test="spiderDefaultParamsAll != null and spiderDefaultParamsAll!= ''">spider_default_params_all =

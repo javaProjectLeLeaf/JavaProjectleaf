@@ -4,7 +4,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.rzspider.project.tool.baseset.mapper.BasesetMapper">
 
-	<resultMap type="Baseset" id="BasesetResult">
+	<resultMap type="com.rzspider.project.tool.baseset.domain.Baseset" id="BasesetResult">
 		<result property="basesetId" column="baseset_id" />
 		<result property="themeName" column="theme_name" />
 		<result property="loginbgName" column="loginbg_name" />
@@ -45,7 +45,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		tool_baseset
 		where baseset_id = #{basesetId}
 	</select>
-	<select id="checkThemeNameUnique" parameterType="Baseset"
+	<select id="checkThemeNameUnique" parameterType="com.rzspider.project.tool.baseset.domain.Baseset"
 		resultMap="BasesetResult">
 		select baseset_id, theme_name,
 		loginbg_name,loginbg_file_name,loginbg_type,
@@ -71,7 +71,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		where use_status = #{useStatus}
 	</select>
 
-	<select id="selectBasesetList" parameterType="Baseset"
+	<select id="selectBasesetList" parameterType="com.rzspider.project.tool.baseset.domain.Baseset"
 		resultMap="BasesetResult">
 		select baseset_id, theme_name,
 		loginbg_name,loginbg_file_name,loginbg_type,
@@ -101,7 +101,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		</where>
 	</select>
 
-	<insert id="insertBaseset" parameterType="Baseset">
+	<insert id="insertBaseset" parameterType="com.rzspider.project.tool.baseset.domain.Baseset">
 		insert into tool_baseset (
 		theme_name,
 		<if
@@ -129,7 +129,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		)
 	</insert>
 
-	<update id="updateBaseset" parameterType="Baseset">
+	<update id="updateBaseset" parameterType="com.rzspider.project.tool.baseset.domain.Baseset">
 		update tool_baseset
 		<set>
 			theme_name = #{themeName},
@@ -148,7 +148,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		where baseset_id = #{basesetId}
 	</update>
 
-	<update id="updateBasesetEdit" parameterType="Baseset">
+	<update id="updateBasesetEdit" parameterType="com.rzspider.project.tool.baseset.domain.Baseset">
 		update tool_baseset
 		<set>
 			<if test="loginbgName != null">loginbg_name = #{loginbgName}, </if>
@@ -165,7 +165,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		</set>
 		where baseset_id = #{basesetId}
 	</update>
-	<update id="updateLoginsetEdit" parameterType="Baseset">
+	<update id="updateLoginsetEdit" parameterType="com.rzspider.project.tool.baseset.domain.Baseset">
 		update tool_baseset
 		<set>
 			<if test="loginbgName != null">loginbg_name = #{loginbgName}, </if>
@@ -177,7 +177,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		</set>
 		where baseset_id = #{basesetId}
 	</update>
-	<update id="updateManualEdit" parameterType="Baseset">
+	<update id="updateManualEdit" parameterType="com.rzspider.project.tool.baseset.domain.Baseset">
 		update tool_baseset
 		<set>
 			<if test="spiderWebsiteManualType != null"> spider_website_manual_type = #{spiderWebsiteManualType},
@@ -194,7 +194,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		</set>
 		where baseset_id = #{basesetId}
 	</update>
-	<update id="updateMusicInfo" parameterType="Baseset">
+	<update id="updateMusicInfo" parameterType="com.rzspider.project.tool.baseset.domain.Baseset">
 		update tool_baseset
 		<set>
 			music_info=#{musicInfo},
@@ -204,7 +204,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		</set>
 		where baseset_id = #{basesetId}
 	</update>
-	<update id="updateMusicOtherSet" parameterType="Baseset">
+	<update id="updateMusicOtherSet" parameterType="com.rzspider.project.tool.baseset.domain.Baseset">
 		update tool_baseset
 		<set>
 			<if test="musicListMaxHeight != null"> music_list_max_height = #{musicListMaxHeight},

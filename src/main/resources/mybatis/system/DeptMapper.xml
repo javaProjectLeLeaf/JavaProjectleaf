@@ -4,7 +4,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.rzspider.project.system.dept.mapper.DeptMapper">
 
-	<resultMap type="Dept" id="DeptResult">
+	<resultMap type="com.rzspider.project.system.dept.domain.Dept" id="DeptResult">
 		<id     property="deptId"     column="dept_id"     />
 		<result property="parentId"   column="parent_id"   />
 		<result property="deptName"   column="dept_name"   />
@@ -28,7 +28,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select count(*) from sys_user where dept_id = #{deptId}
 	</select>
 	
-	<select id="selectDeptCount" parameterType="Dept" resultType="int">
+	<select id="selectDeptCount" parameterType="com.rzspider.project.system.dept.domain.Dept" resultType="int">
 		select count(*) from sys_dept
 		<where>
 			<if test="deptId != null and deptId != 0"> and dept_id = #{deptId} </if>
@@ -48,7 +48,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		where dept_id = #{deptId}
 	</select>
 	
-	<insert id="insertDept" parameterType="Dept">
+	<insert id="insertDept" parameterType="com.rzspider.project.system.dept.domain.Dept">
  		insert into sys_dept(
  			<if test="deptId != null and deptId != 0">dept_id,</if>
  			<if test="parentId != null and parentId != 0">parent_id,</if>
@@ -74,7 +74,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  		)
 	</insert>
 	
-	<update id="updateDept" parameterType="Dept">
+	<update id="updateDept" parameterType="com.rzspider.project.system.dept.domain.Dept">
  		update sys_dept
  		<set>
  			<if test="parentId != null and parentId != 0">parent_id = #{parentId},</if>

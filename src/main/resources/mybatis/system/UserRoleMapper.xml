@@ -4,7 +4,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.rzspider.project.system.user.mapper.UserRoleMapper">
 
-	<resultMap type="UserRole" id="UserRoleResult">
+	<resultMap type="com.rzspider.project.system.user.domain.UserRole" id="UserRoleResult">
 		<result property="userId"     column="user_id"      />
 		<result property="roleId"     column="role_id"      />
 	</resultMap>
