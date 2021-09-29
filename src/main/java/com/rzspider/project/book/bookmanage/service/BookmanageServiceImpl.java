@@ -125,7 +125,6 @@ public class BookmanageServiceImpl implements IBookmanageService {
 	public List<Bookmanage> batchAnalyzeList(String uploadPath, String fileName) {
 		File f = new File(uploadPath + File.separator + fileName);
 		if (!f.exists()) {
-
 			return null;
 		}
 		List<Bookmanage> bmList = ExcelUtils.readExcel(f);
