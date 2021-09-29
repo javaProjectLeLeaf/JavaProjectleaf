@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.rzspider.project.car.carManage.mapper.CarMapper">
+  <resultMap id="BaseResultMap" type="com.rzspider.project.car.carManage.domain.Car">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="code" jdbcType="VARCHAR" property="code" />
+    <result column="type" jdbcType="VARCHAR" property="type" />
+    <result column="inDate" jdbcType="TIMESTAMP" property="indate" />
+    <result column="outDate" jdbcType="TIMESTAMP" property="outdate" />
+    <result column="personId" jdbcType="INTEGER" property="personid" />
+    <result column="cost" jdbcType="DECIMAL" property="cost" />
+    <result column="status" jdbcType="INTEGER" property="status" />
+    <result column="pay" jdbcType="INTEGER" property="pay" />
+    <result column="createTime" jdbcType="TIMESTAMP" property="createtime" />
+    <result column="createId" jdbcType="INTEGER" property="createid" />
+    <result column="a1" jdbcType="INTEGER" property="a1" />
+    <result column="b1" jdbcType="VARCHAR" property="b1" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, code, type, inDate, outDate, personId, cost, status, pay, createTime, createId, 
+    a1, b1
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from car
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+    <select id="selectAll" resultType="com.rzspider.project.car.carManage.domain.Car">
+      select person.name,person.phone,car.* from car
+      left join person on car.personid=person.id order by createtime asc,inDate asc,cost desc
+    </select>
+  <select id="selectCarByPersonId" resultType="com.rzspider.project.car.carManage.domain.Car">
+    <if test="id !='' and id != null">
+      and id = #{id}
+    </if>
+  </select>
+    <select id="selectAbout" resultType="com.rzspider.project.car.carManage.domain.Car">
+      select * from car
+      <where>
+      <if test="searchValue != null and searchValue != ''">
+        and code like concat(concat('%', #{searchValue}), '%')
+      </if>
+    </where>
+
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from car
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.rzspider.project.car.carManage.domain.Car">
+    insert into car (id, code, type, 
+      inDate, outDate, personId, 
+      cost, status, pay, 
+      createTime, createId, a1, 
+      b1)
+    values (#{id,jdbcType=INTEGER}, #{code,jdbcType=VARCHAR}, #{type,jdbcType=VARCHAR}, 
+      #{indate,jdbcType=TIMESTAMP}, #{outdate,jdbcType=TIMESTAMP}, #{personid,jdbcType=INTEGER}, 
+      #{cost,jdbcType=DECIMAL}, #{status,jdbcType=INTEGER}, #{pay,jdbcType=INTEGER}, 
+      #{createtime,jdbcType=TIMESTAMP}, #{createid,jdbcType=INTEGER}, #{a1,jdbcType=INTEGER}, 
+      #{b1,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.rzspider.project.car.carManage.domain.Car">
+    insert into car
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="code != null">
+        code,
+      </if>
+      <if test="type != null">
+        type,
+      </if>
+      <if test="indate != null">
+        inDate,
+      </if>
+      <if test="outdate != null">
+        outDate,
+      </if>
+      <if test="personid != null">
+        personId,
+      </if>
+      <if test="cost != null">
+        cost,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="pay != null">
+        pay,
+      </if>
+      <if test="createtime != null">
+        createTime,
+      </if>
+      <if test="createid != null">
+        createId,
+      </if>
+      <if test="a1 != null">
+        a1,
+      </if>
+      <if test="b1 != null">
+        b1,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="code != null">
+        #{code,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null">
+        #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="indate != null">
+        #{indate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="outdate != null">
+        #{outdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="personid != null">
+        #{personid,jdbcType=INTEGER},
+      </if>
+      <if test="cost != null">
+        #{cost,jdbcType=DECIMAL},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="pay != null">
+        #{pay,jdbcType=INTEGER},
+      </if>
+      <if test="createtime != null">
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createid != null">
+        #{createid,jdbcType=INTEGER},
+      </if>
+      <if test="a1 != null">
+        #{a1,jdbcType=INTEGER},
+      </if>
+      <if test="b1 != null">
+        #{b1,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.rzspider.project.car.carManage.domain.Car">
+    update car
+    <set>
+      <if test="code != null">
+        code = #{code,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null">
+        type = #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="indate != null">
+        inDate = #{indate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="outdate != null">
+        outDate = #{outdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="personid != null">
+        personId = #{personid,jdbcType=INTEGER},
+      </if>
+      <if test="cost != null">
+        cost = #{cost,jdbcType=DECIMAL},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="pay != null">
+        pay = #{pay,jdbcType=INTEGER},
+      </if>
+      <if test="createtime != null">
+        createTime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createid != null">
+        createId = #{createid,jdbcType=INTEGER},
+      </if>
+      <if test="a1 != null">
+        a1 = #{a1,jdbcType=INTEGER},
+      </if>
+      <if test="b1 != null">
+        b1 = #{b1,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.rzspider.project.car.carManage.domain.Car">
+    update car
+    set code = #{code,jdbcType=VARCHAR},
+      type = #{type,jdbcType=VARCHAR},
+      inDate = #{indate,jdbcType=TIMESTAMP},
+      outDate = #{outdate,jdbcType=TIMESTAMP},
+      personId = #{personid,jdbcType=INTEGER},
+      cost = #{cost,jdbcType=DECIMAL},
+      status = #{status,jdbcType=INTEGER},
+      pay = #{pay,jdbcType=INTEGER},
+      createTime = #{createtime,jdbcType=TIMESTAMP},
+      createId = #{createid,jdbcType=INTEGER},
+      a1 = #{a1,jdbcType=INTEGER},
+      b1 = #{b1,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

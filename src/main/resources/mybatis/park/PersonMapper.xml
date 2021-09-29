@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.rzspider.project.park.parkManage.mapper.PersonMapper">
+  <resultMap id="BaseResultMap" type="com.rzspider.project.park.parkManage.domain.Person">
+    <id column="id" property="id" />
+    <result column="name" property="name" />
+    <result column="sex"  property="sex" />
+    <result column="age"  property="age" />
+    <result column="phone"  property="phone" />
+    <result column="makeUserId" property="makeUserId" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, name, sex, age, phone ,makeUserId
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from person
+    where id = #{id}
+  </select>
+    <select id="selectAll" resultType="com.rzspider.project.park.parkManage.domain.Person">
+      select * from person where status=1
+    </select>
+    <select id="selectAllById" resultType="com.rzspider.project.park.parkManage.domain.Person">
+      select * from person where makeUserId=#{id} and status=1
+    </select>
+    <select id="selectOneById" resultType="com.rzspider.project.park.parkManage.domain.Person">
+        select * from person where 1=1
+        <if test="id !='' and id != null">
+            and id=#{id}
+        </if>
+    </select>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from person
+    where id = #{id}
+  </delete>
+  <delete id="batchDeletePersonManage" parameterType="java.lang.Integer">
+    delete from person where id in
+    <foreach item="id" collection="array" open="(" separator=","
+             close=")">
+      #{id}
+    </foreach>
+  </delete>
+  <insert id="insert" parameterType="com.rzspider.project.park.parkManage.domain.Person">
+    insert into person (id, name, sex, 
+      age, phone,makeUserId,status)
+    values (#{id}, #{name}, #{sex},
+      #{age}, #{phone}, #{makeUserId}, #{status})
+  </insert>
+  <insert id="insertSelective" parameterType="com.rzspider.project.park.parkManage.domain.Person">
+    insert into person
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="name != null">
+        name,
+      </if>
+      <if test="sex != null">
+        sex,
+      </if>
+      <if test="age != null">
+        age,
+      </if>
+      <if test="phone != null">
+        phone,
+      </if>
+      <if test="makeUserId != null">
+        makeUserId,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id},
+      </if>
+      <if test="name != null">
+        #{name},
+      </if>
+      <if test="sex != null">
+        #{sex},
+      </if>
+      <if test="age != null">
+        #{age},
+      </if>
+      <if test="phone != null">
+        #{phone},
+      </if>
+      <if test="makeUserId != null">
+        #{makeUserId},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.rzspider.project.park.parkManage.domain.Person">
+    update person
+    <set>
+      <if test="name != null">
+        name = #{name},
+      </if>
+      <if test="sex != null">
+        sex = #{sex},
+      </if>
+      <if test="age != null">
+        age = #{age},
+      </if>
+      <if test="phone != null">
+        phone = #{phone},
+      </if>
+      <if test="makeUserId != null">
+        makeUserId = #{makeUserId},
+      </if>
+    </set>
+    where id = #{id}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.rzspider.project.park.parkManage.domain.Person">
+    update person
+    set name = #{name},
+      sex = #{sex},
+      age = #{age},
+      phone = #{phone},
+      makeUserId = #{makeUserId}
+    where id = #{id}
+  </update>
+</mapper>

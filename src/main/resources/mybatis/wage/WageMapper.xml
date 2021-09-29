@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.rzspider.project.wage.wageManage.mapper.WageMapper">
+  <resultMap id="BaseResultMap" type="com.rzspider.project.wage.wageManage.domain.Wage">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="department" jdbcType="VARCHAR" property="department" />
+    <result column="wage" jdbcType="VARCHAR" property="wage" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, name, department, wage
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from allwage
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select *from allwage
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from allwage
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="batchDeleteWageManage" parameterType="Integer">
+    delete from allwage where id in
+    <foreach item="id" collection="array" open="(" separator=","
+             close=")">
+      #{id}
+    </foreach>
+  </delete>
+
+  <insert id="insert" parameterType="com.rzspider.project.wage.wageManage.domain.Wage">
+    insert into allwage (id, name, department, wage)
+    values (#{id}, #{name}, #{department}, #{wage})
+  </insert>
+  <insert id="insertSelective" parameterType="com.rzspider.project.wage.wageManage.domain.Wage">
+    insert into allwage
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="name != null">
+        name,
+      </if>
+      <if test="department != null">
+        department,
+      </if>
+      <if test="wage != null">
+        wage,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="department != null">
+        #{department,jdbcType=VARCHAR},
+      </if>
+      <if test="wage != null">
+        #{wage,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.rzspider.project.wage.wageManage.domain.Wage">
+    update allwage
+    <set>
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="department != null">
+        department = #{department,jdbcType=VARCHAR},
+      </if>
+      <if test="wage != null">
+        wage = #{wage,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.rzspider.project.wage.wageManage.domain.Wage">
+    update allwage
+    set name = #{name,jdbcType=VARCHAR},
+      department = #{department,jdbcType=VARCHAR},
+      wage = #{wage,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
