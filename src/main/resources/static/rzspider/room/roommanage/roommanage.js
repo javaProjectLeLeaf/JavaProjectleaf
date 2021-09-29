@@ -11,23 +11,23 @@ $(function() {
 			},
 			{
 				field : 'type',
-				title : '图书名称'
+				title : '房间类型'
 			},
 			{
 				field : 'floor',
-				title : '图书作者'
+				title : '房间楼层'
 			},
         {
             field : 'status',
-            title : '房间ID'
+            title : '房间状态'
         },
         {
             field : 'user',
-            title : '图书名称'
+            title : '入住人员'
         },
         {
-            field : 'describe',
-            title : '图书作者'
+            field : 'bz',
+            title : '描述'
         },
         {
             visible :false,
@@ -48,30 +48,30 @@ $(function() {
 							.push('<a class="btn btn-success btn-xs '
 									+ editFlag
 									+ '" href="#" title="编辑" mce_href="#" onclick="edit(\''
-									+ row.bookId
+									+ row.id
 									+ '\')"><i class="fa fa-edit"></i>编辑</a> ');
 					actions
 							.push('<a class="btn btn-primary btn-xs '
 									+ detailFlag
 									+ '" href="#" title="详情" mce_href="#" onclick="detail(\''
-									+ row.bookId
+									+ row.id
 									+ '\')"><i class="fa fa-search"></i>详情</a> ');
 					actions.push('<a class="btn btn-warning btn-xs '
 							+ removeFlag
 							+ '" href="#" title="删除" onclick="remove(\''
-							+ row.bookId
+							+ row.id
 							+ '\')"><i class="fa fa-remove"></i>删除</a>');
 					return actions.join('');
 				}
 			} ];
 	var url = prefix + "/list";
-	$.initTable(columns, url,'请输入书名、作者、分类、藏地');
+	$.initTable(columns, url,'请输入房间号');
 });
 
 /* 详情-详细 */
 function detail(id) {
 	var url = prefix + '/detail/' + id;
-	layer_showAuto("图书详情", url);
+	layer_showAuto("房间详情", url);
 }
 
 /* 图书详情-新增 */
@@ -105,8 +105,8 @@ function batchExport() {
 }
 
 /* 图书详情-修改 */
-function edit(bookId) {
-	var url = prefix + '/edit/' + bookId;
+function edit(id) {
+	var url = prefix + '/edit/' + id;
 	layer_showAuto("修改图书", url);
 }
 
@@ -119,7 +119,7 @@ function remove(id) {
 
 // 批量删除
 function batchRemove() {
-	var rows = $.getSelections("bookId");
+	var rows = $.getSelections("id");
 	if (rows.length == 0) {
 		$.modalMsg("请选择要删除的数据", "warning");
 		return;

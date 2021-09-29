@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="zh_CN" xmlns:th="http://www.thymeleaf.org"
+	xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
+<meta charset="utf-8">
+<head th:include="include :: header"></head>
+<link href="/css/layui.css" th:href="@{/css/layui.css}" rel="stylesheet">
+<body class="gray-bg">
+	<div class="wrapper wrapper-content">
+		<div class="btn-group hidden-xs" id="tableToolbar" role="group">
+			<button type="button" class="btn btn-outline btn-default"
+				th:onclick="'javascript:add()'"
+				shiro:hasPermission="park:parkManage:add">
+				<i class="glyphicon glyphicon-plus"></i>新增用户
+			</button>
+			<button type="button" class="btn btn-outline btn-default"
+				th:onclick="'javascript:batchRemove()'"
+				shiro:hasPermission="park:parkManage:batchRemove">
+				<i class="glyphicon glyphicon-trash"></i>删除用户
+			</button>
+		</div>
+		<table class="bootstrap-table" data-mobile-responsive="true"
+			data-sort-name="id" data-sort-order="asc" id="table1">
+		</table>
+	</div>
+	<div th:include="include :: footer"></div>
+	<script src="/rzspider/park/parkManage/parkManage.js"
+		th:src="@{/rzspider/park/parkManage/parkManage.js}"></script>
+	<script src="/js/layui.js" th:src="@{/js/layui.js}"></script>
+	<script th:inline="javascript">
+        var editFlag = [[${@permissionService.hasPermi('park:parkManage:alter')}]];
+        var detailFlag = [[${@permissionService.hasPermi('park:parkManage:detail')}]];
+        var removeFlag = [[${@permissionService.hasPermi('park:parkManage:remove')}]];
+    </script>
+</body>
+</html>

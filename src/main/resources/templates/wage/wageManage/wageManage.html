@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="zh_CN" xmlns:th="http://www.thymeleaf.org"
+	xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
+<meta charset="utf-8">
+<head th:include="include :: header"></head>
+<link href="/css/layui.css" th:href="@{/css/layui.css}" rel="stylesheet">
+<body class="gray-bg">
+	<div class="wrapper wrapper-content">
+		<div class="btn-group hidden-xs" id="tableToolbar" role="group">
+			<button type="button" class="btn btn-outline btn-default"
+				th:onclick="'javascript:add()'"
+				shiro:hasPermission="wage:wageManage:add">
+				<i class="glyphicon glyphicon-plus"></i>添加员工
+			</button>
+			<button type="button" class="btn btn-outline btn-default"
+				th:onclick="'javascript:batchRemove()'"
+				shiro:hasPermission="wage:wageManage:batchRemove">
+				<i class="glyphicon glyphicon-trash"></i>批量删除
+			</button>
+		</div>
+		<table class="bootstrap-table" data-mobile-responsive="true"
+			data-sort-name="id" data-sort-order="asc" id="table1">
+		</table>
+	</div>
+	<div th:include="include :: footer"></div>
+	<script src="/rzspider/wage/wageManage/wageManage.js"
+		th:src="@{/rzspider/wage/wageManage/wageManage.js}"></script>
+	<script src="/js/layui.js" th:src="@{/js/layui.js}"></script>
+	<script th:inline="javascript">
+        var editFlag = [[${@permissionService.hasPermi('wage:wageManage:alter')}]];
+        var detailFlag = [[${@permissionService.hasPermi('wage:wageManage:detail')}]];
+        var removeFlag = [[${@permissionService.hasPermi('wage:wageManage:remove')}]];
+    </script>
+</body>
+</html>

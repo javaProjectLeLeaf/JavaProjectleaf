@@ -13,196 +13,71 @@
 
 	<div class="wrapper wrapper-content animated fadeInRight ibox-content">
 		<form class="form-horizontal m" id="form-bookmanage-edit">
-			<input id="bookId" name="bookId" th:value="${bookmanage.bookId}"
+			<input id="id" name="id" th:value="${room.id}"
 				type="hidden">
 			<div class="form-group">
 				<label class="col-sm-3 control-label"><em class="gg-star"
-					style="color: red; font-style: normal;">*&nbsp;</em>图书名称：</label>
+					style="color: red; font-style: normal;">*&nbsp;</em>房间号：</label>
 				<div class="col-sm-8">
-					<input id="bookName" name="bookName"
-						th:value="${bookmanage.bookName}" class="form-control" type="text">
+					<input id="roomID" name="roomID"
+						th:value="${room.roomID}" class="form-control" type="text">
 				</div>
 			</div>
 			<div class="form-group">
-				<label class="col-sm-3 control-label">图书作者：</label>
+				<label class="col-sm-3 control-label">楼层：</label>
 				<div class="col-sm-8">
-					<input id="bookAuthor" name="bookAuthor"
-						th:value="${bookmanage.bookAuthor}" class="form-control"
+					<input id="floor" name="floor"
+						th:value="${room.floor}" class="form-control"
 						type="text">
 				</div>
 			</div>
 			<div class="form-group">
-				<label class="col-sm-3 control-label">图书出版社：</label>
+				<label class="col-sm-3 control-label">状态：</label>
 				<div class="col-sm-8">
-					<input id="bookPublisher" name="bookPublisher"
-						th:value="${bookmanage.bookPublisher}" class="form-control"
+					<input id="status" name="status"
+						th:value="${room.status}" class="form-control"
 						type="text">
 				</div>
 			</div>
+
 			<div class="form-group">
-				<label class="col-sm-3 control-label">图书ISBN：</label>
+				<label class="col-sm-3 control-label">入住人员：</label>
 				<div class="col-sm-8">
-					<input id="bookIsbn" name="bookIsbn"
-						th:value="${bookmanage.bookIsbn}" class="form-control" type="text">
-				</div>
-			</div>
-			<div class="form-group">
-				<label class="col-sm-3 control-label">图书简介：</label>
-				<div class="col-sm-8">
-					<input id="bookDes" name="bookDes" th:value="${bookmanage.bookDes}"
+					<input id="user" name="user" th:value="${room.user}"
 						class="form-control" type="text">
-				</div>
-			</div>
-			<div class="form-group">
-				<label class="col-sm-3 control-label">图书语言：</label>
-				<div class="col-sm-8">
-					<input id="bookLanguage" name="bookLanguage"
-						th:value="${bookmanage.bookLanguage}" class="form-control"
-						type="text">
-				</div>
-			</div>
-			<div class="form-group">
-				<label class="col-sm-3 control-label">图书定价：</label>
-				<div class="col-sm-8">
-					<input id="bookOriginalPrice" name="bookOriginalPrice"
-						th:value="${bookmanage.bookOriginalPrice}" class="form-control"
-						type="text">
-				</div>
-			</div>
-			<div class="form-group">
-				<label class="col-sm-3 control-label">图书购买价：</label>
-				<div class="col-sm-8">
-					<input id="bookPurchasePrice" name="bookPurchasePrice"
-						th:value="${bookmanage.bookPurchasePrice}" class="form-control"
-						type="text">
-				</div>
-			</div>
-			<div class="form-group">
-				<label class="col-sm-3 control-label">图书出版日期：</label>
-				<div class="col-sm-8">
-					<div class="input-group date">
-						<span class="input-group-addon"><i class="fa fa-calendar"></i></span>
-						<input type="text" class="form-control"
-							th:value="${bookmanage.bookPublishTime}" name="bookPublishTime">
-					</div>
-				</div>
-			</div>
-			<div class="form-group">
-				<label class="col-sm-3 control-label">图书分类：</label>
-				<div class="col-sm-8">
-					<select class="form-control" id="bookClassification"
-						name="bookClassification">
-						<option value="马列毛邓">马列毛邓</option>
-						<option value="B">哲学宗教</option>
-						<option value="哲学宗教">社会科学</option>
-						<option value="政治法律">政治法律</option>
-						<option value="军事">军事</option>
-						<option value="经济">经济</option>
-						<option value="科教文体">科教文体</option>
-						<option value="语言文字">语言文字</option>
-						<option value="文学">文学</option>
-						<option value="艺术">艺术</option>
-						<option value="历史地理">历史地理</option>
-						<option value="自然科学">自然科学</option>
-						<option value="数理化">数理化</option>
-						<option value="天文地球">天文地球</option>
-						<option value="生物科学">生物科学</option>
-						<option value="医药卫生">医药卫生</option>
-						<option value="农业科学">农业科学</option>
-						<option value="工业技术">工业技术</option>
-						<option value="交通运输">交通运输</option>
-						<option value="航空航天">航空航天</option>
-						<option value="环境安全">环境安全</option>
-						<option value="综合性图书">综合性图书</option>
-						<option value="none">其它分类</option>
-					</select> <input id="bookClassification2" name="bookClassification2"
-						class="form-control" type="text" style="display: none"
-						placeholder="请输入分类名">
-				</div>
-			</div>
-			<div class="form-group">
-				<label class="col-sm-3 control-label">图书装帧：</label>
-				<div class="col-sm-8">
-					<select class="form-control" name="bookBinding" id="bookBinding">
-						<option value="平装">平装</option>
-						<option value="精装">精装</option>
-						<option value="软精装">软精装</option>
-						<option value="none">其他</option>
-					</select> <input id="bookBinding2" name="bookBinding2" class="form-control"
-						type="text" style="display: none" placeholder="请输入装帧类型">
-				</div>
-			</div>
-			<div class="form-group">
-				<label class="col-sm-3 control-label">图书页数：</label>
-				<div class="col-sm-8">
-					<input id="bookPages" name="bookPages"
-						th:value="${bookmanage.bookPages}" class="form-control"
-						type="text">
-				</div>
-			</div>
-			<div class="form-group">
-				<label class="col-sm-3 control-label">图书所在地：</label>
-				<div class="col-sm-8">
-					<input id="bookStayAddress" name="bookStayAddress"
-						th:value="${bookmanage.bookStayAddress}" class="form-control"
-						type="text">
-				</div>
-			</div>
-			<div class="form-group">
-				<label class="col-sm-3 control-label">阅读状态：</label>
-				<div class="col-sm-8">
-					<label class="checkbox-inline i-checks"> <input
-						type="radio" name="bookReadStatus"
-						th:field="*{bookmanage.bookReadStatus}" value="0" id="radio1" />
-						已读
-					</label> <label class="checkbox-inline i-checks"> <input
-						type="radio" name="bookReadStatus"
-						th:field="*{bookmanage.bookReadStatus}" value="1" id="radio2"
-						checked="checked" /> 未读
-					</label> <label class="checkbox-inline i-checks"> <input
-						type="radio" name="bookReadStatus"
-						th:field="*{bookmanage.bookReadStatus}" value="2" id="radio3" />
-						阅读中
-					</label>
-				</div>
-			</div>
-			<div class="form-group">
-				<label class="col-sm-3 control-label">阅读星级：</label>
-				<div class="col-sm-8">
-					<input id="bookReadStar" name="bookReadStar" class="rating"
-						data-min="0" data-max="5" data-step="1" data-size="sm"
-						th:value="${bookmanage.bookReadStar}">
-				</div>
-			</div>
-			<div class="form-group">
-				<label class="col-sm-3 control-label">阅读评价：</label>
-				<div class="col-sm-8">
-					<textarea id="bookReadEvaluation" name="bookReadEvaluation"
-						th:text="${bookmanage.bookReadEvaluation}" class="form-control"
-						type="text"></textarea>
-				</div>
-			</div>
-			<div class="form-group">
-				<label class="col-sm-3 control-label">在馆状态：</label>
-				<div class="col-sm-8">
-					<div class="onoffswitch">
-						<input type="checkbox"
-							th:checked="${bookmanage.status == 0 ? true : false}"
-							class="onoffswitch-checkbox" id="status" name="status"> <label
-							class="onoffswitch-label" for="status"> <span
-							class="onoffswitch-inner"></span> <span
-							class="onoffswitch-switch"></span>
-						</label>
-					</div>
 				</div>
 			</div>
 			<div class="form-group">
 				<label class="col-sm-3 control-label">备注：</label>
 				<div class="col-sm-8">
-					<input id="remark" name="remark" th:value="${bookmanage.remark}"
-						class="form-control" type="text">
+					<input id="bz" name="bz"
+						th:value="${room.bz}" class="form-control"
+						type="text">
 				</div>
 			</div>
+			<div class="form-group" hidden>
+				<label class="col-sm-3 control-label">预留：</label>
+				<div class="col-sm-8">
+					<input id="more" name="bookOriginalPrice"
+						th:value="${room.more}" class="form-control"
+						type="text">
+				</div>
+			</div>
+
+			<div class="form-group">
+				<label class="col-sm-3 control-label">类型：</label>
+				<div class="col-sm-8">
+					<select class="form-control" id="type"
+						name="type">
+						<option value="单人间">单人间</option>
+						<option value="双人间">双人间</option>
+						<option value="客户间">客户间</option>
+					</select> <input id="type1" name="type1"
+						class="form-control" type="text" style="display: none"
+						placeholder="请输入分类名">
+				</div>
+			</div>
+
 			<div class="form-group">
 				<div class="form-control-static col-sm-offset-9">
 					<button type="submit" class="btn btn-primary">提交</button>
@@ -213,40 +88,6 @@
 		</form>
 	</div>
 	<div th:include="include::footer"></div>
-	<script th:inline="javascript">
-	 var bookBinding = [[${bookmanage.bookBinding}]];
-	 var obj = document.getElementById("bookBinding");
-	 for(var i = 0; i < obj.options.length; i++){
-	        var tmp = obj.options[i].value;
-	        if(tmp == bookBinding){
-	        	obj.options[i].selected = 'selected';
-                break;
-	        }
-	        //如果都没有
-	        if(i==obj.options.length-1){
-	        	obj.options[obj.options.length-1].selected = 'selected';
-	        	$("#bookBinding2").show();
-	        	$("#bookBinding2").val(bookBinding);
-	        }
-	    }
-</script>
-	<script th:inline="javascript">
-	 var bookClassification = [[${bookmanage.bookClassification}]];
-	 var obj = document.getElementById("bookClassification");
-	 for(var i = 0; i < obj.options.length; i++){
-	        var tmp = obj.options[i].value;
-	        if(tmp == bookClassification){
-	        	obj.options[i].selected = 'selected';
-                break;
-	        }
-	        //如果都没有
-	        if(i==obj.options.length-1){
-	        	obj.options[obj.options.length-1].selected = 'selected';
-	        	$("#bookClassification2").show();
-	        	$("#bookClassification2").val(bookClassification);
-	        }
-	    }
-</script>
 	<script src="/js/star-rating.js" th:src="@{/js/star-rating.js}"></script>
 	<script src="/js/jquery-ui-1.10.4.min.js"
 		th:src="@{/js/jquery-ui-1.10.4.min.js}"></script>
@@ -257,8 +98,8 @@
 	<script src="/ajax/libs/beautifyhtml/beautifyhtml.js"
 		th:src="@{/ajax/libs/beautifyhtml/beautifyhtml.js}"></script>
 	</script>
-	<script src="/rzspider/book/bookmanage/edit.js"
-		th:src="@{/rzspider/book/bookmanage/edit.js}">
+	<script src="/rzspider/room/roommanage/edit.js"
+		th:src="@{/rzspider/room/roommanage/edit.js}">
 	</script>
 	<script>
 		$(document).ready(

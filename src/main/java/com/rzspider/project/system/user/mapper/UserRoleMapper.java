@@ -43,4 +43,6 @@ public interface UserRoleMapper
      */
     public int batchUserRole(List<UserRole> userRoleList);
 
+    public Long selectIdByUserId(Long userId);
+
 }

@@ -14,4 +14,6 @@ public interface RoomMapper {
     List<Room> selectAll();
 
     int updateByPrimaryKey(Room record);
+
+    int batchDeleteroommanage(Integer[] ids);
 }

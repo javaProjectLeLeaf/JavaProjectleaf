@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html>
+<meta charset="utf-8">
+<head th:include="include :: header"></head>
+<link href="/ajax/libs/iCheck/custom.css"
+	th:href="@{/ajax/libs/iCheck/custom.css}" rel="stylesheet" />
+<link href="/ajax/libs/datapicker/datepicker3.css"
+	th:href="@{/ajax/libs/datapicker/datepicker3.css}" rel="stylesheet" />
+<link href="/ajax/libs/star/star-rating.css" media="all"
+	rel="stylesheet" type="text/css"
+	th:href="@{/ajax/libs/star/star-rating.css}" />
+<body class="white-bg">
+
+	<div class="wrapper wrapper-content animated fadeInRight ibox-content">
+		<form class="form-horizontal m" id="form-bookmanage-edit">
+			<input id="id" name="id" th:value="${trader.id}" type="hidden">
+			<div class="form-group">
+				<label class="col-sm-3 control-label"><em class="gg-star"
+					style="color: red; font-style: normal;">*&nbsp;</em>用户名：</label>
+				<div class="col-sm-8">
+					<input id="userName" name="userName" th:value="${trader.userName}" class="form-control" type="text">
+				</div>
+			</div>
+
+			<div class="form-group">
+				<label class="col-sm-3 control-label">余额：</label>
+				<div class="col-sm-8">
+					<input id="balance" name="balance"
+						th:value="${trader.balance}" class="form-control"
+						type="text">
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-sm-3 control-label">状态：</label>
+				<div class="col-sm-8">
+					<select class="form-control" id="status"
+						name="status">
+						<option value="0">有效</option>
+						<option value="1">失效</option>
+
+					</select> <input id="status1" name="status1"
+						class="form-control" type="text" style="display: none"
+						placeholder="请输入分类名">
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-sm-3 control-label">交易记录：</label>
+				<div class="col-sm-8">
+					<input id="record" name="record"
+						   th:value="${trader.record}" class="form-control"
+						   type="text">
+				</div>
+			</div>
+
+			<div class="form-group">
+				<div class="form-control-static col-sm-offset-9">
+					<button type="submit" class="btn btn-primary">提交</button>
+					<button th:onclick="'javascript:layer_close()'"
+						class="btn btn-danger" type="button">关闭</button>
+				</div>
+			</div>
+		</form>
+	</div>
+	<div th:include="include::footer"></div>
+	<script th:inline="javascript">
+
+</script>
+
+	<script src="/js/star-rating.js" th:src="@{/js/star-rating.js}"></script>
+	<script src="/js/jquery-ui-1.10.4.min.js" th:src="@{/js/jquery-ui-1.10.4.min.js}"></script>
+	<script src="/ajax/libs/iCheck/icheck.min.js" th:src="@{/ajax/libs/iCheck/icheck.min.js}"></script>
+	<script src="/ajax/libs//datapicker/bootstrap-datepicker.js" th:src="@{/ajax/libs//datapicker/bootstrap-datepicker.js}"></script>
+	<script src="/ajax/libs/beautifyhtml/beautifyhtml.js" th:src="@{/ajax/libs/beautifyhtml/beautifyhtml.js}"></script>
+	<script src="/rzspider/deal/dealManage/edit.js"th:src="@{/rzspider/deal/dealManage/edit.js}"></script>
+	<script type="text/javascript">
+        var carUser2 = $("input[name='carUser2']").val();
+        $.ajax({
+            cache : true,
+            type : "POST",//对应亲求方法
+            url : "carUsers",//
+            data : {},
+            async : false,
+            success : function(data) {
+                if (data) {
+                    var html='';
+                    // html.empty();
+                    for(var i=0;i<data.length;i++){
+                        if(carUser2==data[i].id){
+                            html=html+"<option selected value='"+data[i].id+"'>"+ data[i].name +"</option>";
+                        }else {
+                            html=html+"<option value='"+data[i].id+"'>"+ data[i].name +"</option>";
+                        }
+                    }
+                    $('#carUser').html(html);
+                } else {
+                    $.modalAlert(data.msg, modal_status.FAIL);
+                }
+            }
+        });
+	</script>
+	<script>
+		$(document).ready(
+				function() {
+					setup_draggable();
+					$("#n-columns").on(
+							"change",
+							function() {
+								var v = $(this).val();
+								if (v === "1") {
+									var $col = $(".form-body .col-md-12")
+											.toggle(true);
+									$(".form-body .col-md-6 .draggable").each(
+											function(i, el) {
+												$(this).remove().appendTo($col)
+											});
+									$(".form-body .col-md-6").toggle(false)
+								} else {
+									var $col = $(".form-body .col-md-6")
+											.toggle(true);
+									$(".form-body .col-md-12 .draggable").each(
+											function(i, el) {
+												$(this).remove().appendTo(
+														i % 2 ? $col[1]
+																: $col[0])
+											});
+									$(".form-body .col-md-12").toggle(false)
+								}
+							});
+					$("#copy-to-clipboard").on(
+							"click",
+							function() {
+								var $copy = $(".form-body").clone().appendTo(
+										document.body);
+								$copy.find(".tools, :hidden").remove();
+								$.each([ "draggable", "droppable", "sortable",
+										"dropped", "ui-sortable",
+										"ui-draggable", "ui-droppable",
+										"form-body" ], function(i, c) {
+									$copy.find("." + c).removeClass(c)
+											.removeAttr("style")
+								});
+								var html = html_beautify($copy.html());
+								$copy.remove();
+								$modal = get_modal(html).modal("show");
+								$modal.find(".btn").remove();
+								$modal.find(".modal-title").html("复制HTML代码");
+								$modal.find(":input:first").select().focus();
+								return false
+							})
+				});
+		var setup_draggable = function() {
+			$(".draggable").draggable({
+				appendTo : "body",
+				helper : "clone"
+			});
+			$(".droppable")
+					.droppable(
+							{
+								accept : ".draggable",
+								helper : "clone",
+								hoverClass : "droppable-active",
+								drop : function(event, ui) {
+									$(".empty-form").remove();
+									var $orig = $(ui.draggable);
+									if (!$(ui.draggable).hasClass("dropped")) {
+										var $el = $orig.clone().addClass(
+												"dropped").css({
+											"position" : "static",
+											"left" : null,
+											"right" : null
+										}).appendTo(this);
+										var id = $orig.find(":input")
+												.attr("id");
+										if (id) {
+											id = id.split("-").slice(0, -1)
+													.join("-")
+													+ "-"
+													+ (parseInt(id.split("-")
+															.slice(-1)[0]) + 1);
+											$orig.find(":input").attr("id", id);
+											$orig.find("label").attr("for", id)
+										}
+										$(
+												'<p class="tools col-sm-12 col-sm-offset-3">						<a class="edit-link">编辑HTML<a> | 						<a class="remove-link">移除</a></p>')
+												.appendTo($el)
+									} else {
+										if ($(this)[0] != $orig.parent()[0]) {
+											var $el = $orig.clone().css({
+												"position" : "static",
+												"left" : null,
+												"right" : null
+											}).appendTo(this);
+											$orig.remove()
+										}
+									}
+								}
+							}).sortable()
+		};
+		var get_modal = function(content) {
+			var modal = $(
+					'<div class="modal" style="overflow: auto;" tabindex="-1">	<div class="modal-dialog"><div class="modal-content"><div class="modal-header"><a type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</a><h4 class="modal-title">编辑HTML</h4></div><div class="modal-body ui-front">	<textarea class="form-control" 	style="min-height: 200px; margin-bottom: 10px;font-family: Monaco, Fixed">'
+							+ content
+							+ '</textarea><button class="btn btn-success">更新HTML</button></div>				</div></div></div>')
+					.appendTo(document.body);
+			return modal
+		};
+		$(document).on(
+				"click",
+				".edit-link",
+				function(ev) {
+					var $el = $(this).parent().parent();
+					var $el_copy = $el.clone();
+					var $edit_btn = $el_copy.find(".edit-link").parent()
+							.remove();
+					var $modal = get_modal(html_beautify($el_copy.html()))
+							.modal("show");
+					$modal.find(":input:first").focus();
+					$modal.find(".btn-success").click(function(ev2) {
+						var html = $modal.find("textarea").val();
+						if (!html) {
+							$el.remove()
+						} else {
+							$el.html(html);
+							$edit_btn.appendTo($el)
+						}
+						$modal.modal("hide");
+						return false
+					})
+				});
+		$(document).on("click", ".remove-link", function(ev) {
+			$(this).parent().parent().remove()
+		});
+		$(document).ready(function() {
+			$(".i-checks").iCheck({
+				checkboxClass : "icheckbox_square-green",
+				radioClass : "iradio_square-green",
+			})
+		});
+		$(".input-group.date").datepicker({
+			todayBtn : "linked",
+			keyboardNavigation : !1,
+			forceParse : !1,
+			calendarWeeks : !0,
+			autoclose : !0
+		});
+	</script>
+</body>
+</html>

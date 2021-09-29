@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="zh_CN" xmlns:th="http://www.thymeleaf.org"
+	xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
+<meta charset="utf-8">
+<head th:include="include :: header"></head>
+<link href="/css/layui.css" th:href="@{/css/layui.css}" rel="stylesheet">
+<body class="gray-bg">
+	<div class="wrapper wrapper-content">
+		<div class="btn-group hidden-xs" id="tableToolbar" role="group">
+			<button type="button" class="btn btn-outline btn-default"
+				th:onclick="'javascript:add()'"
+				shiro:hasPermission="yw:ywManage:add">
+				<i class="glyphicon glyphicon-plus"></i>新增业务
+			</button>
+			<button type="button" class="btn btn-outline btn-default"
+				th:onclick="'javascript:batchExport()'"
+				shiro:hasPermission="yw:ywManage:batchExcel" id="batchExport">
+				<i class="glyphicon fa fa-download"></i>全部导出Excel
+			</button>
+            <button type="button" class="btn btn-outline btn-default"
+                    th:onclick="'javascript:upFuJian()'"
+                    shiro:hasPermission="yw:ywManage:upFuJian" id="upFuJian">
+                <i class="glyphicon fa fa-arrow-circle-o-up"></i>上传附件
+            </button>
+            <button type="button" class="btn btn-outline btn-default"
+                    th:onclick="'javascript:upFuJian()'"
+                    shiro:hasPermission="yw:ywManage:downFuJian" id="downFuJian">
+                <i class="glyphicon fa fa-download"></i>下载附件
+            </button>
+		</div>
+		<table class="bootstrap-table" data-mobile-responsive="true"
+			data-sort-name="id" data-sort-order="asc" id="table1">
+		</table>
+	</div>
+	<div th:include="include :: footer"></div>
+	<script src="/rzspider/yw/ywManage/ywManage.js"
+		th:src="@{/rzspider/yw/ywManage/ywManage.js}"></script>
+	<script src="/js/layui.js" th:src="@{/js/layui.js}"></script>
+	<script th:inline="javascript">
+        var editFlag = [[${@permissionService.hasPermi('yw:ywManage:edit')}]];
+        var detailFlag = [[${@permissionService.hasPermi('yw:ywManage:more')}]];
+        var removeFlag = [[${@permissionService.hasPermi('yw:ywManage:status')}]];
+    </script>
+</body>
+</html>

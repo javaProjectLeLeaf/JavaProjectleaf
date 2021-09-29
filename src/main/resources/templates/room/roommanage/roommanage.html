@@ -5,10 +5,15 @@
 <head th:include="include :: header"></head>
 <link href="/css/layui.css" th:href="@{/css/layui.css}" rel="stylesheet">
 <body class="gray-bg">
+
+<!--下面区域提供了四个按钮-->
+
 	<div class="wrapper wrapper-content">
 		<div class="btn-group hidden-xs" id="tableToolbar" role="group">
 			<button type="button" class="btn btn-outline btn-default"
+					<!--这个按钮的绑定了add（）方法-->
 				th:onclick="'javascript:add()'"
+			<!--这个按钮的控制权限-->
 				shiro:hasPermission="room:roommanage:add">
 				<i class="glyphicon glyphicon-plus"></i>添加房间信息
 			</button>
@@ -20,7 +25,7 @@
 			<button type="button" class="btn btn-outline btn-default"
 				th:onclick="'javascript:batchRemove()'"
 				shiro:hasPermission="room:roommanage:batchRemove">
-				<i class="glyphicon glyphicon-trash"></i>删除图书
+				<i class="glyphicon glyphicon-trash"></i>批量删除信息
 			</button>
 			<button type="button" class="btn btn-outline btn-default"
 				th:onclick="'javascript:batchExport()'"
@@ -28,18 +33,24 @@
 				<i class="glyphicon fa fa-download"></i>全部导出Excel
 			</button>
 		</div>
+		<!--提供一张表-->
 		<table class="bootstrap-table" data-mobile-responsive="true"
-			data-sort-name="book_id" data-sort-order="asc" id="table1">
+			data-sort-name="id" data-sort-order="asc" id="table1">
 		</table>
 	</div>
+
+<!--页脚功能-->
+
 	<div th:include="include :: footer"></div>
+
+<!--删改太多  从此转入book路线-->
 	<script src="/rzspider/room/roommanage/roommanage.js"
 		th:src="@{/rzspider/room/roommanage/roommanage.js}"></script>
 	<script src="/js/layui.js" th:src="@{/js/layui.js}"></script>
 	<script th:inline="javascript">
         var editFlag = [[${@permissionService.hasPermi('room:roommanage:edit')}]];
         var detailFlag = [[${@permissionService.hasPermi('room:roommanage:detail')}]];
-        var removeFlag = [[${@permissionService.hasPermi('room:roommanage:remove')}]];
+        var removeFlag = [[${@permissionService.hasPermi('room:roommanage:Remove')}]];
     </script>
 </body>
 </html>

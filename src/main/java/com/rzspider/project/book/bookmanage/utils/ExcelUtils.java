@@ -9,6 +9,7 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.rzspider.project.yw.ywManage.domain.YwInfoList;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Row;
@@ -385,6 +386,39 @@ public class ExcelUtils {
 			cell2.setCellValue(String.valueOf(bmList.get(i - 1).getStatus()));
 			cell2 = row2.createCell(18);
 			cell2.setCellValue(bmList.get(i - 1).getRemark() != null ? bmList.get(i - 1).getRemark() : "");
+		}
+		// 写入文件
+		return workbook;
+	}
+
+
+	public static XSSFWorkbook createExcelFile1(List<YwInfoList> ywInfoLists) {
+
+		String[] title = { "序号", "图书名称"};
+		// 创建Excel工作
+		XSSFWorkbook workbook = new XSSFWorkbook();
+		// 创建一个sheet表
+		XSSFSheet sheet = workbook.createSheet();
+		// 设置列宽
+		sheet.setColumnWidth(1, 40 * 256);
+		sheet.setColumnWidth(2, 30 * 256);
+		// 创建第一行
+		XSSFRow row = sheet.createRow(0);
+		XSSFCell cell;
+		// 插入第一行数据
+		for (int i = 0; i < title.length; i++) {
+			cell = row.createCell(i);
+			cell.setCellValue(title[i]);
+		}
+		// 追加数据,向第二行开始加入数据 i = 1
+		for (int i = 1; i < ywInfoLists.size() + 1; i++) {
+			XSSFRow row2 = sheet.createRow(i);
+			XSSFCell cell2 = row2.createCell(0);
+			cell2.setCellValue(i);
+			cell2 = row2.createCell(1);
+			cell2.setCellValue(ywInfoLists.get(i - 1).getYw_title());
+			cell2 = row2.createCell(2);
+			cell2.setCellValue(ywInfoLists.get(i - 1).getYw_title() != null ? ywInfoLists.get(i - 1).getYw_title() : "");
 		}
 		// 写入文件
 		return workbook;

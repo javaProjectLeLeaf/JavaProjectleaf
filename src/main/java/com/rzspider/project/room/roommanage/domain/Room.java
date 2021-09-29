@@ -15,7 +15,7 @@ public class Room extends BaseEntity {
 
     private String user;
 
-    private String describe;
+    private String bz;
 
     private String more;
 
@@ -67,12 +67,12 @@ public class Room extends BaseEntity {
         this.user = user == null ? null : user.trim();
     }
 
-    public String getDescribe() {
-        return describe;
+    public String getBz() {
+        return bz;
     }
 
-    public void setDescribe(String describe) {
-        this.describe = describe == null ? null : describe.trim();
+    public void setBz(String bz) {
+        this.bz = bz == null ? null : bz.trim();
     }
 
     public String getMore() {

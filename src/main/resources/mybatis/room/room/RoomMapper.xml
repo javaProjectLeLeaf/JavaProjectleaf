@@ -1,46 +1,54 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.rzspider.project.room.roommanage.mapper.RoomMapper" >
-  <resultMap id="BaseResultMap" type="com.rzspider.project.room.roommanage.domain.Room" >
-    <id column="id" property="id" jdbcType="INTEGER" />
-    <result column="roomID" property="roomID" jdbcType="INTEGER" />
-    <result column="type" property="type" jdbcType="VARCHAR" />
-    <result column="floor" property="floor" jdbcType="VARCHAR" />
-    <result column="status" property="status" jdbcType="VARCHAR" />
-    <result column="user" property="user" jdbcType="VARCHAR" />
-    <result column="describe" property="describe" jdbcType="VARCHAR" />
-    <result column="more" property="more" jdbcType="VARCHAR" />
-  </resultMap>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.rzspider.project.room.roommanage.mapper.RoomMapper">
+    <resultMap id="BaseResultMap" type="com.rzspider.project.room.roommanage.domain.Room">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="roomID" property="roomID" jdbcType="INTEGER"/>
+        <result column="type" property="type" jdbcType="VARCHAR"/>
+        <result column="floor" property="floor" jdbcType="VARCHAR"/>
+        <result column="status" property="status" jdbcType="VARCHAR"/>
+        <result column="user" property="user" jdbcType="VARCHAR"/>
+        <result column="bz" property="bz" jdbcType="VARCHAR"/>
+        <result column="more" property="more" jdbcType="VARCHAR"/>
+    </resultMap>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from room
     where id = #{id,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.rzspider.project.room.roommanage.domain.Room" >
+    <insert id="insert" parameterType="com.rzspider.project.room.roommanage.domain.Room">
     insert into room (id, roomID, type, 
       floor, status, user, 
-      describe, more)
+      bz, more)
     values (#{id,jdbcType=INTEGER}, #{roomID,jdbcType=INTEGER}, #{type,jdbcType=VARCHAR}, 
       #{floor,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR}, #{user,jdbcType=VARCHAR}, 
-      #{describe,jdbcType=VARCHAR}, #{more,jdbcType=VARCHAR})
+      #{bz,jdbcType=VARCHAR}, #{more,jdbcType=VARCHAR})
   </insert>
-  <update id="updateByPrimaryKey" parameterType="com.rzspider.project.room.roommanage.domain.Room" >
+    <update id="updateByPrimaryKey" parameterType="com.rzspider.project.room.roommanage.domain.Room">
     update room
     set roomID = #{roomID,jdbcType=INTEGER},
       type = #{type,jdbcType=VARCHAR},
       floor = #{floor,jdbcType=VARCHAR},
       status = #{status,jdbcType=VARCHAR},
       user = #{user,jdbcType=VARCHAR},
-      describe = #{describe,jdbcType=VARCHAR},
+      bz = #{bz,jdbcType=VARCHAR},
       more = #{more,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
-    select id, roomID, type, floor, status, user, describe, more
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+    select id, roomID, type, floor, status, user, bz, more
     from room
     where id = #{id,jdbcType=INTEGER}
   </select>
-  <select id="selectAll" resultMap="BaseResultMap" >
-    select id, roomID, type, floor, status, user, describe, more
+    <select id="selectAll" resultMap="BaseResultMap">
+    select id, roomID, type, floor, status, user, bz, more
     from room
   </select>
+    <delete id="batchDeleteroommanage" parameterType="Integer">
+        delete from room where id in
+        <foreach item="id" collection="array" open="(" separator=","
+                 close=")">
+            #{id}
+        </foreach>
+    </delete>
 </mapper>

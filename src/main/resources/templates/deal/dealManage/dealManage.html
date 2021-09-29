@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="zh_CN" xmlns:th="http://www.thymeleaf.org"
+	xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
+<meta charset="utf-8">
+<head th:include="include :: header"></head>
+<link href="/css/layui.css" th:href="@{/css/layui.css}" rel="stylesheet">
+<body class="gray-bg">
+<button type="button" class="btn btn-outline btn-default"
+		th:onclick="'javascript:add()'"
+		shiro:hasPermission="car:carManage:add">
+	<i class="glyphicon glyphicon-plus"></i>新增用户
+</button>
+
+	<div class="wrapper wrapper-content">
+		<table class="bootstrap-table" data-mobile-responsive="true"
+			data-sort-name="id" data-sort-order="asc" id="table1">
+		</table>
+
+	</div>
+	<div th:include="include :: footer"></div>
+	<script src="/rzspider/deal/dealManage/dealManage.js" th:src="@{/rzspider/deal/dealManage/dealManage.js}"></script>
+	<script src="/js/layui.js" th:src="@{/js/layui.js}"></script>
+<script th:inline="javascript">
+    var editFlag = [[${@permissionService.hasPermi('car:carManage:edit')}]];
+    var removeFlag = [[${@permissionService.hasPermi('car:carManage:remove')}]];
+</script>
+
+</body>
+</html>

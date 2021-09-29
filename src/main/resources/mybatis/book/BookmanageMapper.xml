@@ -90,10 +90,10 @@
             <if test="updateTime != null and updateTime != ''">and update_time = #{updateTime}</if>
             <if test="remark != null and remark != ''">and remark = #{remark}</if>
             <if test="searchValue != null and searchValue != ''">
-                AND (book_name like concat(concat('%', #{searchValue}),
-                '%') OR book_author like concat(concat('%', #{searchValue}), '%') OR
-                book_classification like concat(concat('%', #{searchValue}), '%') OR
-                book_stay_address like concat(concat('%', #{searchValue}), '%'))
+                AND (book_name like concat(concat('%', #{searchValue}),'%')
+                OR book_author like concat(concat('%', #{searchValue}), '%')
+                OR book_classification like concat(concat('%', #{searchValue}), '%')
+                OR book_stay_address like concat(concat('%', #{searchValue}), '%'))
             </if>
         </where>
     </select>
