@@ -33,7 +33,7 @@ import java.time.LocalDateTime;
 //                //2.设置执行周期(Trigger)
 //                triggerContext -> {
 //                    //2.1 从数据库获取执行周期
-//                    String cron = cronMapper.getCron();//暂时关闭定时任务，需要启动去掉这一行注释就可以
+//                    String cron = cronMapper.getCron();
 //                    //2.2 合法性校验.
 //                    if (StringUtils.isEmpty(cron)) {
 //                        System.out.println("定时任务信息为空");

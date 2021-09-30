@@ -29,6 +29,36 @@ public class Salary {
 
     private String by3;
 
+    private Integer page;
+
+    private Integer rows;
+
+    private String cdateStr;
+
+    public String getCdateStr() {
+        return cdateStr;
+    }
+
+    public void setCdateStr(String cdateStr) {
+        this.cdateStr = cdateStr;
+    }
+
+    public Integer getPage() {
+        return page;
+    }
+
+    public void setPage(Integer page) {
+        this.page = page;
+    }
+
+    public Integer getRows() {
+        return rows;
+    }
+
+    public void setRows(Integer rows) {
+        this.rows = rows;
+    }
+
     public Integer getId() {
         return id;
     }

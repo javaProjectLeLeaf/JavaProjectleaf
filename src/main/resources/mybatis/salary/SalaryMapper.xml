@@ -25,6 +25,14 @@
         from salary
         where id = #{id,jdbcType=INTEGER}
     </select>
+    <select id="selectAll" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from salary
+    </select>
+    <select id="selectCount" resultType="java.lang.Integer">
+        select count(*) from salary
+    </select>
     <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from salary
     where id = #{id,jdbcType=INTEGER}

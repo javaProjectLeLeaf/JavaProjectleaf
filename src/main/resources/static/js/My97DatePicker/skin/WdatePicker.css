@@ -1,0 +1,12 @@
+.Wdate{
+	/*border:#999 1px solid;*/
+	height:30px;
+	background:#fff url(/js/My97DatePicker/skin/datePicker.gif) no-repeat right;
+	background-size: 18px 24px;
+}
+.Wdate::-ms-clear{display:none;}
+
+.WdateFmtErr{
+	font-weight:bold;
+	color:red;
+}

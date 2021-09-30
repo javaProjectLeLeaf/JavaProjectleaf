@@ -2,6 +2,8 @@ package com.rzspider.project.salary.salarymanage.mapper;
 
 import com.rzspider.project.salary.salarymanage.domain.Salary;
 
+import java.util.List;
+
 public interface SalaryMapper {
     int deleteByPrimaryKey(Integer id);
 
@@ -14,4 +16,8 @@ public interface SalaryMapper {
     int updateByPrimaryKeySelective(Salary record);
 
     int updateByPrimaryKey(Salary record);
+
+    List<Salary> selectAll();
+
+    int selectCount();
 }
