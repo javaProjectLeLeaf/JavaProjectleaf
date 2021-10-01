@@ -192,6 +192,7 @@
       </if>
     </trim>
   </insert>
+  <insert id="insertYwInfoLists"></insert>
   <update id="updateByPrimaryKeySelective" parameterType="com.rzspider.project.yw.ywManage.domain.YwInfoList">
     update yw_info_list
     <set>

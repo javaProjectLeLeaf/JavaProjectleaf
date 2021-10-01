@@ -22,4 +22,8 @@ public interface CarMapper {
     List<Car> selectCarByPersonId(int id);
 
     List<Car> selectAbout(Car car);
+
+    int selectCount();
+
+    List<Car> selectNewAll();
 }

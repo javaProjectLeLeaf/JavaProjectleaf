@@ -24,4 +24,6 @@ public interface PersonMapper {
     int batchDeletePersonManage(Integer[] ids);
 
     Person selectOneById();
+
+    int selectCount();
 }

@@ -30,6 +30,9 @@
       select person.name,person.phone,car.* from car
       left join person on car.personid=person.id order by createtime asc,inDate asc,cost desc
     </select>
+  <select id="selectNewAll" resultType="com.rzspider.project.car.carManage.domain.Car">
+      select * from car order by createtime asc,inDate asc,cost desc
+    </select>
   <select id="selectCarByPersonId" resultType="com.rzspider.project.car.carManage.domain.Car">
     <if test="id !='' and id != null">
       and id = #{id}
@@ -43,6 +46,9 @@
       </if>
     </where>
 
+    </select>
+    <select id="selectCount" resultType="java.lang.Integer">
+        select count(*) from car
     </select>
     <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from car

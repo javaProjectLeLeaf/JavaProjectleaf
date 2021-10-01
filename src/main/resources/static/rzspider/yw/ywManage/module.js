@@ -6,7 +6,7 @@ $(function() {
 				checkbox : true
 			},
 			{
-                visible : false,
+
 				field : 'id',
 				title : '序列'
 			},
@@ -195,11 +195,6 @@ function up(id) {
         _ajax(prefix + "/remove/" + id, "", "post");
     })
 }
-function module() {
-    var url =prefix + '/module';
-    layer_showAuto("业务明细管理", url);
-}
-
 
 // 批量删除
 function batchRemove() {
@@ -213,6 +208,11 @@ function batchRemove() {
 			"ids" : rows
 		}, "post");
 	});
+
+    function module() {
+        var url =prefix + '/module';
+        layer_showAuto("业务明细管理", url);
+    }
 
 
 }

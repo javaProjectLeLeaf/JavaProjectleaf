@@ -6,8 +6,10 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 import com.rzspider.project.yw.ywManage.domain.YwInfoList;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
@@ -122,7 +124,71 @@ public class ExcelUtils {
 		}
 
 	}
+//读取业务excel文件
+	public static List<YwInfoList> readYwExcel(File file) {
+		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("EEE MMM dd hh:mm:ss zzz yyyy", Locale.US);
 
+		List<YwInfoList> ywInfoLists = null;
+		try {
+			ywInfoLists = new ArrayList<YwInfoList>();
+			YwInfoList bm = null;
+			Workbook wb = null;
+			Sheet sheet = null;
+			Row row = null;
+			String cellData = null;
+			// 获取工作簿
+			wb = getWorkbook(file);
+			if (wb != null) {
+				// 获取第一个sheet
+				sheet = (Sheet) wb.getSheetAt(0);
+				// 获取最大行数
+				int rownum = sheet.getPhysicalNumberOfRows();
+				// 获取第一行
+				row = sheet.getRow(0);
+				// 获取最大列数
+				int colnum = row.getPhysicalNumberOfCells();
+				// 从第二行第二列开始读取
+				for (int i = 1; i < rownum; i++) {
+					bm = new YwInfoList();
+					row = sheet.getRow(i);
+					if (row != null) {
+
+						// 图书名称
+						if (!"".equals(row.getCell(1))) {
+							bm.setYw_title(row.getCell(1).toString());
+						}
+
+						bm.setYw_type(row.getCell(2).toString());
+						bm.setYw_dtl(row.getCell(3).toString());
+						bm.setYw_content(row.getCell(4).toString());
+						bm.setOp_id(Integer.valueOf(row.getCell(5).toString()));
+						bm.setStaff_name(row.getCell(6).toString());
+						bm.setBill_id(Integer.valueOf(row.getCell(7).toString().substring(0,row.getCell(7).toString().length()-2)));
+						bm.setCreate_date(simpleDateFormat.parse(row.getCell(8).toString()));
+						bm.setUpdate_date(simpleDateFormat.parse(row.getCell(9).toString()));
+						bm.setDelete_date(simpleDateFormat.parse(row.getCell(10).toString()));
+						bm.setRestore_date(simpleDateFormat.parse(row.getCell(11).toString()));
+						if (row.getCell(12).toString().contains("下线") || "0.0".equals(row.getCell(12).toString())
+								|| "0".equals(row.getCell(12).toString())) {
+							// 已读
+							bm.setStatus(0);
+						} else if (row.getCell(12).toString().contains("正常") || "1.0".equals(row.getCell(12).toString())
+								|| "1".equals(row.getCell(12).toString())) {
+							// 未读
+							bm.setStatus(1);
+
+							ywInfoLists.add(bm);
+						}
+					}
+					return ywInfoLists;
+				}
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			return ywInfoLists;
+		}
+		return ywInfoLists;
+	}
 	// 读取excel返回workbook
 	public static Workbook getWorkbook(File file) {
 		Workbook wb = null;
@@ -296,6 +362,69 @@ public class ExcelUtils {
 				cell2.setCellValue("无");
 			}
 		}
+		// 写入文件
+		return workbook;
+	}
+
+	// 获取workbook
+	public static XSSFWorkbook createYwExcelFile() {
+		String[] title = {  "业务标题", "业务大类", "业务明细", "业务内容", "创建人编号", "创建人姓名",
+				"创建人联系方式", "创建时间", "更新时间", "下线时间",
+				"恢复时间", "状态" };
+		// 创建Excel工作
+		XSSFWorkbook workbook = new XSSFWorkbook();
+		// 创建一个sheet表
+		XSSFSheet sheet = workbook.createSheet();
+		// 设置列宽
+		sheet.setColumnWidth(1, 20 * 256);
+		sheet.setColumnWidth(2, 20 * 256);
+		sheet.setColumnWidth(3, 20 * 256);
+		sheet.setColumnWidth(4, 80 * 256);
+		sheet.setColumnWidth(5, 20 * 256);
+		sheet.setColumnWidth(6, 30 * 256);
+		sheet.setColumnWidth(7, 30 * 256);
+		sheet.setColumnWidth(8, 40 * 256);
+		sheet.setColumnWidth(9, 40 * 256);
+		sheet.setColumnWidth(10, 40 * 256);
+		sheet.setColumnWidth(11, 40 * 256);
+		sheet.setColumnWidth(12, 40 * 256);
+		// 创建第一行
+		XSSFRow row = sheet.createRow(0);
+		XSSFCell cell;
+		// 插入第一行数据
+		for (int i = 0; i < title.length; i++) {
+			cell = row.createCell(i);
+			cell.setCellValue(title[i]);
+		}
+		// 追加数据,向第二行开始加入数据 i = 1
+
+			XSSFRow row2 = sheet.createRow(1);
+			XSSFCell cell2 = row2.createCell(0);
+			cell2.setCellValue(1);
+				cell2 = row2.createCell(1);
+				cell2.setCellValue("移动业务");
+				cell2 = row2.createCell(2);
+				cell2.setCellValue("5G终端");
+				cell2 = row2.createCell(3);
+				cell2.setCellValue("5G终端");
+				cell2 = row2.createCell(4);
+				cell2.setCellValue("22");
+				cell2 = row2.createCell(5);
+				cell2.setCellValue("103");
+				cell2 = row2.createCell(6);
+				cell2.setCellValue("黄旭峰");
+				cell2 = row2.createCell(7);
+				cell2.setCellValue("1062292863");
+				cell2 = row2.createCell(8);
+				cell2.setCellValue("Tue Sep 28 10:03:15 CST 2021");
+				cell2 = row2.createCell(9);
+				cell2.setCellValue("Tue Sep 28 10:03:15 CST 2021");
+				cell2 = row2.createCell(10);
+				cell2.setCellValue("Tue Sep 28 10:45:17 CST 2021");
+				cell2 = row2.createCell(11);
+				cell2.setCellValue("Tue Sep 28 10:45:35 CST 2021");
+				cell2 = row2.createCell(12);
+				cell2.setCellValue("正常");
 		// 写入文件
 		return workbook;
 	}

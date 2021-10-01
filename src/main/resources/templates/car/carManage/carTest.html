@@ -1,0 +1,751 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <!-- Bootstrap 3.3.6 -->
+    <!--<link rel="stylesheet" href="/css/css/bootstrap.css">-->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="/css/font-awesome.css">
+    <!-- AdminLTE Theme skin-blue  -->
+    <!--<link rel="stylesheet" href="/css/skin/WdatePicker.css">-->
+    <link rel="stylesheet" href="/css/css.css">
+    <link rel="stylesheet" href="/css/AdminLTE.css">
+    <link rel="stylesheet" href="/css/fileinput.min.css">
+    <link rel="stylesheet" href="/css/bootstrap-switch.min.css">
+    <script type="text/javascript" src="//code.jquery.com/jquery-1.8.2.min.js"></script>
+    <script type="text/javascript" src="//cdn.bootcss.com/handlebars.js/4.0.6/handlebars.js"></script>
+    <script src="/js/jquery.pagination.js"></script>
+    <script src="/js/My97DatePicker/WdatePicker.js"></script>
+    <!--<script src="/js/dataTables.colReorder.js"></script>-->
+    <!--<script src="/js/html5shiv.min.js"></script>-->
+    <!--<script src="/js/respond.min.js"></script>-->
+    <script src="/js/jquery/7fb1b5077bd74199dee79282b56555d9eeff8252/jquery.js"></script>
+    <!--<script src="https://api.map.baidu.com/api?v=3.0&ak=GhIgNVXZc6c4gtA9qdHcwcxgfGv4qjgN"></script>-->
+    <script src="/js/zeroModal/zeroModal.min.js"></script>
+    <script src="/js/jquery-ui.min.js"></script>
+    <script src="/js/bootstrap/js/bootstrap.min.js"></script>
+    <script src="/js/bootstarp-switch/3.3.2/js/bootstrap-switch.min.js"></script>
+    <script src="/js/jquery.pagination.js"></script>
+    <!--<script src="/js/seajs/sea.js"></script>-->
+    <!--<script src="/js/seajs/sea-plugins.js"></script>-->
+    <!--<script src="/js/conf/config.js"></script>-->
+    <!--<script src="/js/fileinput/fileinput.min.js"></script>-->
+    <!--<script src="/js/fileinput/locales/zh.js"></script>-->
+</head>
+<body>
+<!--列表模态框-->
+<div class="row" id="Page_exportCardHtml">
+    <div class="col-md-12">
+        <div class="box">
+            <form id="JS_queryExportCardForm">
+                <div class="box-header with-border">
+                    <div class="box-tools pull-right">
+                        <button type="button" class="btn btn-box-tool input-sm" data-widget="collapse"><i
+                                class="fa fa-minus"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="box-body">
+                    <div class="row">
+
+                        <div class="col-lg-2">
+                            <label>车牌号</label>
+                            <input type="text" class="form-control input-sm Wdate" name="start"
+                                   onClick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss'})" placeholder="开始时间">
+                        </div>
+                        <div class="col-lg-2">
+                            <label>类型</label>
+                            <select class="input-sm form-control" name="ggxh">
+                                <option value="0">C型</option>
+                                <option value="1">B型</option>
+                                <option value="2">A型</option>
+                            </select>
+                        </div>
+                        <div class="col-lg-2 btn-group-sm" style="margin-top:22px">
+                            <button type="reset" class="btn btn-default">重置</button>
+                            <button type="button" class="btn btn-primary" data-toggle="modal" name="query">查询</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="box" id="newsCarList" style="min-height:100px;">
+            <form id="oneForm">
+            <div class="box-header ">
+                <h5 class="box-title">清单界面</h5>
+                <button type="button" class="btn btn-primary " data-toggle="modal"
+                        name="add">新增
+                </button>
+                <button type="button" class="btn btn-primary " data-toggle="modal"
+                        name="personClick" id="personClick">车主管理
+                </button>
+                <div class="box-tools btn-group-sm">
+                    <a class="btn btn-primary" id="JS_export">导出 </a>
+                </div>
+            </div>
+            <div class="box-body" style="min-height: 100px;">
+                <table class="table table-bordered table-hover text-center" style="table-layout:fixed;"
+                       data-adjustable="true">
+                    <thead>
+                    <tr>
+                        <th width="10%">车牌号</th>
+                        <th width="5%">车型</th>
+                        <th width="8%">入场时间</th>
+                        <th width="7%">出厂时间</th>
+                        <th width="4%">车主id</th>
+                        <th width="5%">停车费</th>
+                        <th width="5%">状态</th>
+                        <th width="10%">是否支付</th>
+                        <th colspan="3" width="5%">操作</th>
+                    </tr>
+                    </thead>
+                    <tbody id="content" name="content"></tbody>
+                </table>
+                <div class="box-footer no-border">
+                    <div class="dataTables_paginate" id="pagination" name="pagination"></div>
+                </div>
+            </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!--用户列表模态框-->
+<div class="modal fade" id="personPage" tabindex="-1" role="dialog"
+     style="overflow-y:auto; overflow-x:auto; ">
+    <div class="modal-dialog modal-lg" style="width: 1100px" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                        aria-hidden="true">×</span></button>
+                <h4 class="box-title">用户列表</h4>
+            </div>
+        <div class="box">
+            <form id="personPageForm">
+                <div class="box-header with-border">
+                    <div class="box-tools pull-right">
+                        <button type="button" class="btn btn-box-tool input-sm" data-widget="collapse"><i
+                                class="fa fa-minus"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="box-body">
+                    <div class="row">
+
+                        <div class="col-lg-2">
+                            <label>用户名</label>
+                            <input type="text" class="form-control input-sm" name="start"
+                                    placeholder="用户名">
+                        </div>
+                        <div class="col-lg-2 btn-group-sm" style="margin-top:22px">
+                            <button type="reset" class="btn btn-default">重置</button>
+                            <button type="button" class="btn btn-primary" data-toggle="modal" name="query">查询</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="box" id="newsPersonList" style="min-height:100px;">
+            <form id="newPersonListForm">
+                <div class="box-header ">
+                    <h5 class="box-title">清单界面</h5>
+                    <button type="button" class="btn btn-primary " data-toggle="modal"
+                            name="add">新增
+                    </button>
+                    <button type="button" class="btn btn-primary " data-toggle="modal"
+                            name="carClick">车辆管理
+                    </button>
+                    <div class="box-tools btn-group-sm">
+                        <a class="btn btn-primary" id="JS_personExport">导出 </a>
+                    </div>
+                </div>
+                <div class="box-body" style="min-height: 100px;">
+                    <table class="table table-bordered table-hover text-center" style="table-layout:fixed;"
+                           data-adjustable="true">
+                        <thead>
+                        <tr>
+                            <th width="10%">姓名</th>
+                            <th width="5%">性别</th>
+                            <th width="8%">年龄</th>
+                            <th width="7%">电话</th>
+                            <th width="4%">创建人id</th>
+                            <th width="5%">状态</th>
+                            <th colspan="3" width="5%">操作</th>
+                        </tr>
+                        </thead>
+                        <tbody id="personContent" name="personContent"></tbody>
+                    </table>
+                    <div class="box-footer no-border">
+                        <div class="dataTables_paginate" id="personpagination" name="personpagination"></div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+</div>
+<!--car数据模板-->
+<script type="text/template" id="newsCarListTemplate">
+    {{#each this}}
+    <tr>
+        <td style="display: none"><input type="hidden" name="id"value="{{id}}">{{id}}</td>
+        <td><input type="hidden" name="code" value="{{code}}">{{code}}</td>
+        <td><input type="hidden" name="type" value="{{type}}">{{destype type}}</td>
+        <td style="overflow:hidden;text-overflow: ellipsis;white-space: nowrap" title="{{indate}}"><input type="hidden"  name="indate" value="{{indate}}">{{deadlineTimes indate}}</td>
+        <td style="overflow:hidden;text-overflow: ellipsis;white-space: nowrap" title="{{outdate}}"><input type="hidden" name="outdate" value="{{outdate}}">{{deadlineTimes outdate}}</td>
+        <td><input type="hidden" name="personid" value="{{personid}}">{{personid}}</td>
+        <td><input type="hidden" name="cost" value="{{cost}}">{{cost}}</td>
+        <td><input type="hidden" name="status" value="{{status}}">{{ztzh status}}</td>
+        <td><input type="hidden" name="pay" value="{{pay}}">{{payzh pay}}</td>
+        {{#status2 status}}{{/status2}}//这是什么，和上面日期一样的写法，
+    </tr>
+    {{/each}}
+</script>
+<!--person表数据模板-->
+<script type="text/template" id="newsPersonListTemplate">
+    {{#each this}}
+    <tr>
+        <td style="display: none"><input type="hidden" name="id"value="{{id}}">{{id}}</td>
+        <td><input type="hidden" name="name" value="{{name}}">{{name}}</td>
+        <td><input type="hidden" name="sex" value="{{sex}}">{{sex1 sex}}</td>
+        <td><input type="hidden" name="age" value="{{age}}">{{age}}</td>
+        <td><input type="hidden" name="phone" value="{{phone}}">{{phone}}</td>
+        <td><input type="hidden" name="makeUserId" value="{{makeUserId}}">{{makeUserId}}</td>
+        <td><input type="hidden" name="status" value="{{status}}">{{status1 status}}</td>
+        <td><div class="btn-group-xs"><button type="button" class="btn btn-primary"    name="edit" data-toggle="modal" id='editPerson'>修改</button></div></td>
+        <td><div class="btn-group-xs"><button type="button" class="btn btn-primary"    name="deleteOneCar" data-toggle="modal" id='deletePerson'>删除</button></div></td>
+    </tr>
+    {{/each}}
+</script>
+
+<!--新增弹窗页-->
+<div class="modal fade" id="addSalaryModal" tabindex="-1" role="dialog"
+     style="overflow-y:auto; overflow-x:auto; ">
+    <div class="modal-dialog modal-lg" style="width: 1100px" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                        aria-hidden="true">×</span></button>
+                <h4 class="box-title">【新增车辆】</h4>
+            </div>
+            <div class="modal-body">
+                <form id="addSalary" type="multipart/form-data" method="post">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <label>车牌号</label>
+                            <input type="text" class="form-control input-sm" name="code" placeholder="车牌号"/>
+                        </div>
+                        <div class="col-md-3">
+                            <label>车型</label>
+                            <select class="form-control input-sm" name="type">
+                                <option value="">请选择</option>
+                                <option value="0">C型</option>
+                                <option value="1">B型</option>
+                                <option value="2">A型</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="modal-footer">
+                        <div class="text-center">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                            <button type="button" class="btn btn-primary" id="editSave" name="editSave">保存</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--修改弹窗页-->
+<div class="modal fade" id="editPage" tabindex="-1" role="dialog"
+     style="overflow-y:auto; overflow-x:auto; ">
+    <div class="modal-dialog modal-lg" style="width: 1100px" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                        aria-hidden="true">×</span></button>
+                <h4 class="box-title">【修改车辆】</h4>
+            </div>
+            <div class="modal-body">
+                <form id="editForm" type="multipart/form-data" method="post">
+                    <input  type="hidden" class="form-control input-sm" name="id"/>
+                    <div class="row">
+                        <div class="col-md-3">
+                            <label>车牌号</label>
+                            <input type="text" class="form-control input-sm" name="code" placeholder="车牌号"/>
+                        </div>
+                        <div class="col-md-3">
+                            <label>车型</label>
+                            <select class="form-control input-sm" name="type" id="edittype">
+                                <option value="">请选择</option>
+                                <option value="0">C型</option>
+                                <option value="1">B型</option>
+                                <option value="2">A型</option>
+                            </select>
+                        </div>
+                        <div class="col-md-3">
+                            <label>入场时间</label>
+                            <input type="text" class="form-control input-sm Wdate" name="indateStr" onClick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss'})" placeholder="入场时间"/>
+                        </div>
+                        <div class="col-md-3">
+                            <label>出厂时间</label>
+                            <input type="text" class="form-control input-sm Wdate" name="outdateStr" onClick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss'})" placeholder="出厂时间"/>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-3">
+                            <label>状态</label>
+                            <select class="form-control input-sm" name="status" >
+                                <option value="" >请选择</option>
+                                <option value="0">在场</option>
+                                <option value="1">离场</option>
+                            </select>
+                        </div>
+                        <div class="col-md-3">
+                            <label>是否付费</label>
+                            <select class="form-control input-sm" name="pay" `>
+                                <option value="">请选择</option>
+                                <option value="0">已付</option>
+                                <option value="1">未付</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="modal-footer">
+                        <div class="text-center">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                            <button type="button" class="btn btn-primary" id="eSave" name="eSave">保存</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    //时间列表中显示截取,可以把返回的日期格式化
+    Handlebars.registerHelper("deadlineTimes", function (value) {
+        if (value != null) {
+            return value.substr(0, 20);
+        } else {
+            return null;
+        }
+    });
+    /**
+     * 按钮显示,这是根据状态判断，分别显示不同按钮，如果是一致不需要传参数判断，就显示固定按钮
+     */
+    Handlebars.registerHelper("status2", function (value) {
+        if (value === 0) {
+            return"<td><div class=\"btn-group-xs\"><button type=\"button\" class=\"btn btn-primary\"    name=\"edit\" data-toggle=\"modal\" id='edit'>修改</button></div></td>"+
+            "<td><div class=\"btn-group-xs\"><button type=\"button\" class=\"btn btn-primary\"    name=\"deleteOneCar\" data-toggle=\"modal\" id='delete'>删除</button></div></td>"+
+                "<td><div class=\"btn-group-xs\"><button type=\"button\" class=\"btn btn-primary\"    name=\"grant\" data-toggle=\"modal\" id='leave'>离场</button></div></td>";
+        } else  {
+            return"<td><div class=\"btn-group-xs\"><button type=\"button\" class=\"btn btn-primary\"    name=\"edit\" data-toggle=\"edit\">修改</button></div></td>" +
+                "<td><div class=\"btn-group-xs\"><button type=\"button\" class=\"btn btn-primary\"    name=\"deleteOneCar\" data-toggle=\"delete\">删除</button></div></td>"
+        }
+    });
+
+    //车型取值展示
+    Handlebars.registerHelper("destype", function (value) {
+        if (value === "0") {
+            return "C型";
+        } else if (value === "1") {
+            return "B型" ;
+        } else if (value === "2") {
+            return "A型" ;
+        }
+    });
+
+    //状态取值展示
+    Handlebars.registerHelper("ztzh", function (value) {
+        if (value === 0) {
+            return "在场";
+        } else if (value === 1) {
+            return "离场" ;
+        }
+    });
+    //支付情况取值展示
+    Handlebars.registerHelper("payzh", function (value) {
+        if (value === 0) {
+            return "已付";
+        } else if (value === 1) {
+            return "未付" ;
+        }
+    });
+
+    //车主性别取值展示
+    Handlebars.registerHelper("sex1", function (value) {
+        if (value === 0) {
+            return "男";
+        } else if (value === 1) {
+            return "女" ;
+        }
+    });
+
+    //默认执行列表方法
+    selectAll();
+    personClick();
+
+    //点击弹出用户页面
+    function personClick() {
+        var self = this;
+        var dom = $("#newsCarList");
+        var add = dom.find("[name='personClick']");
+        var modal = $("#personPage");
+        add.unbind('click');
+        add.bind('click', function () {
+            modal.modal('show');
+            selectAllCar()
+        })
+    }
+    function deleteCar() {
+        var self = this;
+        var dom = $("#newsCarList");
+        var add = dom.find("[name='deleteOneCar']");
+        add.unbind('click');
+        add.bind('click', function () {
+            $.ajax({
+                cache: true,
+                type: "POST",
+                url: "/car/carMan/deleteCar",
+                data: cmds,
+                async: false,
+                success: function (json,status) {
+                    if (status) {
+                        modal.modal('hide');
+                        setTimeout(function () {
+                            $("#addSalary")[0].reset();
+                        }, 1000);
+                        save.attr('disabled', false);
+                        selectAll();
+                    } else {
+                        $.modalAlert(data.msg, 500);
+                    }
+                }
+            });
+
+        })
+    }
+
+    //点击新增按钮弹出新增页面
+    function addSalary() {
+        var self = this;
+        var dom = $("#newsCarList");
+        var add = dom.find("[name='add']");
+        var modal = $("#addSalaryModal");
+        add.unbind('click');
+        add.bind('click', function () {
+            modal.modal('show');
+            selectAllPerson();
+        })
+    }
+
+    //请求修改页面
+    function returnEditCarPage() {
+        var self = this;
+        var dom = $("#newsCarList");
+        var add = dom.find("[name='edit']");
+        var modal = $("#editPage");
+        add.unbind('click');
+        add.bind('click', function () {
+            modal.modal('show');
+            editCar($(this));
+        })
+    }
+
+    //修改车辆信息
+    function editCar(the) {
+        var self = this;
+        var row =  getTableOneRow(the);
+        var modal = $("#editPage");
+        var form = $("#editForm");
+        //保存
+        var save = $("#eSave");
+        //修改窗口默认值
+        form.find("[name='id']").val(row.id);
+        form.find("[name='code']").val(row.code);
+        form.find("[name='type']").val(row.type);
+        form.find("[name='indateStr']").val(row.indate);
+        form.find("[name='outdateStr']").val(row.outdate);
+        form.find("[name='personid']").val(row.personid);
+        form.find("[name='cost']").val(row.cost);
+        form.find("[name='status']").val(row.status);
+        form.find("[name='pay']").val(row.pay);
+        save.unbind('click');
+        save.bind('click', function () {
+            save.attr('disabled', true);
+
+            // var code = $("input[name='code']").val();
+            // var indate = $("input[name='indate']").val();
+            // var outdate = $("input[name='outdate']").val();
+            // var personid = $("input[name='personid']").val();
+            // var cost = $("input[name='cost']").val();
+            // var status = $("input[name='personid']").val();
+            // var type = $("input[name='type']").val();
+            // var pay = $("input[name='pay']").val();
+            var cmds = form.serialize();
+
+            $.ajax({
+                cache: true,
+                type: "POST",
+                url: "/car/carMan/addCar",
+                data: cmds,
+                //     {
+                //     "code" : code,
+                //     "type" : type,
+                //     "indate" : indate,
+                //     "outdate" : outdate,
+                //     "personid" : personid,
+                //     "cost" : cost,
+                //     "status" : status,
+                //     "pay" : pay
+                // },
+                async: false,
+                success: function (json,status) {
+                    if (status) {
+                        modal.modal('hide');
+                        setTimeout(function () {
+                            $("#addSalary")[0].reset();
+                        }, 1000);
+                        save.attr('disabled', false);
+                        selectAll();
+                    } else {
+                        $.modalAlert(data.msg, 500);
+                    }
+                }
+            });
+        })
+    }
+
+    //点击新增页面中的保存按钮
+    function saveSalary() {
+        var self = this;
+        var modal = $("#addSalaryModal");
+        var form = $("#addSalary");
+        //保存
+        var save = $("#editSave");
+        save.unbind('click');
+        save.bind('click', function () {
+
+            var cmds = form.serialize();
+            alert(cmds)
+            save.attr('disabled', true);
+
+
+            $.ajax({
+                cache: true,
+                type: "POST",
+                url: "/car/carMan/addCar",
+                data: cmds,
+                async: false,
+                success: function (json,status) {
+                    if (status) {
+                        modal.modal('hide');
+                        setTimeout(function () {
+                            $("#addSalary")[0].reset();
+                        }, 1000);
+                        save.attr('disabled', false);
+                        selectAll();
+                    } else {
+                        $.modalAlert(data.msg, 500);
+                    }
+                }
+            });
+        })
+    }
+
+    //列表分页展示
+    function selectAll(){
+        var _domPagination = $("#pagination");
+        getServerPage("/car/carMan/list", "", function (json) {
+            if (json) {
+                //通过模板定义的id获取模板
+                var tpl = $("#newsCarListTemplate").html();
+
+                //预编译模板
+                var template = Handlebars.compile(tpl);
+                //传入需要填充的数据匹配
+                var html = template(json.data);
+
+                //插入模板到ul中
+                $("#content").html(html);
+                addSalary();
+                returnEditCarPage();
+            } else {
+                $.modalAlert(data.msg, modal_status.FAIL);
+            }
+        }, _domPagination, 10, 6);
+    }
+
+    //展示用户列表
+    function selectAllPerson(){
+        var _domPagination = $("#personpagination");
+        getServerPage("/car/carMan/personList", "", function (json) {
+            if (json) {
+                //通过模板定义的id获取模板
+                var tpl = $("#newsPersonListTemplate").html();
+
+                //预编译模板
+                var template = Handlebars.compile(tpl);
+                //传入需要填充的数据匹配
+                var html = template(json.data);
+
+                //插入模板到ul中
+                $("#personContent").html(html);
+            } else {
+                $.modalAlert(data.msg, modal_status.FAIL);
+            }
+        }, _domPagination, 10, 6);
+    }
+
+    //以下可以无视，就是一些封装方法，直接复制就行
+    function getServerPage(url, cmd, callback, obj, pageSize, displayPage) {
+        var self = this;
+        var page_index = 0;
+        var page_count = 0;
+        var items_per_page = pageSize || 10;
+        var num_display_entries = displayPage || 8;
+        var current_page = 0;
+        $(obj).html(''); // 初始化清空分页
+        function getDataList(index, jq) {
+            if ($(obj).find("li.active").length > 0) {
+                current_page = $(obj).find("li.active")[0].innerText - 1;
+            }
+            var _cmd = cmd;
+            if (typeof(_cmd) == "object") {
+                _cmd = cmd;
+                _cmd['page'] = index;
+                _cmd['rows'] = items_per_page;
+            } else {
+                _cmd = _cmd + "&page=" + (index) + '&rows=' + items_per_page;
+            }
+            $.ajax({
+                cache: true,
+                type: "POST",
+                url: url,
+                data: _cmd,
+                async: false,
+                success: function (json,status) {
+                    if (status) {
+                        callback(json);
+                        var _table = $(obj).parent().prev(".box-body").find('table');
+                        if (_table.data('adjustable')) {
+                            _table.addClass('table2');
+                            var _tableDom = _table[0];
+                            setWeithTable(_tableDom);
+                        }
+                        page_count = json.total;
+                        if ($(obj).html() == '') {
+                            $(obj).pagination(json.total, {
+                                items_per_page: items_per_page, //每页显示的条目数
+                                num_display_entries: num_display_entries, //连续分页主体部分显示的分页条目数
+                                num_edge_entries: 2, //两侧显示的首尾分页的条目数
+                                current_page: current_page,
+                                prev_text: "上页",
+                                next_text: "下页",
+                                callback: pageselectCallback
+                            });
+                            setPageInfo(index);
+                        }
+                    }
+                }
+            });
+        }
+        // 回调方法
+        function pageselectCallback(page_index, jq) {
+            getDataList(page_index, jq);
+            setPageInfo(page_index);
+        }
+        // 初始化
+        getDataList(current_page);
+        function setPageInfo(pageIndex) {
+            var _startSize = pageIndex == 0 ? 0 : pageIndex * items_per_page;
+            var _endSize = (pageIndex + 1) * items_per_page > page_count ? page_count : (pageIndex + 1) * items_per_page;
+            if (page_count == 0) {
+                var _html = "<div class='dataTables_info pull-left'>第" + 0 + "-" + 0 + "，共" + 0 + "</div>";
+                $(obj).prepend(_html);
+            } else {
+                var _html = "<div class='dataTables_info pull-right pagination'>第" + (_startSize + 1) + "-" + _endSize + "，共" + page_count + "</div>";
+                $(obj).prepend(_html);
+            }
+        }
+    }
+    /**
+     * 设置表格列宽度的可调节
+     * @param table 表格的Dom对象 必须要用js来获取，不能用jquery
+     *
+     */
+    function setWeithTable(table) {
+        var tTD; //用来存储当前更改宽度的Table Cell,避免快速移动鼠标的问题
+
+        for (j = 0; j < table.rows[0].cells.length; j++) {
+            table.rows[0].cells[j].onmousedown = function () {
+                //记录单元格
+                tTD = this;
+                if (event.offsetX > tTD.offsetWidth - 10) {
+                    tTD.mouseDown = true;
+                    tTD.oldX = event.x;
+                    tTD.oldWidth = tTD.offsetWidth;
+                }
+            };
+            table.rows[0].cells[j].onmouseup = function () {
+                //结束宽度调整
+                if (tTD == undefined) tTD = this;
+                tTD.mouseDown = false;
+                tTD.style.cursor = 'default';
+            };
+            table.rows[0].cells[j].onmousemove = function () {
+                //更改鼠标样式
+                if (event.offsetX > this.offsetWidth - 10)
+                    this.style.cursor = 'col-resize';
+                else
+                    this.style.cursor = 'default';
+                //取出暂存的Table Cell
+                if (tTD == undefined) tTD = this;
+                //调整宽度
+                if (tTD.mouseDown != null && tTD.mouseDown == true) {
+                    tTD.style.cursor = 'default';
+                    if (tTD.oldWidth + (event.x - tTD.oldX) > 0)
+                        tTD.width = tTD.oldWidth + (event.x - tTD.oldX);
+                    //调整列宽
+                    tTD.style.width = tTD.width;
+                    tTD.style.cursor = 'col-resize';
+                    //调整该列中的每个Cell
+                    table = tTD;
+                    while (table.tagName != 'TABLE') table = table.parentElement;
+                    for (j = 0; j < table.rows.length; j++) {
+                        table.rows[j].cells[tTD.cellIndex].width = tTD.width;
+                    }
+                }
+            };
+        }
+        table.onmouseup = function (event) {
+            /* Act on the event */
+            if (tTD == undefined) {
+            } else {
+                tTD.mouseDown = false;
+                tTD.style.cursor = 'default';
+            }
+        };
+    }
+
+    /**
+     * 获取一行数据
+     * @param obj
+     * @param message
+     * @returns {{}}
+     */
+    function getTableOneRow(obj) {
+        var data = {};
+        obj.parents("tr").find("input").each(function () {
+            var key = $(this).attr("name");
+            var value = $(this).val();
+            data[key] = value;
+        });
+        return data;
+    }
+</script>
+</body>
+</html>

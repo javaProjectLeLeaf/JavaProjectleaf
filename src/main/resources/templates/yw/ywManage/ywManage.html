@@ -13,20 +13,21 @@
 				<i class="glyphicon glyphicon-plus"></i>新增业务
 			</button>
 			<button type="button" class="btn btn-outline btn-default"
+					th:onclick="'javascript:addExport()'"
+					shiro:hasPermission="yw:ywManage:addExcel" id="addExport">
+				<i class="glyphicon fa fa-arrow-circle-o-up"></i>导入Excel
+			</button>
+			<button type="button" class="btn btn-outline btn-default"
 				th:onclick="'javascript:batchExport()'"
 				shiro:hasPermission="yw:ywManage:batchExcel" id="batchExport">
 				<i class="glyphicon fa fa-download"></i>全部导出Excel
 			</button>
-            <button type="button" class="btn btn-outline btn-default"
-                    th:onclick="'javascript:upFuJian()'"
-                    shiro:hasPermission="yw:ywManage:upFuJian" id="upFuJian">
-                <i class="glyphicon fa fa-arrow-circle-o-up"></i>上传附件
-            </button>
-            <button type="button" class="btn btn-outline btn-default"
-                    th:onclick="'javascript:upFuJian()'"
-                    shiro:hasPermission="yw:ywManage:downFuJian" id="downFuJian">
-                <i class="glyphicon fa fa-download"></i>下载附件
-            </button>
+			<button type="button" class="btn btn-outline btn-default"
+					th:onclick="'javascript:module()'"
+					shiro:hasPermission="yw:ywManage:module" id="module">
+				<i class="glyphicon fa fa-arrow-circle-o-up"></i>业务窗口
+			</button>
+
 		</div>
 		<table class="bootstrap-table" data-mobile-responsive="true"
 			data-sort-name="id" data-sort-order="asc" id="table1">
@@ -42,4 +43,5 @@
         var removeFlag = [[${@permissionService.hasPermi('yw:ywManage:status')}]];
     </script>
 </body>
+
 </html>

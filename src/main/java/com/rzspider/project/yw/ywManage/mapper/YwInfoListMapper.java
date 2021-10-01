@@ -20,4 +20,6 @@ public interface YwInfoListMapper {
     List<YwInfoList> selectAll();
 
     List<YwInfoList> selectAboutType(YwInfoList ywInfoList1);
+
+    int insertYwInfoLists(List<YwInfoList> ywInfoLists);
 }

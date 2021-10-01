@@ -13,12 +13,12 @@
 			</button>
 			<button type="button" class="btn btn-outline btn-default"
 				th:onclick="'javascript:downExcelTemplate()'"
-				shiro:hasPermission="book:bookmanage:downExcelTemplate">
+				shiro:hasPermission="yw:ywManage:downExcelTemplate">
 				<i class="glyphicon fa fa-download"></i>下载模板
 			</button>
 			<button type="button" class="btn btn-outline btn-default"
 				th:onclick="'javascript:batchSave()'"
-				shiro:hasPermission="book:bookmanage:batchSave" id="batchSave"
+				shiro:hasPermission="yw:ywManage:batchSave" id="batchSave"
 				disabled="true">
 				<i class="glyphicon fa fa-save"></i>全部保存
 			</button>

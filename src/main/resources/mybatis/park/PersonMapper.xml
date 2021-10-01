@@ -30,6 +30,9 @@
             and id=#{id}
         </if>
     </select>
+    <select id="selectCount" resultType="java.lang.Integer">
+      select count(*) from person
+    </select>
 
     <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from person

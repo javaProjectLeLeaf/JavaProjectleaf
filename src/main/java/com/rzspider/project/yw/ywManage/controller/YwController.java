@@ -1,12 +1,20 @@
 package com.rzspider.project.yw.ywManage.controller;
 
 import com.rzspider.common.constant.CommonSymbolicConstant;
+import com.rzspider.common.constant.FileExtensionConstant;
 import com.rzspider.common.constant.FileMessageConstant;
+import com.rzspider.common.constant.project.BookConstant;
+import com.rzspider.common.utils.FileUploadUtils;
 import com.rzspider.common.utils.StringUtils;
+import com.rzspider.framework.aspectj.lang.annotation.Log;
+import com.rzspider.framework.config.FilePathConfig;
 import com.rzspider.framework.web.controller.BaseController;
 import com.rzspider.framework.web.domain.Message;
 import com.rzspider.framework.web.page.TableDataInfo;
+import com.rzspider.project.book.bookmanage.domain.Bookmanage;
+import com.rzspider.project.book.bookmanage.utils.BookmanageUtils;
 import com.rzspider.project.book.bookmanage.utils.ExcelUtils;
+import com.rzspider.project.common.file.controller.FileController;
 import com.rzspider.project.common.file.utilt.FileUtils;
 import com.rzspider.project.system.user.domain.User;
 import com.rzspider.project.yw.ywManage.domain.YwInfoList;
@@ -16,14 +24,21 @@ import com.rzspider.project.yw.ywManage.mapper.YwModuleMapper;
 import org.apache.commons.io.IOUtils;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
+import org.apache.tomcat.util.http.fileupload.FileUploadBase;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.ByteArrayOutputStream;
+import java.io.*;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -31,10 +46,13 @@ import java.util.List;
 @Controller
 @RequestMapping("/yw/ywManage")
 public class YwController extends BaseController {
+    public List<YwInfoList> ywInfoLists;
     @Resource
     private YwInfoListMapper ywInfoListMapper;
     @Resource
     private YwModuleMapper ywModuleMapper;
+    @Autowired
+    private FilePathConfig filePathConfig;
 
     /**
      * 跳转主菜单页面
@@ -204,14 +222,6 @@ public class YwController extends BaseController {
         return ywModule;
     }
 
-    /**
-     * 返回上传附件的输入页面
-     */
-    @RequiresPermissions("yw:ywManage:upFuJian")
-    @RequestMapping("upFuJian")
-    public String upFuJian() {
-        return "/yw/ywManage/upFuJian";
-    }
 
 
     /**
@@ -253,19 +263,257 @@ public class YwController extends BaseController {
             e.printStackTrace();
         }
     }
-//public byte[] batchExport(YwInfoList ywInfoList) {
-//    ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-//    // 数据库读取数据
-//    List<YwInfoList> bmList = ywInfoListMapper.selectAll(YwInfoList);
-//    if (bmList == null || bmList.size() < 1) {
-//        return null;
-//    }
-//    // 生成xls
-//    XSSFWorkbook workbook = ExcelUtils.createExcelFile(bmList);
-//    // workbook写入输出流
-//    ExcelUtils.writeWBToStream(workbook, outputStream);
-//    return outputStream.toByteArray();
-//}
+
+    /**
+     * 返回批量上传模板页面
+     */
+    @RequiresPermissions("yw:ywManage:addExcel")
+    @RequestMapping("/addExport")
+    public String addExport() {
+        return "/yw/ywManage/batchAdd";
+    }
+
+    /**
+     * 下载模板
+     */
+    @RequiresPermissions("yw:ywManage:downExcelTemplate")
+    @GetMapping("/downExcelTemplate")
+    public void downExcelTemplate(HttpServletResponse response) throws IOException {
+        response.reset();
+        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+        // 生成xls
+        XSSFWorkbook workbook = ExcelUtils.createYwExcelFile();
+        // workbook写入输出流
+        ExcelUtils.writeWBToStream(workbook, outputStream);
+        byte[] data = outputStream.toByteArray();
+
+        String excelName = "业务模板.xlsx";
+        // 处理中文乱码
+        try {
+            excelName = FileUtils.getNewString(excelName);
+        } catch (Exception e) {
+            e.printStackTrace();
+            excelName = BookConstant.BOOK_DEFAULT_EXCELTEMPLATE_NAME;
+        }
+        response.setHeader(FileMessageConstant.FILE_CONTENT_DISPOSITION,
+                FileMessageConstant.FILE_ATTACHMENT_FILENAME + excelName);
+        response.addHeader(FileMessageConstant.FILE_CONTENT_LENGTH, CommonSymbolicConstant.EMPTY_STRING + data.length);
+        response.setContentType(FileMessageConstant.FILE_CONTENT_TYPE);
+
+        IOUtils.write(data, response.getOutputStream());
+        response.getOutputStream().close();
+    }
+
+    /**
+     * 批量上传Excel解析返回数据并显示
+     */
+    @RequiresPermissions("yw:ywManage:batchAnalyzeList")
+    @ResponseBody
+    @PostMapping("/batchAnalyzeList")
+    public Message upload(@RequestParam("file") MultipartFile file, HttpServletRequest request) {
+        ywInfoLists = null;
+        // 判断文件大小，格式等等
+        try {
+            FileUploadUtils.assertAllowed(file);
+        } catch (FileUploadBase.FileSizeLimitExceededException e1) {
+            e1.printStackTrace();
+
+            ywInfoLists.clear();
+            return Message.error(FileMessageConstant.FILE_MESSAGE_SIZE_GREATER_TEN_M);
+        }
+        // 原始名字
+        String fileName = file.getOriginalFilename();
+        if (!fileName.toLowerCase().endsWith(FileExtensionConstant.FILE_EXTENSION_POINT_EXCEL_XLS)
+                && !fileName.toLowerCase().endsWith(FileExtensionConstant.FILE_EXTENSION_POINT_EXCEL_XLSX)) {
+            ywInfoLists.clear();
+            return Message.error(FileMessageConstant.FILE_MESSAGE_FORMAT_INCORRENT);
+        }
+        // 重命名
+        fileName = FileUploadUtils.renameToUUID(fileName);
+        // 先上传
+        try {
+            FileUploadUtils.uploadFile(file.getBytes(), filePathConfig.getUploadCachePath(), fileName);
+        } catch (Exception e) {
+            ywInfoLists.clear();
+            return Message.error();
+        }
+        // 解析并返回数据
+        File f = new File(filePathConfig.getUploadCachePath() + File.separator + fileName);
+        if (!f.exists()) {
+            ywInfoLists = null;
+        }
+        List<YwInfoList> ywInfoLists1 = ExcelUtils.readYwExcel(f);
+        // 删除复制的文件
+        if (f.exists()) {
+            f.delete();
+        }
+        ywInfoLists = ywInfoLists1;
+        if (ywInfoLists == null || ywInfoLists.size() < 1) {
+            return Message.error(BookConstant.BOOK_MESSAGE_NO_DATA);
+        }
+        return Message.success();
+    }
+
+    /**
+     * 显示上传excel表格
+     *
+     * @return
+     */
+    @ResponseBody
+    @GetMapping("/batchAnalyzeList2")
+    public TableDataInfo batchAnalyzeList2() {
+        TableDataInfo tdi = getDataTable(ywInfoLists);
+        return tdi;
+    }
+
+    /**
+     * 保存上传的excel数据
+     *
+     * @return
+     */
+    @ResponseBody
+    @PostMapping("/batchSave")
+    @RequiresPermissions("yw:ywManage:batchSave")
+    public Message batchSave() {
+        if (ywInfoLists == null || ywInfoLists.size() < 1) {
+            ywInfoLists.clear();
+            return Message.error("文件中没有数据或者数据不全");
+        }
+        for (int i = 0; i < ywInfoLists.size(); i++) {
+            if (ywInfoListMapper.insert(ywInfoLists.get(i)) == 0) {
+                ywInfoLists.clear();
+                return Message.error("数据格式有误 无法上传");
+            }
+        }
+        return Message.success();
+    }
+
+/**
+ *返回业务管理界面
+ */
+    @RequiresPermissions("yw:ywManage:module")
+    @RequestMapping("/module")
+    public String module(){
+        return "/yw/ywManage/module";
+    }
 
 
+    public String greeting(@RequestParam(value="name", required=false, defaultValue="World") String name, Model model) {
+        model.addAttribute("name", name);
+        return "greeting";
+    }
+    private static final Logger logger = LoggerFactory.getLogger(FileController.class);
+    //文件上传相关代码
+    @RequiresPermissions("yw:ywManage:upFuJian")
+    @RequestMapping(value = "upFuJian")
+    @ResponseBody
+    public String upload(@RequestParam("test") MultipartFile file) {
+        if (file.isEmpty()) {
+            return "文件为空";
+        }
+        // 获取文件名
+        String fileName = file.getOriginalFilename();
+        logger.info("上传的文件名为：" + fileName);
+        // 获取文件的后缀名
+        String suffixName = fileName.substring(fileName.lastIndexOf("."));
+        logger.info("上传的后缀名为：" + suffixName);
+        // 文件上传后的路径
+        String filePath = "E://test//";
+        // 解决中文问题，liunx下中文路径，图片显示问题
+        // fileName = UUID.randomUUID() + suffixName;
+        File dest = new File(filePath + fileName);
+        // 检测是否存在目录
+        if (!dest.getParentFile().exists()) {
+            dest.getParentFile().mkdirs();
+        }
+        try {
+            file.transferTo(dest);
+            return "上传成功";
+        } catch (IllegalStateException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return "上传失败";
+    }
+
+    //文件下载相关代码
+    @RequiresPermissions("yw:ywManage:downFuJian")
+    @RequestMapping("/downFuJian")
+    public String downloadFile(org.apache.catalina.servlet4preview.http.HttpServletRequest request, HttpServletResponse response){
+        String fileName = "FileUploadTests.java";
+        if (fileName != null) {
+            //当前是从该工程的WEB-INF//File//下获取文件(该目录可以在下面一行代码配置)然后下载到C:\\users\\downloads即本机的默认下载的目录
+            String realPath = request.getServletContext().getRealPath(
+                    "C://Users//Administrator//IdeaProjects//JavaProjectleaf//src//main//resources//static//");
+            File file = new File(realPath, fileName);
+            if (file.exists()) {
+                response.setContentType("application/force-download");// 设置强制下载不打开
+                response.addHeader("Content-Disposition",
+                        "attachment;fileName=" +  fileName);// 设置文件名
+                byte[] buffer = new byte[1024];
+                FileInputStream fis = null;
+                BufferedInputStream bis = null;
+                try {
+                    fis = new FileInputStream(file);
+                    bis = new BufferedInputStream(fis);
+                    OutputStream os = response.getOutputStream();
+                    int i = bis.read(buffer);
+                    while (i != -1) {
+                        os.write(buffer, 0, i);
+                        i = bis.read(buffer);
+                    }
+                    System.out.println("success");
+                } catch (Exception e) {
+                    e.printStackTrace();
+                } finally {
+                    if (bis != null) {
+                        try {
+                            bis.close();
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                    if (fis != null) {
+                        try {
+                            fis.close();
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }
+            }
+        }
+        return null;
+    }
+    //多文件上传
+    @RequestMapping(value = "/batch/upload", method = RequestMethod.POST)
+    @ResponseBody
+    public String handleFileUpload(HttpServletRequest request) {
+        List<MultipartFile> files = ((MultipartHttpServletRequest) request)
+                .getFiles("file");
+        MultipartFile file = null;
+        BufferedOutputStream stream = null;
+        for (int i = 0; i < files.size(); ++i) {
+            file = files.get(i);
+            if (!file.isEmpty()) {
+                try {
+                    byte[] bytes = file.getBytes();
+                    stream = new BufferedOutputStream(new FileOutputStream(
+                            new File(file.getOriginalFilename())));
+                    stream.write(bytes);
+                    stream.close();
+
+                } catch (Exception e) {
+                    stream = null;
+                    return "You failed to upload " + i + " => "
+                            + e.getMessage();
+                }
+            } else {
+                return "You failed to upload " + i
+                        + " because the file was empty.";
+            }
+        }
+        return "upload successful";
+    }
 }
