@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head lang="en">
+    <link rel="stylesheet" href="/ajax/plugins/bootstrap-fileinput/css/fileinput.css"/>
     <!-- Bootstrap 3.3.6 -->
     <!--<link rel="stylesheet" href="/css/css/bootstrap.css">-->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -31,6 +32,9 @@
     <!--<script src="/js/conf/config.js"></script>-->
     <!--<script src="/js/fileinput/fileinput.min.js"></script>-->
     <!--<script src="/js/fileinput/locales/zh.js"></script>-->
+    <script src="/ajax/plugins/bootstrap-fileinput/js/fileinput.min.js"></script>
+    <script src="/ajax/plugins/bootstrap-fileinput/js/locales/zh.js"></script>
+    <script src="/ajax/plugins/bootstrap-fileinput/js/locales/fr.js"></script>
 </head>
 <body>
 <!--列表模态框-->
@@ -189,6 +193,16 @@
                         <textarea type="text" rows="3" style="height: auto" class="form-control input-sm "
                         name="bz" placeholder="备注"></textarea>
                     </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">图片上传：</label>
+                        <div class="col-sm-4">
+                            <input id="file-8" class="file" type="file" name="file">
+                        </div>
+                        <div class="col-sm-4" id="show8" align="center"
+                             style="display: none">
+                            <img id="showImg8" width="285" height="285" src=""></img>
+                        </div>
+                    </div>
                     <div class="modal-footer">
                         <div class="text-center">
                             <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
@@ -200,6 +214,38 @@
         </div>
     </div>
 </div>
+<script>
+    //上传绑定
+    // 上传文件
+    $("#file-8").fileinput({
+        language : 'zh', // 设置语言
+        uploadUrl : "/test/testManage/uploadImgFile?blogFileName=blogset",
+        allowedFileExtensions : [ 'jpg', 'png', 'jpeg',
+            'gif','ico' ],// 接收的文件后缀
+        showUpload : true, // 是否显示上传按钮
+        showRemove : false, // 是否显示移除按钮
+        showCaption : false,// 是否显示标题
+        browseClass : "btn btn-primary", // 按钮样式
+        dropZoneEnabled : true,//是否显示拖拽区域
+        uploadAsync : true,
+        showBrowse : true,
+        browseOnZoneClick : false,
+        maxFileCount : 1, // 表示允许同时上传的最大文件个数
+        enctype : 'multipart/form-data',
+        maxFileSize : 512
+        // 单位为kb，如果为0表示不限制文件大小
+    }).on("filebatchselected", function(event, files) {
+        //返回文件名
+    }).on('filesuccessremove', function(event, id){
+        $("#show8").css('display', 'none');
+        fileBase64_8=null;
+    }).on("fileuploaded", function(event, data) {
+        //返回文件名,改过，实际返回base64编码
+        fileBase64_8 = (data.response.code == 0) ? (data.response.imgbase64String) : null;
+        $("#show8").css('display', 'block');
+        document.getElementById("showImg8").src = fileBase64_8;
+    });
+</script>
 <script>
     //时间列表中显示截取
     Handlebars.registerHelper("deadlineTimes", function (value) {
