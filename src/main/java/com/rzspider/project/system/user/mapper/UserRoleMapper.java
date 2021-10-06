@@ -45,4 +45,6 @@ public interface UserRoleMapper
 
     public Long selectIdByUserId(Long userId);
 
+    public List<Long> selectRoleIdByUserId(Long userId);
+
 }

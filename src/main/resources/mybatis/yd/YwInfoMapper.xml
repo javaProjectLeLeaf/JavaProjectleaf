@@ -1,0 +1,317 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.rzspider.project.yd.ydManage.mapper.YwInfoMapper">
+  <resultMap id="BaseResultMap" type="com.rzspider.project.yd.ydManage.domain.YwInfo">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="yw_title" jdbcType="VARCHAR" property="ywTitle" />
+    <result column="yw_type" jdbcType="VARCHAR" property="ywType" />
+    <result column="yw_dtl" jdbcType="VARCHAR" property="ywDtl" />
+    <result column="yw_content" jdbcType="VARCHAR" property="ywContent" />
+    <result column="op_id" jdbcType="INTEGER" property="opId" />
+    <result column="staff_name" jdbcType="VARCHAR" property="staffName" />
+    <result column="bill_id" jdbcType="VARCHAR" property="billId" />
+    <result column="create_date" jdbcType="TIMESTAMP" property="createDate" />
+    <result column="update_date" jdbcType="TIMESTAMP" property="updateDate" />
+    <result column="delete_date" jdbcType="TIMESTAMP" property="deleteDate" />
+    <result column="restore_date" jdbcType="TIMESTAMP" property="restoreDate" />
+    <result column="status" jdbcType="INTEGER" property="status" />
+    <result column="fee_file" jdbcType="VARCHAR" property="feeFile" />
+    <result column="exfile" jdbcType="VARCHAR" property="exfile" />
+    <result column="ex1" jdbcType="VARCHAR" property="ex1" />
+    <result column="ex2" jdbcType="VARCHAR" property="ex2" />
+    <result column="ex3" jdbcType="INTEGER" property="ex3" />
+    <result column="ex4" jdbcType="INTEGER" property="ex4" />
+    <result column="ex5" jdbcType="VARCHAR" property="ex5" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, yw_title, yw_type, yw_dtl, yw_content, op_id, staff_name, bill_id, create_date, 
+    update_date, delete_date, restore_date, status, fee_file, exfile, ex1, ex2, ex3, 
+    ex4, ex5
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from yw_info_list
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+    <select id="selectPage" resultType="java.lang.Integer">
+      select count(*) from yw_info_list
+      <where>
+        <if test="ywType != null and ywType != ''">
+          and yw_type =  #{ywType,jdbcType=VARCHAR}
+        </if>
+        <if test="ywDtl != null and ywDtl != ''">
+          and yw_dtl = #{ywDtl,jdbcType=VARCHAR}
+        </if>
+        <if test="status != null and status != ''">
+          and status = #{status,jdbcType=INTEGER}
+        </if>
+        <if test="ywTitle != null and ywTitle != ''">
+          and yw_title like #{ywTitle,jdbcType=VARCHAR}
+        </if>
+        <if test="start != null">
+          and create_date >= #{start}
+        </if>
+        <if test="end != null">
+          and create_date &lt;= #{end}
+        </if>
+      </where>
+    </select>
+  <select id="selectAll" resultMap="BaseResultMap" >
+      SELECT  <include refid="Base_Column_List" /> FROM yw_info_list
+    <where>
+      <if test="ywType != null and ywType != ''">
+        and yw_type =  #{ywType,jdbcType=VARCHAR}
+      </if>
+      <if test="ywDtl != null and ywDtl != ''">
+        and yw_dtl = #{ywDtl,jdbcType=VARCHAR}
+      </if>
+      <if test="status != null and status != ''">
+        and status = #{status,jdbcType=INTEGER}
+      </if>
+      <if test="ywTitle != null and ywTitle != ''">
+        and yw_title like #{ywTitle,jdbcType=VARCHAR}
+      </if>
+      <if test="start != null">
+        and create_date >= #{start}
+      </if>
+      <if test="end != null">
+        and create_date &lt;= #{end}
+      </if>
+    </where>
+    order by create_date desc
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from yw_info_list
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.rzspider.project.yd.ydManage.domain.YwInfo">
+    insert into yw_info_list (id, yw_title, yw_type, 
+      yw_dtl, yw_content, op_id, 
+      staff_name, bill_id, create_date, 
+      update_date, delete_date, restore_date, 
+      status, fee_file, exfile, 
+      ex1, ex2, ex3, ex4, 
+      ex5)
+    values (#{id,jdbcType=INTEGER}, #{ywTitle,jdbcType=VARCHAR}, #{ywType,jdbcType=VARCHAR}, 
+      #{ywDtl,jdbcType=VARCHAR}, #{ywContent,jdbcType=VARCHAR}, #{opId,jdbcType=INTEGER}, 
+      #{staffName,jdbcType=VARCHAR}, #{billId,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP},
+      #{updateDate,jdbcType=TIMESTAMP}, #{deleteDate,jdbcType=TIMESTAMP}, #{restoreDate,jdbcType=TIMESTAMP}, 
+      #{status,jdbcType=INTEGER}, #{feeFile,jdbcType=VARCHAR}, #{exfile,jdbcType=VARCHAR}, 
+      #{ex1,jdbcType=VARCHAR}, #{ex2,jdbcType=VARCHAR}, #{ex3,jdbcType=INTEGER}, #{ex4,jdbcType=INTEGER}, 
+      #{ex5,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.rzspider.project.yd.ydManage.domain.YwInfo">
+    insert into yw_info_list
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="ywTitle != null">
+        yw_title,
+      </if>
+      <if test="ywType != null">
+        yw_type,
+      </if>
+      <if test="ywDtl != null">
+        yw_dtl,
+      </if>
+      <if test="ywContent != null">
+        yw_content,
+      </if>
+      <if test="opId != null">
+        op_id,
+      </if>
+      <if test="staffName != null">
+        staff_name,
+      </if>
+      <if test="billId != null">
+        bill_id,
+      </if>
+      <if test="createDate != null">
+        create_date,
+      </if>
+      <if test="updateDate != null">
+        update_date,
+      </if>
+      <if test="deleteDate != null">
+        delete_date,
+      </if>
+      <if test="restoreDate != null">
+        restore_date,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="feeFile != null">
+        fee_file,
+      </if>
+      <if test="exfile != null">
+        exfile,
+      </if>
+      <if test="ex1 != null">
+        ex1,
+      </if>
+      <if test="ex2 != null">
+        ex2,
+      </if>
+      <if test="ex3 != null">
+        ex3,
+      </if>
+      <if test="ex4 != null">
+        ex4,
+      </if>
+      <if test="ex5 != null">
+        ex5,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="ywTitle != null">
+        #{ywTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="ywType != null">
+        #{ywType,jdbcType=VARCHAR},
+      </if>
+      <if test="ywDtl != null">
+        #{ywDtl,jdbcType=VARCHAR},
+      </if>
+      <if test="ywContent != null">
+        #{ywContent,jdbcType=VARCHAR},
+      </if>
+      <if test="opId != null">
+        #{opId,jdbcType=INTEGER},
+      </if>
+      <if test="staffName != null">
+        #{staffName,jdbcType=VARCHAR},
+      </if>
+      <if test="billId != null">
+        #{billId,jdbcType=INTEGER},
+      </if>
+      <if test="createDate != null">
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateDate != null">
+        #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="deleteDate != null">
+        #{deleteDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="restoreDate != null">
+        #{restoreDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="feeFile != null">
+        #{feeFile,jdbcType=VARCHAR},
+      </if>
+      <if test="exfile != null">
+        #{exfile,jdbcType=VARCHAR},
+      </if>
+      <if test="ex1 != null">
+        #{ex1,jdbcType=VARCHAR},
+      </if>
+      <if test="ex2 != null">
+        #{ex2,jdbcType=VARCHAR},
+      </if>
+      <if test="ex3 != null">
+        #{ex3,jdbcType=INTEGER},
+      </if>
+      <if test="ex4 != null">
+        #{ex4,jdbcType=INTEGER},
+      </if>
+      <if test="ex5 != null">
+        #{ex5,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.rzspider.project.yd.ydManage.domain.YwInfo">
+    update yw_info_list
+    <set>
+      <if test="ywTitle != null">
+        yw_title = #{ywTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="ywType != null">
+        yw_type = #{ywType,jdbcType=VARCHAR},
+      </if>
+      <if test="ywDtl != null">
+        yw_dtl = #{ywDtl,jdbcType=VARCHAR},
+      </if>
+      <if test="ywContent != null">
+        yw_content = #{ywContent,jdbcType=VARCHAR},
+      </if>
+      <if test="opId != null">
+        op_id = #{opId,jdbcType=INTEGER},
+      </if>
+      <if test="staffName != null">
+        staff_name = #{staffName,jdbcType=VARCHAR},
+      </if>
+      <if test="billId != null">
+        bill_id = #{billId,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null">
+        create_date = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateDate != null">
+        update_date = #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="deleteDate != null">
+        delete_date = #{deleteDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="restoreDate != null">
+        restore_date = #{restoreDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="feeFile != null">
+        fee_file = #{feeFile,jdbcType=VARCHAR},
+      </if>
+      <if test="exfile != null">
+        exfile = #{exfile,jdbcType=VARCHAR},
+      </if>
+      <if test="ex1 != null">
+        ex1 = #{ex1,jdbcType=VARCHAR},
+      </if>
+      <if test="ex2 != null">
+        ex2 = #{ex2,jdbcType=VARCHAR},
+      </if>
+      <if test="ex3 != null">
+        ex3 = #{ex3,jdbcType=INTEGER},
+      </if>
+      <if test="ex4 != null">
+        ex4 = #{ex4,jdbcType=INTEGER},
+      </if>
+      <if test="ex5 != null">
+        ex5 = #{ex5,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.rzspider.project.yd.ydManage.domain.YwInfo">
+    update yw_info_list
+    set yw_title = #{ywTitle,jdbcType=VARCHAR},
+      yw_type = #{ywType,jdbcType=VARCHAR},
+      yw_dtl = #{ywDtl,jdbcType=VARCHAR},
+      yw_content = #{ywContent,jdbcType=VARCHAR},
+      op_id = #{opId,jdbcType=INTEGER},
+      staff_name = #{staffName,jdbcType=VARCHAR},
+      bill_id = #{billId,jdbcType=VARCHAR},
+      create_date = #{createDate,jdbcType=TIMESTAMP},
+      update_date = #{updateDate,jdbcType=TIMESTAMP},
+      delete_date = #{deleteDate,jdbcType=TIMESTAMP},
+      restore_date = #{restoreDate,jdbcType=TIMESTAMP},
+      status = #{status,jdbcType=INTEGER},
+      fee_file = #{feeFile,jdbcType=VARCHAR},
+      exfile = #{exfile,jdbcType=VARCHAR},
+      ex1 = #{ex1,jdbcType=VARCHAR},
+      ex2 = #{ex2,jdbcType=VARCHAR},
+      ex3 = #{ex3,jdbcType=INTEGER},
+      ex4 = #{ex4,jdbcType=INTEGER},
+      ex5 = #{ex5,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

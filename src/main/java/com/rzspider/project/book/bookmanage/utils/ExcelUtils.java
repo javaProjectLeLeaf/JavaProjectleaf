@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
+import com.rzspider.project.yd.ydManage.domain.YwInfo;
 import com.rzspider.project.yw.ywManage.domain.YwInfoList;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.Sheet;
@@ -188,6 +189,57 @@ public class ExcelUtils {
 			return ywInfoLists;
 		}
 		return ywInfoLists;
+	}
+
+	//读取移动业务excel文件
+	public static List<YwInfo> readYdExcel(File file) {
+		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("EEE MMM dd hh:mm:ss zzz yyyy", Locale.US);
+
+		List<YwInfo> ywInfos = null;
+		try {
+			ywInfos = new ArrayList<YwInfo>();
+			YwInfo bm = null;
+			Workbook wb = null;
+			Sheet sheet = null;
+			Row row = null;
+			String cellData = null;
+			// 获取工作簿
+			wb = getWorkbook(file);
+			if (wb != null) {
+				// 获取第一个sheet
+				sheet = (Sheet) wb.getSheetAt(0);
+				// 获取最大行数
+				int rownum = sheet.getPhysicalNumberOfRows();
+				// 获取第一行
+				row = sheet.getRow(0);
+				// 获取最大列数
+				int colnum = row.getPhysicalNumberOfCells();
+				// 从第二行第二列开始读取
+				for (int i = 1; i < rownum; i++) {
+					bm = new YwInfo();
+					row = sheet.getRow(i);
+					if (row != null) {
+
+						// 图书名称
+						if (!"".equals(row.getCell(1))) {
+							bm.setYwTitle(row.getCell(1).toString());
+						}
+
+						bm.setYwType(row.getCell(2).toString());
+						bm.setYwDtl(row.getCell(3).toString());
+						bm.setYwContent(row.getCell(4).toString());
+						bm.setStaffName(row.getCell(5).toString());
+							ywInfos.add(bm);
+						}
+					}
+					return ywInfos;
+				}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			return ywInfos;
+		}
+		return ywInfos;
 	}
 	// 读取excel返回workbook
 	public static Workbook getWorkbook(File file) {
@@ -429,6 +481,49 @@ public class ExcelUtils {
 		return workbook;
 	}
 
+
+	// 获取移动业务workbook
+	public static XSSFWorkbook createYdExcelFile() {
+		String[] title = { "序号", "业务标题", "业务大类", "业务明细", "业务内容", "创建人姓名",};
+		// 创建Excel工作
+		XSSFWorkbook workbook = new XSSFWorkbook();
+		// 创建一个sheet表
+		XSSFSheet sheet = workbook.createSheet();
+		// 设置列宽
+		sheet.setColumnWidth(0, 20 * 256);
+		sheet.setColumnWidth(1, 20 * 256);
+		sheet.setColumnWidth(2, 20 * 256);
+		sheet.setColumnWidth(3, 20 * 256);
+		sheet.setColumnWidth(4, 80 * 256);
+		sheet.setColumnWidth(5, 20 * 256);
+		// 创建第一行
+		XSSFRow row = sheet.createRow(0);
+		XSSFCell cell;
+		// 插入第一行数据
+		for (int i = 0; i < title.length; i++) {
+			cell = row.createCell(i);
+			cell.setCellValue(title[i]);
+		}
+		// 追加数据,向第二行开始加入数据 i = 1
+
+		XSSFRow row2 = sheet.createRow(1);
+		XSSFCell cell2 = row2.createCell(0);
+		cell2.setCellValue(1);
+		cell2 = row2.createCell(1);
+		cell2.setCellValue("移动业务");
+		cell2 = row2.createCell(2);
+		cell2.setCellValue("5G终端");
+		cell2 = row2.createCell(3);
+		cell2.setCellValue("5G终端");
+		cell2 = row2.createCell(4);
+		cell2.setCellValue("22");
+		cell2 = row2.createCell(5);
+		cell2.setCellValue("黄旭峰");
+
+		// 写入文件
+		return workbook;
+	}
+
 	// workbook写入输出流
 	public static boolean writeWBToStream(XSSFWorkbook workbook, ByteArrayOutputStream outputStream) {
 		try {
@@ -548,6 +643,45 @@ public class ExcelUtils {
 			cell2.setCellValue(ywInfoLists.get(i - 1).getYw_title());
 			cell2 = row2.createCell(2);
 			cell2.setCellValue(ywInfoLists.get(i - 1).getYw_title() != null ? ywInfoLists.get(i - 1).getYw_title() : "");
+		}
+		// 写入文件
+		return workbook;
+	}
+
+	public static XSSFWorkbook createExcelFileYwInfo(List<YwInfo> ywInfos) {
+
+		String[] title = { "序号","业务标题","业务大类", "业务明细","业务内容"};
+		// 创建Excel工作
+		XSSFWorkbook workbook = new XSSFWorkbook();
+		// 创建一个sheet表
+		XSSFSheet sheet = workbook.createSheet();
+		// 设置列宽
+		sheet.setColumnWidth(1, 5 * 256);
+		sheet.setColumnWidth(2, 15 * 256);
+		sheet.setColumnWidth(3, 20 * 256);
+		sheet.setColumnWidth(4, 20 * 256);
+		sheet.setColumnWidth(5, 40 * 256);
+		// 创建第一行
+		XSSFRow row = sheet.createRow(0);
+		XSSFCell cell;
+		// 插入第一行数据
+		for (int i = 0; i < title.length; i++) {
+			cell = row.createCell(i);
+			cell.setCellValue(title[i]);
+		}
+		// 追加数据,向第二行开始加入数据 i = 1
+		for (int i = 1; i < ywInfos.size() + 1; i++) {
+			XSSFRow row2 = sheet.createRow(i);
+			XSSFCell cell2 = row2.createCell(0);
+			cell2.setCellValue(i);
+			cell2 = row2.createCell(1);
+			cell2.setCellValue(ywInfos.get(i - 1).getYwTitle());
+			cell2 = row2.createCell(2);
+			cell2.setCellValue(ywInfos.get(i - 1).getYwType() != null ? ywInfos.get(i - 1).getYwType() : "");
+			cell2 = row2.createCell(3);
+			cell2.setCellValue(ywInfos.get(i - 1).getYwDtl() != null ? ywInfos.get(i - 1).getYwDtl() : "");
+			cell2 = row2.createCell(4);
+			cell2.setCellValue(ywInfos.get(i - 1).getYwContent() != null ? ywInfos.get(i - 1).getYwContent() : "");
 		}
 		// 写入文件
 		return workbook;

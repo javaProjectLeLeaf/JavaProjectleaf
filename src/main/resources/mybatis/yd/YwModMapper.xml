@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.rzspider.project.yd.ydManage.mapper.YwModMapper">
+  <resultMap id="BaseResultMap" type="com.rzspider.project.yd.ydManage.domain.YwMod">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="yw_type" jdbcType="VARCHAR" property="ywType" />
+    <result column="yw_dtl" jdbcType="VARCHAR" property="ywDtl" />
+    <result column="yw_comment" jdbcType="VARCHAR" property="ywComment" />
+    <result column="ex1" jdbcType="VARCHAR" property="ex1" />
+    <result column="ex2" jdbcType="VARCHAR" property="ex2" />
+    <result column="ex3" jdbcType="INTEGER" property="ex3" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, yw_type, yw_dtl, yw_comment, ex1, ex2, ex3
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from yw_module
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+    <select id="selectAll" resultType="com.rzspider.project.yd.ydManage.domain.YwMod" resultMap="BaseResultMap">
+      select <include refid="Base_Column_List" /> from yw_module
+      <where>
+      <if test="ywType != null and ywType != ''">
+        and yw_type like #{ywType,jdbcType=VARCHAR}
+      </if>
+      <if test="ywDtl != null and ywDtl != ''">
+        and yw_dtl like #{ywDtl,jdbcType=VARCHAR}
+      </if>
+      </where>
+    </select>
+  <select id="selectAllByType" resultType="com.rzspider.project.yd.ydManage.domain.YwMod" resultMap="BaseResultMap">
+    select <include refid="Base_Column_List" /> from yw_module group by yw_type
+  </select>
+  <select id="selectDtlByType" resultType="com.rzspider.project.yd.ydManage.domain.YwMod" resultMap="BaseResultMap">
+    select yw_dtl from yw_module where yw_type = #{yw_type,jdbcType=VARCHAR}
+  </select>
+  <select id="selectDtlByDtl" resultType="com.rzspider.project.yd.ydManage.domain.YwMod" resultMap="BaseResultMap">
+    select yw_comment from yw_module where yw_dtl = #{yw_dtl,jdbcType=VARCHAR}
+  </select>
+  <select id="selectPage" resultType="java.lang.Integer">
+    select count(*) from yw_module
+    <where>
+      <if test="ywType != null and ywType != ''">
+        and yw_type like #{ywType,jdbcType=VARCHAR}
+      </if>
+      <if test="ywDtl != null and ywDtl != ''">
+        and yw_dtl like #{ywDtl,jdbcType=VARCHAR}
+      </if>
+    </where>
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from yw_module
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.rzspider.project.yd.ydManage.domain.YwMod">
+    insert into yw_module (id, yw_type, yw_dtl, 
+      yw_comment, ex1, ex2, 
+      ex3)
+    values (#{id,jdbcType=INTEGER}, #{ywType,jdbcType=VARCHAR}, #{ywDtl,jdbcType=VARCHAR}, 
+      #{ywComment,jdbcType=VARCHAR}, #{ex1,jdbcType=VARCHAR}, #{ex2,jdbcType=VARCHAR}, 
+      #{ex3,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.rzspider.project.yd.ydManage.domain.YwMod">
+    insert into yw_module
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="ywType != null">
+        yw_type,
+      </if>
+      <if test="ywDtl != null">
+        yw_dtl,
+      </if>
+      <if test="ywComment != null">
+        yw_comment,
+      </if>
+      <if test="ex1 != null">
+        ex1,
+      </if>
+      <if test="ex2 != null">
+        ex2,
+      </if>
+      <if test="ex3 != null">
+        ex3,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="ywType != null">
+        #{ywType,jdbcType=VARCHAR},
+      </if>
+      <if test="ywDtl != null">
+        #{ywDtl,jdbcType=VARCHAR},
+      </if>
+      <if test="ywComment != null">
+        #{ywComment,jdbcType=VARCHAR},
+      </if>
+      <if test="ex1 != null">
+        #{ex1,jdbcType=VARCHAR},
+      </if>
+      <if test="ex2 != null">
+        #{ex2,jdbcType=VARCHAR},
+      </if>
+      <if test="ex3 != null">
+        #{ex3,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.rzspider.project.yd.ydManage.domain.YwMod">
+    update yw_module
+    <set>
+      <if test="ywType != null">
+        yw_type = #{ywType,jdbcType=VARCHAR},
+      </if>
+      <if test="ywDtl != null">
+        yw_dtl = #{ywDtl,jdbcType=VARCHAR},
+      </if>
+      <if test="ywComment != null">
+        yw_comment = #{ywComment,jdbcType=VARCHAR},
+      </if>
+      <if test="ex1 != null">
+        ex1 = #{ex1,jdbcType=VARCHAR},
+      </if>
+      <if test="ex2 != null">
+        ex2 = #{ex2,jdbcType=VARCHAR},
+      </if>
+      <if test="ex3 != null">
+        ex3 = #{ex3,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.rzspider.project.yd.ydManage.domain.YwMod">
+    update yw_module
+    set yw_type = #{ywType,jdbcType=VARCHAR},
+      yw_dtl = #{ywDtl,jdbcType=VARCHAR},
+      yw_comment = #{ywComment,jdbcType=VARCHAR},
+      ex1 = #{ex1,jdbcType=VARCHAR},
+      ex2 = #{ex2,jdbcType=VARCHAR},
+      ex3 = #{ex3,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

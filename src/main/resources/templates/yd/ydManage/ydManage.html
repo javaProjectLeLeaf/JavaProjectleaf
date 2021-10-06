@@ -1,0 +1,1608 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <!-- Bootstrap 3.3.6 -->
+    <link rel="stylesheet" href="/ajax/plugins/bootstrap-fileinput/css/fileinput.css"/>
+    <!--<link rel="stylesheet" href="/css/css/bootstrap.css">-->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="/css/font-awesome.css">
+    <!-- AdminLTE Theme skin-blue  -->
+    <!--<link rel="stylesheet" href="/css/skin/WdatePicker.css">-->
+    <link rel="stylesheet" href="/css/css.css">
+    <link rel="stylesheet" href="/css/AdminLTE.css">
+    <link rel="stylesheet" href="/css/fileinput.min.css">
+    <link rel="stylesheet" href="/css/bootstrap-switch.min.css">
+    <script type="text/javascript" src="//code.jquery.com/jquery-1.8.2.min.js"></script>
+    <script type="text/javascript" src="//cdn.bootcss.com/handlebars.js/4.0.6/handlebars.js"></script>
+    <script src="/js/jquery.pagination.js"></script>
+    <script src="/js/My97DatePicker/WdatePicker.js"></script>
+    <!--<script src="/js/dataTables.colReorder.js"></script>-->
+    <!--<script src="/js/html5shiv.min.js"></script>-->
+    <!--<script src="/js/respond.min.js"></script>-->
+    <script src="/js/jquery/7fb1b5077bd74199dee79282b56555d9eeff8252/jquery.js"></script>
+    <!--<script src="https://api.map.baidu.com/api?v=3.0&ak=GhIgNVXZc6c4gtA9qdHcwcxgfGv4qjgN"></script>-->
+    <script src="/js/zeroModal/zeroModal.min.js"></script>
+    <script src="/js/jquery-ui.min.js"></script>
+    <script src="/js/bootstrap/js/bootstrap.min.js"></script>
+    <script src="/js/bootstarp-switch/3.3.2/js/bootstrap-switch.min.js"></script>
+    <script src="/js/jquery.pagination.js"></script>
+    <!--<script src="/js/seajs/sea.js"></script>-->
+    <!--<script src="/js/seajs/sea-plugins.js"></script>-->
+    <!--<script src="/js/conf/config.js"></script>-->
+    <!--<script src="/js/fileinput/fileinput.min.js"></script>-->
+    <!--<script src="/js/fileinput/locales/zh.js"></script>-->
+    <script src="/ajax/plugins/bootstrap-fileinput/js/fileinput.min.js"></script>
+    <script src="/ajax/plugins/bootstrap-fileinput/js/locales/zh.js"></script>
+    <script src="/ajax/plugins/bootstrap-fileinput/js/locales/fr.js"></script>
+</head>
+<body>
+<!--业务列表模态框-->
+<div class="row" id="Page_ywInfoHtml">
+    <div class="col-md-12">
+        <div class="box">
+            <!--业务表头部筛选框-->
+            <form id="JS_yeInfoForm">
+                <div class="box-header with-border">
+                    <div class="box-tools pull-right">
+                        <button type="button" class="btn btn-box-tool input-sm" data-widget="collapse"><i
+                                class="fa fa-minus"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="box-body">
+                    <div class="row">
+                        <div class="col-lg-2">
+                            <label>业务大类</label>
+                            <select class="input-sm form-control" name="ywType" id="fingywType">
+                                <option value="">全部类型</option>
+                            </select>
+                        </div>
+                        <div class="col-lg-2">
+                            <label>业务细项</label>
+                            <select class="input-sm form-control" name="ywDtl" id="fingywDtl">
+                                <option value="">全部</option>
+                            </select>
+                        </div>
+                        <div class="col-lg-2">
+                            <label>开始时间</label>
+                            <input type="text" class="form-control input-sm Wdate" name="startStr"
+                                   onClick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss'})" placeholder="开始时间">
+                        </div>
+                        <div class="col-lg-2">
+                            <label>结束时间</label>
+                            <input type="text" class="form-control input-sm Wdate" name="endStr"
+                                   onClick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss'})" placeholder="结束时间">
+                        </div>
+                        <div class="col-lg-2">
+                            <label>业务标题</label>
+                            <input type="text" class="form-control input-sm" name="ywTitle"
+                                    placeholder="业务标题">
+                        </div>
+                        <div class="col-lg-2">
+                            <label>状态</label>
+                            <select class="input-sm form-control" name="status">
+                            <option value="">全部</option>
+                            <option value="1">正常</option>
+                            <option value="2">下线</option>
+                            </select>
+                        </div>
+                        <div class="col-lg-2 btn-group-sm" style="margin-top:22px">
+                            <button type="reset" class="btn btn-default">重置</button>
+                            <button type="button" class="btn btn-primary" data-toggle="modal" name="query">查询</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <!--业务表结构-->
+        <div class="box" id="newsList" style="min-height:100px;">
+            <div class="box-header ">
+                <h5 class="box-title">业务清单界面</h5>
+                <button type="button" class="btn btn-primary hide" data-toggle="modal"
+                        name="add">新增
+                </button>
+                <button type="button" class="btn btn-primary " data-toggle="modal"
+                        name="pagewh">业务维护
+                </button>
+                <div class="box-tools btn-group-sm">
+                    <a class="btn btn-primary" id="JS_export" name="dc">导出 </a>
+                </div>
+                <button type="button" class="btn btn-primary " data-toggle="modal"
+                        name="getExcel">下载模板
+                </button>
+                <button type="button" class="btn btn-primary"
+                        id="upExcel" name="upExcel">
+                    <i class="glyphicon fa fa-cloud"></i>上传excel
+                </button>
+
+            </div>
+            <div class="box-body" style="min-height: 100px;">
+                <table class="table table-bordered table-hover text-center" style="table-layout:fixed;"
+                       data-adjustable="true" id="table1">
+                    <thead>
+                    <tr>
+                        <th width="15%">业务标题</th>
+                        <th width="15%">业务大类</th>
+                        <th width="15%">业务细项</th>
+                        <th width="30%">业务内容</th>
+                        <th width="10%">创建人</th>
+                        <th colspan="4" width="15%">操作</th>
+                    </tr>
+                    </thead>
+                    <tbody id="content" name="content"></tbody>
+                </table>
+                <div class="box-footer no-border">
+                    <div class="dataTables_paginate" id="pagination" name="pagination"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--业务维护模态框-->
+<div class="modal fade" id="PageWhHtml" tabindex="-1" role="dialog"
+     style="overflow-y:auto; overflow-x:auto; ">
+    <div class="modal-dialog modal-lg" style="width: 1100px" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                        aria-hidden="true">×</span></button>
+                <!--业务表头部筛选框-->
+                <form id="JS_yeWhForm">
+                    <div class="box-body">
+                        <div class="row">
+                            <div class="col-lg-2">
+                                <label>业务大类</label>
+                                <select class="input-sm form-control" name="ywType" id="findYwType">
+                                </select>
+                            </div>
+                            <div class="col-lg-2">
+                                <label>业务细项</label>
+                                <select class="input-sm form-control" name="ywDtl" id="findYwDtl">
+                                </select>
+                            </div>
+                            <div class="col-lg-2 btn-group-sm" style="margin-top:22px">
+                                <button type="reset" class="btn btn-default">重置</button>
+                                <button type="button" class="btn btn-primary" data-toggle="modal" name="query">查询
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <!--业务表结构-->
+            <div class="box" id="whList" style="min-height:100px;">
+                <div class="box-header ">
+                    <h5 class="box-title">业务清单界面</h5>
+                    <button type="button" class="btn btn-primary" data-toggle="modal"
+                            name="add">新增
+                    </button>
+                </div>
+                <div class="box-body" style="min-height: 100px;">
+                    <table class="table table-bordered table-hover text-center" style="table-layout:fixed;"
+                           data-adjustable="true">
+                        <thead>
+                        <tr>
+                            <th width="15%">业务大类</th>
+                            <th width="15%">业务细项</th>
+                            <th width="60%">备注说明</th>
+                            <th colspan="2" width="10%">操作</th>
+                        </tr>
+                        </thead>
+                        <tbody id="whcontent" name="content"></tbody>
+                    </table>
+                    <div class="box-footer no-border">
+                        <div class="dataTables_paginate" id="whpagination" name="pagination"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--业务信息table数据模板-->
+<script type="text/template" id="newsListTemplate">
+    {{#each this}}
+    <tr>
+        <td style="display: none"><input type="hidden" name="id"value="{{id}}">{{id}}</td>
+        <td><input type="hidden" name="ywTitle" value="{{ywTitle}}">{{ywTitle}}</td>
+        <td><input type="hidden" name="ywType" value="{{ywType}}">{{ywType}}</td>
+        <td><input type="hidden" name="ywDtl" value="{{ywDtl}}">{{ywDtl}}</td>
+        <td style="overflow:hidden;text-overflow: ellipsis;white-space: nowrap" title="{{ywContent}}"><input type="hidden" name="ywContent" value="{{ywContent}}">{{ywContent}}</td>
+        <td><input type="hidden" name="staffName" value="{{staffName}}">{{staffName}}</td>
+        {{#userController status}}{{/userController}}
+    </tr>
+    {{/each}}
+</script>
+<!--业务维护table数据模板-->
+<script type="text/template" id="ywWhTemplate">
+    {{#each this}}
+    <tr>
+        <td style="display: none"><input type="hidden" name="id"value="{{id}}">{{id}}</td>
+        <td><input type="hidden" name="ywType" value="{{ywType}}">{{ywType}}</td>
+        <td><input type="hidden" name="ywDtl" value="{{ywDtl}}">{{ywDtl}}</td>
+        <td style="overflow:hidden;text-overflow: ellipsis;white-space: nowrap" title="{{ywComment}}"><input type="hidden" name="ywComment" value="{{ywComment}}">{{ywComment}}</td>
+        {{#whController}}{{/whController}}
+    </tr>
+    {{/each}}
+</script>
+<!--新增弹窗页-->
+<div class="modal fade" id="addYwModal" tabindex="-1" role="dialog"
+     style="overflow-y:auto; overflow-x:auto; ">
+    <div class="modal-dialog modal-lg" style="width: 1100px" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                        aria-hidden="true">×</span></button>
+                <h4 class="box-title">【业务新增】</h4>
+            </div>
+            <div class="modal-body">
+                <form id="addYwForm" type="multipart/form-data" method="post">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <label>业务标题</label>
+                            <input type="text" class="form-control input-sm" name="ywTitle" placeholder="业务标题"/>
+                        </div>
+                        <div class="col-md-4">
+                            <label>业务大类</label>
+                            <select class="form-control input-sm" name="ywType" id="ywType">
+                            </select>
+                        </div>
+                        <div class="col-md-4">
+                            <label>业务明细</label>
+                            <select class="form-control input-sm" name="ywDtl" id="ywDtl">
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <label>业务内容</label>
+                        <textarea type="text" rows="5" style="height: auto" class="form-control input-sm "
+                                  name="ywContent" id="ywContent"></textarea>
+                    </div>
+                    <!--<div class="row">-->
+                        <!--<div class="col-md-6">-->
+                            <!--<label>上传附件</label>-->
+                            <!--<div class="form-group">-->
+                                <!--<label class="col-sm-3 control-label">单个附件：</label>-->
+                                <!--<div class="col-sm-4">-->
+                                    <!--<input id="upFile" class="file" type="file" name="file">-->
+                                <!--</div>-->
+                                <!--<div class="col-sm-4" id="show8" align="center"-->
+                                     <!--style="display: none">-->
+                                    <!--<img id="showImg8" width="285" height="285" src=""></img>-->
+                                <!--</div>-->
+                            <!--</div>-->
+                        <!--</div>-->
+                        <!--<div class="col-md-6">-->
+                            <!--<label>其他附件</label>-->
+                            <!--<input type="file" class="form-control input-sm" name="file" id="moreFile" placeholder="可以上传多个附件"/>-->
+                        <!--</div>-->
+                    <!--</div>-->
+                    <div class="modal-footer">
+                        <div class="text-center">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                            <button type="button" class="btn btn-primary" id="save" name="save">保存</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<!--修改弹窗页-->
+<div class="modal fade" id="editYwModal" tabindex="-1" role="dialog"
+     style="overflow-y:auto; overflow-x:auto; ">
+    <div class="modal-dialog modal-lg" style="width: 1100px" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                        aria-hidden="true">×</span></button>
+                <h4 class="box-title">【业务修改】</h4>
+            </div>
+            <div class="modal-body">
+                <form id="editYwForm" type="multipart/form-data" method="post">
+                    <div class="row">
+                        <div>
+                            <input type="hidden" class="form-control input-sm" name="id" placeholder="id"/>
+                        </div>
+                        <div class="col-md-4">
+                            <label>业务标题</label>
+                            <input type="text" class="form-control input-sm" name="ywTitle" placeholder="业务标题"/>
+                        </div>
+                        <div class="col-md-4">
+                            <label>业务大类</label>
+                            <select class="form-control input-sm" name="ywType" id="editywType">
+                            </select>
+                        </div>
+                        <div class="col-md-4">
+                            <label>业务明细</label>
+                            <select class="form-control input-sm" name="ywDtl" id="editywDtl">
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <label>业务内容</label>
+                        <textarea type="text" rows="5" style="height: auto" class="form-control input-sm "
+                                  name="ywContent" id="editywContent"></textarea>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label>上传附件</label>
+                            <input type="file" class="form-control input-sm" name="feeFile" placeholder="上传关键附件"/>
+                        </div>
+                        <div class="col-md-6">
+                            <label>其他附件</label>
+                            <input type="file" class="form-control input-sm" name="exfile" placeholder="可以上传多个附件"/>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <div class="text-center">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                            <button type="button" class="btn btn-primary" id="editSave" name="editSave">保存</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<!--新增业务维护弹窗页-->
+<div class="modal fade" id="addYwWhModal" tabindex="-1" role="dialog"
+     style="overflow-y:auto; overflow-x:auto; ">
+    <div class="modal-dialog modal-lg" style="width: 1100px" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                        aria-hidden="true">×</span></button>
+                <h4 class="box-title">【业务新增】</h4>
+            </div>
+            <div class="modal-body">
+                <form id="addYwWhForm" type="multipart/form-data" method="post">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label>业务大类</label>
+                            <input class="form-control input-sm" name="ywType" id="ywWhType">
+                        </div>
+                        <div class="col-md-6">
+                            <label>业务明细</label>
+                            <input class="form-control input-sm" name="ywDtl" id="ywWhDtl">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <label>备注说明</label>
+                        <textarea type="text" rows="5" style="height: auto" class="form-control input-sm "
+                                  name="ywComment" id="ywWhContent"></textarea>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label>上传附件</label>
+                            <input type="file" class="form-control input-sm" name="feeFile" placeholder="上传关键附件"/>
+                        </div>
+                        <div class="col-md-6">
+                            <label>其他附件</label>
+                            <input type="file" class="form-control input-sm" name="exfile" placeholder="可以上传多个附件"/>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <div class="text-center">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                            <button type="button" class="btn btn-primary" id="whsave" name="save">保存</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<!--修改业务维护弹窗页-->
+<div class="modal fade" id="editYwWhModal" tabindex="-1" role="dialog"
+     style="overflow-y:auto; overflow-x:auto; ">
+    <div class="modal-dialog modal-lg" style="width: 1100px" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                        aria-hidden="true">×</span></button>
+                <h4 class="box-title">【业务修改】</h4>
+            </div>
+            <div class="modal-body">
+                <form id="editYwWhForm" type="multipart/form-data" method="post">
+                    <div class="row">
+                        <div>
+                            <input type="hidden" class="form-control input-sm" name="id" placeholder="id"/>
+                        </div>
+                        <div class="col-md-6">
+                            <label>业务大类</label>
+                            <input class="form-control input-sm" name="ywType" id="editWhywType">
+                        </div>
+                        <div class="col-md-6">
+                            <label>业务明细</label>
+                            <input class="form-control input-sm" name="ywDtl" id="editWhywDtl">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <label>备注说明</label>
+                        <textarea type="text" rows="5" style="height: auto" class="form-control input-sm "
+                                  name="ywComment" id="editYwywComment"></textarea>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label>上传附件</label>
+                            <input type="file" class="form-control input-sm" name="feeFile" placeholder="上传关键附件"/>
+                        </div>
+                        <div class="col-md-6">
+                            <label>其他附件</label>
+                            <input type="file" class="form-control input-sm" name="exfile" placeholder="可以上传多个附件"/>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <div class="text-center">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                            <button type="button" class="btn btn-primary" id="editYwSave" name="editSave">保存</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<!--详情弹窗页-->
+<div class="modal fade" id="detailYwModal" tabindex="-1" role="dialog"
+     style="overflow-y:auto; overflow-x:auto; ">
+    <div class="modal-dialog modal-lg" style="width: 1100px" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                        aria-hidden="true">×</span></button>
+                <h4 class="box-title">【业务修改】</h4>
+            </div>
+            <div class="modal-body">
+                <form id="detailYwForm" type="multipart/form-data" method="post">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <label>业务标题</label>
+                            <input type="text" class="form-control input-sm" name="ywTitle" placeholder="业务标题"/>
+                        </div>
+                        <div class="col-md-4">
+                            <label>业务大类</label>
+                            <input type="text" class="form-control input-sm" name="ywType" placeholder="业务大类"/>
+                        </div>
+                        <div class="col-md-4">
+                            <label>业务明细</label>
+                            <input type="text" class="form-control input-sm" name="ywDtl" placeholder="业务明细"/>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <label>业务内容</label>
+                        <textarea type="text" rows="5" style="height: auto" class="form-control input-sm "
+                                  name="ywContent" id="detailywContent"></textarea>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <label>创建人id</label>
+                            <input type="text" class="form-control input-sm" name="opId" placeholder="创建人id"/>
+                        </div>
+                        <div class="col-md-4">
+                            <label>创建人姓名</label>
+                            <input type="text" class="form-control input-sm" name="staffName" placeholder="创建人姓名"/>
+                        </div>
+                        <div class="col-md-4">
+                            <label>创建人联系方式</label>
+                            <input type="text" class="form-control input-sm" name="billId" placeholder="创建人联系方式"/>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-3">
+                            <label>创建时间</label>
+                            <input type="text" class="form-control input-sm" name="createDate" placeholder="创建时间"/>
+                        </div>
+                        <div class="col-md-3">
+                            <label>修改时间</label>
+                            <input type="text" class="form-control input-sm" name="updateDate" placeholder="修改时间"/>
+                        </div>
+                        <div class="col-md-3">
+                            <label>下线时间</label>
+                            <input type="text" class="form-control input-sm" name="deleteDate" placeholder="下线时间"/>
+                        </div>
+                        <div class="col-md-3">
+                            <label>恢复时间</label>
+                            <input type="text" class="form-control input-sm" name="restoreDate" placeholder="恢复时间"/>
+                        </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label>上传附件</label>
+                            <input type="file" class="form-control input-sm" name="feeFile" placeholder="上传关键附件"/>
+                        </div>
+                        <div class="col-md-6">
+                            <label>其他附件</label>
+                            <input type="file" class="form-control input-sm" name="exfile" placeholder="可以上传多个附件"/>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <div class="text-center">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                        </div>
+                    </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="excel" tabindex="-1" role="dialog"
+     style="overflow-y:auto; overflow-x:auto; ">
+    <div class="modal-dialog modal-lg" style="width: 1100px" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                        aria-hidden="true">×</span></button>
+                <div class="col-lg-2 btn-group-sm" style="margin-top:22px">
+                    <button type="button" class="btn btn-primary"
+                            id="uploadExcel">
+                        <input type="file" class="form-control input-sm" name="file" id="moreFile" placeholder="可以上传多个附件"/>
+                    </button>
+                    <button type="button" class="btn btn-primary" data-toggle="modal" name="saveExcel">保存</button>
+                </div>
+    </div>
+    <table class="bootstrap-table" data-mobile-responsive="true"
+           data-sort-name="book_id" data-sort-order="asc">
+    </table>
+</div>
+    </div>
+</div>
+<script>
+    //时间列表中显示截取
+    Handlebars.registerHelper("deadlineTimes", function (value) {
+        if (value != null) {
+            return value.substr(0, 20);
+        } else {
+            return null;
+        }
+    });
+    /**
+     * 按钮显示,这是根据状态判断，分别显示不同按钮，如果是一致不需要传参数判断，就显示固定按钮
+     */
+    Handlebars.registerHelper("userController", function (status) {
+        if(status==1){
+            return "<td><div class=\"btn-group-xs\"><button type=\"button\" class=\"btn btn-rounded\"    name=\"ywxqButton\" data-toggle=\"modal\">详情</button></div></td>" +
+                "<td><div class=\"btn-group-xs\"><button type=\"button\" class=\"btn btn-primary\"    name=\"ywZfTableButton\" data-toggle=\"modal\">资费表</button></div></td>" +
+                "<td><div class=\"btn-group-xs\"><button type=\"button\" class=\"btn btn-danger hide\"    name=\"ywOffLineButton\" data-toggle=\"modal\">下线</button></div></td>" +
+                "<td><div class=\"btn-group-xs\"><button type=\"button\" class=\"btn btn-warning hide\"    name=\"ywEditButton\" data-toggle=\"modal\">修改</button></div></td>";
+        }else {
+            return "<td><div class=\"btn-group-xs\"><button type=\"button\" class=\"btn btn-rounded\"    name=\"ywxqButton\" data-toggle=\"modal\">详情</button></div></td>" +
+                "<td><div class=\"btn-group-xs\"><button type=\"button\" class=\"btn btn-primary\"    name=\"ywZfTableButton\" data-toggle=\"modal\">资费表</button></div></td>" +
+                "<td><div class=\"btn-group-xs\"><button type=\"button\" class=\"btn btn-danger hide\"    name=\"ywOnLineButton\" data-toggle=\"modal\">上线</button></div></td>" +
+                "<td><div class=\"btn-group-xs\"><button type=\"button\" class=\"btn btn-warning hide\"    name=\"ywEditButton\" data-toggle=\"modal\">修改</button></div></td>";
+        }
+
+
+    });
+
+    //业务维护列表按钮显示
+    Handlebars.registerHelper("whController", function () {
+
+            return "<td><div class=\"btn-group-xs\"><button type=\"button\" class=\"btn btn-warning\"    name=\"whEditButton\" data-toggle=\"modal\">修改</button></div></td>" +
+                "<td><div class=\"btn-group-xs\"><button type=\"button\" class=\"btn btn-danger\"    name=\"whDeleteButton\" data-toggle=\"modal\">删除</button></div></td>"
+    });
+
+    //默认执行列表方法
+    selectAll();
+    yw4XLK();
+    yw3XLK();
+    ywWh();
+    DaoChu();
+    getExcel();
+    upExcel();
+
+
+    //点击导出按钮
+    function DaoChu() {
+        var dom = $("#Page_ywInfoHtml");
+        var add = dom.find("[name='dc']");
+        add.unbind('click');
+        add.bind('click', function () {
+            batchExport();
+            });
+    }
+
+
+    /* 全部导出excel */
+    function batchExport() {
+        var table1Length = document.getElementById("table1").rows[1].cells.length;
+        var form = $("#JS_yeInfoForm");
+        var cmds = form.serialize();
+        if (table1Length == 1) {
+            // 没有数据
+            $.modalMsg("没有内容可供导出", "warning");
+            return;
+        } else {
+            location.href = "/yd/ydManage/batchExport?"+cmds;
+            layer.msg("正在导出图书,请稍后……", {
+                icon : 1,
+                shade : [ 0.1, '#fff' ]
+            });
+
+        }
+    }
+
+    //点击模板下载按钮触发
+    function getExcel() {
+        var dom = $("#Page_ywInfoHtml");
+        var add = dom.find("[name='getExcel']");
+        add.unbind('click');
+        add.bind('click', function () {
+            downExcelTemplate();
+    })
+    }
+
+    /* 下载模板 */
+    function downExcelTemplate() {
+        alert(11)
+        location.href ="/yd/ydManage/downExcelTemplate";
+        layer.msg('正在下载模板,请稍后…', {
+            icon : 1
+        });
+    }
+
+    //点击上传excel按钮触发
+    function upExcel() {
+        var dom = $("#Page_ywInfoHtml");
+        var add = dom.find("[name='upExcel']");
+        var modal = $("#excel");
+        add.unbind('click');
+        add.bind('click', function () {
+            modal.modal('show');
+            upYwExcel();
+        })
+    }
+
+
+    function upYwExcel() {
+        var _domPagination = $("#pagination");
+        getServerPage("/yd/ydManage/batchAnalyzeList", "", function (json) {
+            if (json) {
+                //通过模板定义的id获取模板
+                var tpl = $("#newsListTemplate").html();
+                //预编译模板
+                var template = Handlebars.compile(tpl);
+                //传入需要填充的数据匹配
+                var html = template(json.data);
+                //插入模板到ul中
+                $("#content").html(html);
+                if(json.role=="isAdmin"){
+                    var dom = $("#newsList");
+                    var add = dom.find("[name='add']");
+                    var update = dom.find("[name='ywEditButton']");
+                    var delete1 = dom.find("[name='ywOnLineButton']");
+                    var delete2 = dom.find("[name='ywOffLineButton']");
+                    add.removeClass('hide');
+                    update.removeClass('hide');
+                    delete1.removeClass('hide');
+                    delete2.removeClass('hide');
+                    addSalary();
+                    editYw();
+                    ywOffLine();
+                    ywOnLine();
+                    detailyw();
+                    find();
+                }else {
+                    detailyw();
+                    find();
+                }
+            } else {
+                $.modalAlert(data.msg, modal_status.FAIL);
+            }
+        },_domPagination, 10, 6);
+    }
+    $(function() {
+        layui.use('uploadExcel', function() {
+            var upload = layui.upload;
+            // 执行实例
+            var uploadInst = upload.render({
+                elem : '#uploadExcel', // 绑定元素
+                url : '/yd/ydManage/batchAnalyzeList', // 上传接口
+                size : 10000,// 不超过10m
+                accept : 'file',
+                exts: 'xls|xlsx|XLS|XLSX',
+                done : function(data) {
+                    if (data.code == 0) {
+                        document.getElementById("upExcel").setAttribute(
+                            "disabled", true);
+                        layer.msg("批量上传成功,正在刷新数据请稍后……", {
+                            icon : 1,
+                            time : 500,
+                            shade : [ 0.1, '#fff' ]
+                        }, function() {
+                            alert(111)
+                            var url =  "/yd/ydManage/batchAnalyzeList2";
+                            $.initTable2(columns, url);
+                            // 保存按钮可用
+                            document.getElementById("batchSave").removeAttribute(
+                                "disabled");
+                        });
+                    } else {
+                        $.modalAlert(data.msg, modal_status.FAIL);
+                    }
+
+                },
+            });
+        });
+    });
+
+    //点击业务维护按钮弹出维护页面
+    function ywWh() {
+        var dom = $("#newsList");
+        var add = dom.find("[name='pagewh']");
+        var modal = $("#PageWhHtml");
+        add.unbind('click');
+        add.bind('click', function () {
+            modal.modal('show');
+            selectWhList();
+            yw5XLK();
+            findWh();
+        })
+    }
+
+    //展示业务维护列表
+    function selectWhList(){
+        var _domPagination = $("#whpagination");
+        getServerPage("/yd/ydManage/whList", "", function (json) {
+            if (json) {
+                //通过模板定义的id获取模板
+                var tpl = $("#ywWhTemplate").html();
+
+                //预编译模板
+                var template = Handlebars.compile(tpl);
+                //传入需要填充的数据匹配
+                var html = template(json.data);
+                //插入模板到ul中
+                $("#whcontent").html(html);
+                addYwWh();
+                editYwWh();
+                deleteWhButton();
+            } else {
+                $.modalAlert(data.msg, modal_status.FAIL);
+            }
+        }, _domPagination, 10, 6);
+    }
+
+    //点击业务维护--》新增按钮弹出新增页面
+    function addYwWh() {
+        var dom = $("#PageWhHtml");
+        var add = dom.find("[name='add']");
+        var modal = $("#addYwWhModal");
+        add.unbind('click');
+        add.bind('click', function () {
+            modal.modal('show');
+            saveWh();
+        })
+    }
+
+    //点击业务维护--》新增页面中的保存按钮
+    function saveWh() {
+        var modal = $("#addYwWhModal");
+        var form = $("#addYwWhForm");
+        //保存
+        var save = $("#whsave");
+        save.unbind('click');
+        save.bind('click', function () {
+            var cmds = form.serialize();
+            save.attr('disabled', true);
+            $.ajax({
+                cache: true,
+                type: "POST",
+                url: "/yd/ydManage/addYwWh",
+                data: cmds,
+                async: false,
+                success: function (json,status) {
+                    if (status) {
+                        modal.modal('hide');
+                        setTimeout(function () {
+                            $("#addYwWhForm")[0].reset();
+                        }, 1000);
+                        save.attr('disabled', false);
+                        selectWhList();
+                    } else {
+                        $.modalAlert(data.msg, 500);
+                    }
+                }
+            });
+        })
+    }
+
+    //点击业务维护--》修改按钮弹出修改页面
+    function editYwWh() {
+        var dom = $("#PageWhHtml");
+        var edit = dom.find("[name='whEditButton']");
+        var modal = $("#editYwWhModal");
+        edit.unbind('click');
+        edit.bind('click', function () {
+            var _this = $(this);
+            var data = getTableOneRow(_this);
+            modal.find("[name='id']").val(data.id);
+            modal.find("[name='ywType']").val(data.ywType);
+            modal.find("[name='ywDtl']").val(data.ywDtl);
+            modal.find("[name='ywComment']").val(data.ywComment);
+            modal.modal('show');
+            saveEditWh();
+        })
+    }
+
+    //点击业务维护--》修改页面中的保存按钮
+    function saveEditWh() {
+        var modal = $("#editYwWhModal");
+        var form = $("#editYwWhForm");
+        //保存
+        var save = $("#editYwSave");
+        save.unbind('click');
+        save.bind('click', function () {
+            var cmds = form.serialize();
+            save.attr('disabled', true);
+            $.ajax({
+                cache: true,
+                type: "POST",
+                url: "/yd/ydManage/addYwWh",
+                data: cmds,
+                async: false,
+                success: function (json,status) {
+                    if (status) {
+                        modal.modal('hide');
+                        setTimeout(function () {
+                            $("#editYwWhForm")[0].reset();
+                        }, 1000);
+                        save.attr('disabled', false);
+                        selectWhList();
+                    } else {
+                        $.modalAlert(data.msg, 500);
+                    }
+                }
+            });
+        })
+    }
+
+    //点击业务维护--》删除按钮
+    function deleteWhButton() {
+        var modal = $("#PageWhHtml");
+        var del = modal.find("[name='whDeleteButton']");
+        del.unbind('click');
+        del.bind('click', function () {
+            var _this = $(this);
+            var cmds = getTableOneRow(_this);
+            $.ajax({
+                cache: true,
+                type: "POST",
+                url: "/yd/ydManage/deleteWh",
+                data: cmds,
+                async: false,
+                success: function (json,status) {
+                    if (status) {
+                        setTimeout(function () {
+                        }, 1000);
+                        selectWhList();
+                    } else {
+                        $.modalAlert(data.msg, 500);
+                    }
+                }
+            });
+        })
+    }
+
+    <!--获取业务维护页面下拉框-->
+    function yw5XLK(){
+        $.ajax({
+            cache: true,
+            type: "POST",
+            url: "yw_type",
+            data: {},
+            async: false,
+            success: function (json) {
+                if (json) {
+                    var html = '';
+                    var html = html + "<option value=''>全部业务类型</option>"
+                    for (var i = 0; i < json.data.length; i++) {
+                        html = html + "<option value='" + json.data[i].ywType + "'>" + json.data[i].ywType + "</option>";
+                    }
+                    $('#findYwType').html(html);
+                    yw6XLK();
+                    $("#findYwType").change(function () {
+                        yw6XLK();
+                    });
+
+                } else {
+                    $.modalAlert(data.msg, modal_status.FAIL);
+                }
+            }
+        });
+
+    }
+
+    <!--获取业务维护页面下拉框-->
+    function yw6XLK(){
+        var dom = $("#PageWhHtml");
+        var yType = dom.find("[name='ywType']").val();
+        $.ajax({
+            cache: true,
+            type: "POST",
+            url: "ywDtl/"+yType,
+            data: {},
+            dataType: 'json',
+            async: false,
+            success: function (json) {
+                if (json) {
+                    var html = '';
+                    var html = html + "<option value=''>全部业务明细</option>"
+                    for (var i = 0; i < json.data.length; i++) {
+                        html = html + "<option value='" + json.data[i].ywDtl + "'>" + json.data[i].ywDtl + "</option>";
+                    }
+                    $('#findYwDtl').html(html);
+                } else {
+                    $.modalAlert(data.msg, modal_status.FAIL);
+                }
+            }
+        });
+
+    }
+
+    //业务维护页面
+    function findWh() {
+        var dom = $("#PageWhHtml");
+        var add = dom.find("[name='query']");
+        add.unbind('click');
+        add.bind('click', function () {
+            findAboutYwWh();
+        })
+    }
+
+    //业务维护条件查询方法
+    function findAboutYwWh(){
+        var _domPagination = $("#whpagination");
+        var form = $("#JS_yeWhForm")
+        var cmds = form.serialize();
+       getServerPage("/yd/ydManage/whList",cmds, function (json) {
+                if (json) {
+
+                    var tpl = $("#ywWhTemplate").html();
+                    //预编译模板
+                    var template = Handlebars.compile(tpl);
+                    //传入需要填充的数据匹配
+                    var html = template(json.data);
+                    //插入模板到ul中
+                    $("#whcontent").html(html);
+                } else {
+                    $.modalAlert(data.msg, modal_status.FAIL);
+                }
+            },_domPagination, 10, 6)
+    }
+
+
+
+
+    //主页中业务列表分页展示
+    function selectAll(){
+        var _domPagination = $("#pagination");
+        getServerPage("/yd/ydManage/list", "", function (json) {
+            if (json) {
+                //通过模板定义的id获取模板
+                var tpl = $("#newsListTemplate").html();
+                //预编译模板
+                var template = Handlebars.compile(tpl);
+                //传入需要填充的数据匹配
+                var html = template(json.data);
+                //插入模板到ul中
+                $("#content").html(html);
+                if(json.role=="isAdmin"){
+                    var dom = $("#newsList");
+                    var add = dom.find("[name='add']");
+                    var update = dom.find("[name='ywEditButton']");
+                    var delete1 = dom.find("[name='ywOnLineButton']");
+                    var delete2 = dom.find("[name='ywOffLineButton']");
+                    add.removeClass('hide');
+                    update.removeClass('hide');
+                    delete1.removeClass('hide');
+                    delete2.removeClass('hide');
+                    addSalary();
+                    editYw();
+                    ywOffLine();
+                    ywOnLine();
+                    detailyw();
+                    find();
+                }else {
+                    detailyw();
+                    find();
+                }
+            } else {
+                $.modalAlert(data.msg, modal_status.FAIL);
+            }
+        },_domPagination, 10, 6);
+    }
+
+    //点击查询按钮触发
+    function find() {
+        var dom = $("#Page_ywInfoHtml");
+        var add = dom.find("[name='query']");
+        add.unbind('click');
+        add.bind('click', function () {
+            findAboutYw();
+        })
+    }
+
+    //主页条件查询方法
+    function findAboutYw(){
+        var _domPagination = $("#pagination");
+        var form = $("#JS_yeInfoForm");
+        var cmds = form.serialize();
+        getServerPage("/yd/ydManage/list",cmds, function (json) {
+                if (json) {
+                    var tpl = $("#newsListTemplate").html();
+                    //预编译模板
+                    var template = Handlebars.compile(tpl);
+                    //传入需要填充的数据匹配
+                    var html = template(json.data);
+                    //插入模板到ul中
+                    $("#content").html(html);
+                    addSalary();
+                    editYw();
+                    ywOffLine();
+                    ywOnLine();
+                    detailyw();
+                } else {
+                    $.modalAlert(data.msg, modal_status.FAIL);
+                }
+            },_domPagination, 10, 6);
+    }
+
+    //点击新增按钮弹出新增页面
+    function addSalary() {
+        var dom = $("#newsList");
+        var add = dom.find("[name='add']");
+        var modal = $("#addYwModal");
+        add.unbind('click');
+        add.bind('click', function () {
+            modal.modal('show');
+            saveYw();
+            ywXLK();
+        })
+    }
+
+    <!--获取新增业务类型下拉框-->
+    function ywXLK(){
+    $.ajax({
+        cache: true,
+        type: "POST",
+        url: "yw_type",
+        data: {},
+        async: false,
+        success: function (json) {
+            if (json) {
+                var html = '';
+                for (var i = 0; i < json.data.length; i++) {
+                    html = html + "<option value='" + json.data[i].ywType + "'>" + json.data[i].ywType + "</option>";
+                }
+                $('#ywType').html(html);
+                yw2XLK();-
+                $("#ywType").change(function () {
+                    yw2XLK();//改变一次值调用一次这方法，然后又绑定一次change事件？不太合适啊
+                });
+
+            } else {
+                $.modalAlert(data.msg, modal_status.FAIL);
+            }
+        }
+    });
+
+}
+
+    <!--获取新增业务明细下拉框-->
+    function yw2XLK(){
+        var ytype = $("#ywType").val();
+        $.ajax({
+            cache: true,
+            type: "POST",
+            url: "ywDtl/"+ytype,
+            data: {},
+            dataType: 'json',
+            async: false,
+            success: function (json) {
+                if (json) {
+                    var html = '';
+                    for (var i = 0; i < json.data.length; i++) {
+                        html = html + "<option value='" + json.data[i].ywDtl + "'>" + json.data[i].ywDtl + "</option>";
+                    }
+                    $('#ywDtl').html(html);
+                } else {
+                    $.modalAlert(data.msg, modal_status.FAIL);
+                }
+            }
+        });
+    }
+
+    <!--获取查询业务类型下拉框-->
+    function yw3XLK(){
+        $.ajax({
+            cache: true,
+            type: "POST",
+            url: "yw_type",
+            data: {},
+            async: false,
+            success: function (json) {
+                if (json) {
+                    var html = '';
+                    var html = html + "<option value=''>全部业务类型</option>"
+                    for (var i = 0; i < json.data.length; i++) {
+                        html = html + "<option value='" + json.data[i].ywType + "'>" + json.data[i].ywType + "</option>";
+                    }
+                    $('#fingywType').html(html);
+                    yw4XLK();
+                        $("#fingywType").change(function () {
+                            yw4XLK();
+                        });
+
+                } else {
+                    $.modalAlert(data.msg, modal_status.FAIL);
+                }
+            }
+        });
+
+    }
+
+    <!--获取查询业务明细下拉框-->
+    function yw4XLK(){
+        var ytype = $("#fingywType").val();
+        $.ajax({
+            cache: true,
+            type: "POST",
+            url: "ywDtl/"+ytype,
+            data: {},
+            dataType: 'json',
+            async: false,
+            success: function (json) {
+                if (json) {
+                    var html = '';
+                    var html = html + "<option value=''>全部业务明细</option>";
+                    for (var i = 0; i < json.data.length; i++) {
+                        html = html + "<option value='" + json.data[i].ywDtl + "'>" + json.data[i].ywDtl + "</option>";
+                    }
+                    $('#fingywDtl').html(html);
+                } else {
+                    $.modalAlert(data.msg, modal_status.FAIL);
+                }
+            }
+        });
+    }
+
+    //点击新增页面中的保存按钮
+    function saveYw() {
+        var modal = $("#addYwModal");
+        var form = $("#addYwForm");
+        //保存
+        var save = $("#save");
+        save.unbind('click');
+        save.bind('click', function () {
+            var cmds = form.serialize();
+            save.attr('disabled', true);
+            $.ajax({
+                cache: true,
+                type: "POST",
+                url: "/yd/ydManage/addYw",
+                data: cmds,
+                async: false,
+                success: function (json,status) {
+                    if (status) {
+                        modal.modal('hide');
+                        setTimeout(function () {
+                            $("#addYwForm")[0].reset();
+                        }, 1000);
+                        save.attr('disabled', false);
+                        selectAll();
+                    } else {
+                        $.modalAlert(data.msg, 500);
+                    }
+                }
+            });
+        })
+    }
+
+    //点击修改按钮弹出修改页面
+    function editYw() {
+        var dom = $("#newsList");
+        var update = dom.find("[name='ywEditButton']");
+        var modal = $("#editYwModal");
+        update.unbind('click');
+        update.bind('click', function () {
+            editywXLK();//首先下拉的内容获取到，你对他赋值才能匹配上显示什么对应内容，也就是value对应的里面的内容
+            var _this = $(this);
+            var data = getTableOneRow(_this);
+            modal.find("[name='id']").val(data.id);
+            modal.find("[name='ywTitle']").val(data.ywTitle);
+            modal.find("[name='ywType']").val(data.ywType);
+            edityw2XLK();//这个放在这里就可以，是因为你在这方法里面获取了        var ytype = $("#editywType").val();
+            //如果你都没赋值，根本获取不到，所以顺序就出现了问题，你在赋值后去获取就拿到了，就都执行对了
+            modal.find("[name='ywDtl']").val(data.ywDtl);
+            modal.find("[name='ywContent']").val(data.ywContent);
+            modal.modal('show');
+            saveEditYw();
+        })
+    }
+
+    <!--获取修改业务类型下拉框-->
+    function editywXLK(){
+        $.ajax({
+            cache: true,
+            type: "POST",
+            url: "yw_type",
+            data: {},
+            async: false,
+            success: function (json) {
+                if (json) {
+                    var html = '';
+                    for (var i = 0; i < json.data.length; i++) {
+                        html = html + "<option value='" + json.data[i].ywType + "'>" + json.data[i].ywType + "</option>";
+                    }
+                    $('#editywType').html(html);
+                    edityw2XLK();
+                    $("#editywType").change(function () {
+                        edityw2XLK();//改变一次值调用一次这方法，然后又绑定一次change事件？不太合适啊
+                    });
+                } else {
+                    $.modalAlert(data.msg, modal_status.FAIL);
+                }
+            }
+        });
+
+    }
+
+    <!--获取修改业务明细下拉框-->
+    function edityw2XLK(){
+        var ytype = $("#editywType").val();
+        $.ajax({
+            cache: true,
+            type: "POST",
+            url: "ywDtl/"+ytype,
+            data: {},
+            dataType: 'json',
+            async: false,
+            success: function (json) {
+                if (json) {
+                    var html = '';
+                    for (var i = 0; i < json.data.length; i++) {
+                        html = html + "<option value='" + json.data[i].ywDtl + "'>" + json.data[i].ywDtl + "</option>";
+                    }
+                    $('#editywDtl').html(html);
+                } else {
+                    $.modalAlert(data.msg, modal_status.FAIL);
+                }
+            }
+        });
+    }
+
+    //修改页面保存按钮
+    function saveEditYw() {
+        var modal = $("#editYwModal");
+        var form = $("#editYwForm");
+        //保存
+        var save = $("#editSave");
+        save.unbind('click');
+        save.bind('click', function () {
+            var cmds = form.serialize();
+            save.attr('disabled', true);
+            $.ajax({
+                cache: true,
+                type: "POST",
+                url: "/yd/ydManage/editYw",
+                data: cmds,
+                async: false,
+                success: function (json,status) {
+                    if (status) {
+                        modal.modal('hide');
+                        setTimeout(function () {
+                            $("#editYwForm")[0].reset();
+                        }, 1000);
+                        save.attr('disabled', false);
+                        selectAll();
+                    } else {
+                        $.modalAlert(data.msg, 500);
+                    }
+                }
+            });
+        })
+    }
+
+    //点击下线按钮
+    function ywOffLine() {
+        var dom = $("#newsList");
+        var ywOffLineButton = dom.find("[name='ywOffLineButton']");
+        ywOffLineButton.unbind('click');
+        ywOffLineButton.bind('click', function () {
+            var _this = $(this);
+            var data = getTableOneRow(_this);
+            $.ajax({
+                cache: true,
+                type: "POST",
+                url: "/yd/ydManage/ywOffLine",
+                data: data,
+                async: false,
+                success: function (json,status) {
+                    if (status) {
+                        findAboutYw();
+                    } else {
+                        $.modalAlert(data.msg, 500);
+                    }
+                }
+            });
+        })
+    }
+
+    //点击上线按钮
+    function ywOnLine() {
+        var dom = $("#newsList");
+        var ywOnLineButton = dom.find("[name='ywOnLineButton']");
+        ywOnLineButton.unbind('click');
+        ywOnLineButton.bind('click', function () {
+            var _this = $(this);
+            var data = getTableOneRow(_this);
+            $.ajax({
+                cache: true,
+                type: "POST",
+                url: "/yd/ydManage/ywOnLine",
+                data: data,
+                async: false,
+                success: function (json, status) {
+                    if (status) {
+                        findAboutYw();
+                    } else {
+                        $.modalAlert(data.msg, 500);
+                    }
+                }
+            });
+        })
+    }
+
+    //点击详情按钮弹出详情页面
+    function detailyw() {
+        var dom = $("#newsList");
+        var add = dom.find("[name='ywxqButton']");
+        var modal = $("#detailYwModal");
+        add.unbind('click');
+        add.bind('click', function () {
+            var _this = $(this)
+            var data = getTableOneRow(_this);
+            $.ajax({
+                cache: true,
+                type: "POST",
+                url: "/yd/ydManage/ywMore",
+                data: data,
+                async: false,
+                success: function (json) {
+                    if (json) {
+                        modal.find("[name='ywTitle']").val(json.data.ywTitle);
+                        modal.find("[name='ywType']").val(json.data.ywType);
+                        modal.find("[name='ywDtl']").val(json.data.ywDtl);
+                        modal.find("[name='ywContent']").val(json.data.ywContent);
+                        modal.find("[name='opId']").val(json.data.opId);
+                        modal.find("[name='staffName']").val(json.data.staffName);
+                        modal.find("[name='billId']").val(json.data.billId);
+                        modal.find("[name='createDate']").val(json.data.createDate);
+                        modal.find("[name='updateDate']").val(json.data.updateDate);
+                        modal.find("[name='deleteDate']").val(json.data.deleteDate);
+                        modal.find("[name='restoreDate']").val(json.data.restoreDate);
+                        modal.find("[name='status']").val(json.data.status);
+
+                        modal.modal('show');
+                    } else {
+                        $.modalAlert(data.msg, 500);
+                    }
+                }
+            });
+
+        })
+    }
+
+    //以下可以无视，就是一些封装方法，直接复制就行
+    function getServerPage(url, cmd, callback, obj, pageSize, displayPage) {
+        var self = this;
+        var page_index = 0;
+        var page_count = 0;
+        var items_per_page = pageSize || 10;
+        var num_display_entries = displayPage || 8;
+        var current_page = 0;
+        $(obj).html(''); // 初始化清空分页
+        function getDataList(index, jq) {
+            if ($(obj).find("li.active").length > 0) {
+                current_page = $(obj).find("li.active")[0].innerText - 1;
+            }
+            var _cmd = cmd;
+            if (typeof(_cmd) == "object") {
+                _cmd = cmd;
+                _cmd['page'] = index;
+                _cmd['rows'] = items_per_page;
+            } else {
+                _cmd = _cmd + "&page=" + (index) + '&rows=' + items_per_page;
+            }
+            $.ajax({
+                cache: true,
+                type: "POST",
+                url: url,
+                data: _cmd,
+                async: false,
+                success: function (json,status) {
+                    if (status) {
+                        callback(json);
+                        var _table = $(obj).parent().prev(".box-body").find('table');
+                        if (_table.data('adjustable')) {
+                            _table.addClass('table2');
+                            var _tableDom = _table[0];
+                            setWeithTable(_tableDom);
+                        }
+                        page_count = json.total;
+                        if ($(obj).html() == '') {
+                            $(obj).pagination(json.total, {
+                                items_per_page: items_per_page, //每页显示的条目数
+                                num_display_entries: num_display_entries, //连续分页主体部分显示的分页条目数
+                                num_edge_entries: 2, //两侧显示的首尾分页的条目数
+                                current_page: current_page,
+                                prev_text: "上页",
+                                next_text: "下页",
+                                callback: pageselectCallback
+                            });
+                            setPageInfo(index);
+                        }
+                    }
+                }
+            });
+        }
+        // 回调方法
+        function pageselectCallback(page_index, jq) {
+            getDataList(page_index, jq);
+            setPageInfo(page_index);
+        }
+        // 初始化
+        getDataList(current_page);
+        function setPageInfo(pageIndex) {
+            var _startSize = pageIndex == 0 ? 0 : pageIndex * items_per_page;
+            var _endSize = (pageIndex + 1) * items_per_page > page_count ? page_count : (pageIndex + 1) * items_per_page;
+            if (page_count == 0) {
+                var _html = "<div class='dataTables_info pull-left'>第" + 0 + "-" + 0 + "，共" + 0 + "</div>";
+                $(obj).prepend(_html);
+            } else {
+                var _html = "<div class='dataTables_info pull-right pagination'>第" + (_startSize + 1) + "-" + _endSize + "，共" + page_count + "</div>";
+                $(obj).prepend(_html);
+            }
+        }
+    }
+    /**
+     * 设置表格列宽度的可调节
+     * @param table 表格的Dom对象 必须要用js来获取，不能用jquery
+     *
+     */
+    function setWeithTable(table) {
+        var tTD; //用来存储当前更改宽度的Table Cell,避免快速移动鼠标的问题
+
+        for (j = 0; j < table.rows[0].cells.length; j++) {
+            table.rows[0].cells[j].onmousedown = function () {
+                //记录单元格
+                tTD = this;
+                if (event.offsetX > tTD.offsetWidth - 10) {
+                    tTD.mouseDown = true;
+                    tTD.oldX = event.x;
+                    tTD.oldWidth = tTD.offsetWidth;
+                }
+            };
+            table.rows[0].cells[j].onmouseup = function () {
+                //结束宽度调整
+                if (tTD == undefined) tTD = this;
+                tTD.mouseDown = false;
+                tTD.style.cursor = 'default';
+            };
+            table.rows[0].cells[j].onmousemove = function () {
+                //更改鼠标样式
+                if (event.offsetX > this.offsetWidth - 10)
+                    this.style.cursor = 'col-resize';
+                else
+                    this.style.cursor = 'default';
+                //取出暂存的Table Cell
+                if (tTD == undefined) tTD = this;
+                //调整宽度
+                if (tTD.mouseDown != null && tTD.mouseDown == true) {
+                    tTD.style.cursor = 'default';
+                    if (tTD.oldWidth + (event.x - tTD.oldX) > 0)
+                        tTD.width = tTD.oldWidth + (event.x - tTD.oldX);
+                    //调整列宽
+                    tTD.style.width = tTD.width;
+                    tTD.style.cursor = 'col-resize';
+                    //调整该列中的每个Cell
+                    table = tTD;
+                    while (table.tagName != 'TABLE') table = table.parentElement;
+                    for (j = 0; j < table.rows.length; j++) {
+                        table.rows[j].cells[tTD.cellIndex].width = tTD.width;
+                    }
+                }
+            };
+        }
+        table.onmouseup = function (event) {
+            /* Act on the event */
+            if (tTD == undefined) {
+            } else {
+                tTD.mouseDown = false;
+                tTD.style.cursor = 'default';
+            }
+        };
+    }
+    /**
+     * 获取一行数据
+     * @param obj
+     * @param message
+     * @returns {{}}
+     */
+    function getTableOneRow(obj) {
+        var data = {};
+        obj.parents("tr").find("input").each(function () {
+            var key = $(this).attr("name");
+            var value = $(this).val();
+            data[key] = value;
+        });
+        return data;
+    }
+</script>
+
+<script>
+    $("#moreFile").fileinput({
+        language : 'zh', // 设置语言
+        uploadUrl : "/yd/ydManage/uploadImgFile?blogFileName=blogset",
+        allowedFileExtensions : [ 'jpg', 'png', 'jpeg',
+            'gif','ico','xml','xmls','txt' ],// 接收的文件后缀
+        showUpload : true, // 是否显示上传按钮
+        showRemove : false, // 是否显示移除按钮
+        showCaption : false,// 是否显示标题
+        browseClass : "btn btn-primary", // 按钮样式
+        dropZoneEnabled : true,//是否显示拖拽区域
+        uploadAsync : true,
+        showBrowse : true,
+        browseOnZoneClick : false,
+        maxFileCount : 5, // 表示允许同时上传的最大文件个数
+        enctype : 'multipart/form-data',
+        maxFileSize : 1024*1024
+        // 单位为kb，如果为0表示不限制文件大小
+    }).on("filebatchselected", function(event, files) {
+        //返回文件名
+    }).on('filesuccessremove', function(event, id){
+        $("#show8").css('display', 'none');
+        fileBase64_8=null;
+    }).on("fileuploaded", function(event, data) {
+        //返回文件名,改过，实际返回base64编码
+        fileBase64_8 = (data.response.code == 0) ? (data.response.imgbase64String) : null;
+        $("#show8").css('display', 'block');
+        document.getElementById("showImg8").src = fileBase64_8;
+    });
+    //上传绑定
+    // 上传文件
+    $("#upFile").fileinput({
+        language : 'zh', // 设置语言
+        uploadUrl : "/yd/ydManage/uploadImgFile?blogFileName=aa",
+        allowedFileExtensions : [ 'jpg', 'png', 'jpeg',
+            'gif','ico' ],// 接收的文件后缀
+        showUpload : true, // 是否显示上传按钮
+        showRemove : false, // 是否显示移除按钮
+        showCaption : false,// 是否显示标题
+        browseClass : "btn btn-primary", // 按钮样式
+        dropZoneEnabled : true,//是否显示拖拽区域
+        uploadAsync : true,
+        showBrowse : true,
+        browseOnZoneClick : false,
+        maxFileCount : 1, // 表示允许同时上传的最大文件个数
+        enctype : 'multipart/form-data',
+        maxFileSize : 512
+        // 单位为kb，如果为0表示不限制文件大小
+    }).on("filebatchselected", function(event, files) {
+        //返回文件名
+    }).on('filesuccessremove', function(event, id){
+        $("#showTp").css('display', 'none');
+        fileBase64_8=null;
+    }).on("fileuploaded", function(event, data) {
+        //返回文件名,改过，实际返回base64编码
+        fileBase64_8 = (data.response.code == 0) ? (data.response.imgbase64String) : null;
+        $("#showTp").css('display', 'block');
+        document.getElementById("showImg8").src = fileBase64_8;
+    });
+
+
+</script>
+</body>
+</html>

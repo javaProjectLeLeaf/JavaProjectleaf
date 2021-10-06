@@ -1,0 +1,938 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <!-- Bootstrap 3.3.6 -->
+    <link rel="stylesheet" href="/ajax/plugins/bootstrap-fileinput/css/fileinput.css"/>
+    <!--<link rel="stylesheet" href="/css/css/bootstrap.css">-->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="/css/font-awesome.css">
+    <!-- AdminLTE Theme skin-blue  -->
+    <!--<link rel="stylesheet" href="/css/skin/WdatePicker.css">-->
+    <link rel="stylesheet" href="/css/css.css">
+    <link rel="stylesheet" href="/css/AdminLTE.css">
+    <link rel="stylesheet" href="/css/fileinput.min.css">
+    <link rel="stylesheet" href="/css/bootstrap-switch.min.css">
+    <script type="text/javascript" src="//code.jquery.com/jquery-1.8.2.min.js"></script>
+    <script type="text/javascript" src="//cdn.bootcss.com/handlebars.js/4.0.6/handlebars.js"></script>
+    <script src="/js/jquery.pagination.js"></script>
+    <script src="/js/My97DatePicker/WdatePicker.js"></script>
+    <!--<script src="/js/dataTables.colReorder.js"></script>-->
+    <!--<script src="/js/html5shiv.min.js"></script>-->
+    <!--<script src="/js/respond.min.js"></script>-->
+    <script src="/js/jquery/7fb1b5077bd74199dee79282b56555d9eeff8252/jquery.js"></script>
+    <!--<script src="https://api.map.baidu.com/api?v=3.0&ak=GhIgNVXZc6c4gtA9qdHcwcxgfGv4qjgN"></script>-->
+    <script src="/js/zeroModal/zeroModal.min.js"></script>
+    <script src="/js/jquery-ui.min.js"></script>
+    <script src="/js/bootstrap/js/bootstrap.min.js"></script>
+    <script src="/js/bootstarp-switch/3.3.2/js/bootstrap-switch.min.js"></script>
+    <script src="/js/jquery.pagination.js"></script>
+    <!--<script src="/js/seajs/sea.js"></script>-->
+    <!--<script src="/js/seajs/sea-plugins.js"></script>-->
+    <!--<script src="/js/conf/config.js"></script>-->
+    <!--<script src="/js/fileinput/fileinput.min.js"></script>-->
+    <!--<script src="/js/fileinput/locales/zh.js"></script>-->
+    <script src="/ajax/plugins/bootstrap-fileinput/js/fileinput.min.js"></script>
+    <script src="/ajax/plugins/bootstrap-fileinput/js/locales/zh.js"></script>
+    <script src="/ajax/plugins/bootstrap-fileinput/js/locales/fr.js"></script>
+</head>
+<body>
+<div class="row" id="Page_villageListHtml">
+    <div class="col-md-12">
+        <div class="box">
+            <form id="JS_queryVillageListForm">
+                <div class="box-header with-border">
+                    <div class="box-tools pull-right">
+                        <button type="button" class="btn btn-box-tool input-sm" data-widget="collapse"><i
+                                class="fa fa-minus"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="box-body">
+                    <div class="row">
+                        <div class="col-lg-2" id="countyCodeId">
+                            <label>县区</label>
+                            <select class="input-sm combo countyCode form-control" name="countyCode" id="countyCode"
+                                    title="请选择县区">
+                            </select>
+                        </div>
+                        <div class="col-lg-2" id="regionIds">
+                            <label>区域</label>
+                            <select name="regionId" id="regionId" class="input-sm form-control" title="请选择区域">
+                            </select>
+                        </div>
+                        <div class="col-lg-2">
+                            <label>小区名称：</label>
+                            <input class="input-sm form-control" name="villageName" placeholder="小区名称">
+                        </div>
+                        <div class="col-lg-2">
+                            <label>承包人：</label>
+                            <input class="input-sm form-control" name="contractorName" placeholder="承包人">
+                        </div>
+                        <div class="col-lg-2">
+                            <label>场景：</label>
+                            <select class="input-sm combo form-control"    name="scene">
+                                <option value="" selected="selected" >请选择</option>
+                                <option value="存量小区">存量小区</option>
+                                <option value="新建小区">新建小区</option>
+                            </select>
+                        </div>
+                        <div class="col-lg-2 btn-group-sm" style="margin-top:25px">
+                            <button type="reset" class="btn btn-default">重置</button>
+                            <button type="button" class="btn btn-primary" data-toggle="modal" name="query">查询</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="box" id="JS_getVillageList" style="min-height:100px;">
+            <div class="box-header ">
+                <h5 class="box-title">清单界面</h5>
+                <button type="button" class="btn btn-primary hide" data-toggle="modal"
+                        name="add">新增
+                </button>
+                <div class="box-tools btn-group-sm">
+                    <a class="btn btn-primary hide" id="JS_export" name="export1">导出 </a>
+                </div>
+            </div>
+            <div class="box-body" style="min-height: 100px;">
+                <table class="table table-bordered table-hover text-center" style="table-layout:fixed;"
+                       data-adjustable="true">
+                    <thead>
+                    <tr>
+                        <th width="8%">县区</th>
+                        <th width="8%">区域</th>
+                        <th width="10%">小区名称</th>
+                        <th width="8%">承包人</th>
+                        <th width="8%">场景</th>
+                        <th width="8%">总户数</th>
+                        <th width="8%">移动宽带</th>
+                        <th width="8%">接入率</th>
+                        <th width="8%">排摸量</th>
+                        <th width="8%">友商宽带</th>
+                        <th width="8%">未安装</th>
+                        <th width="8%">未排摸</th>
+                        <th width="8%">日新装</th>
+                        <th width="8%">周新装</th>
+                        <th width="8%">月新装</th>
+                        <th width="8%">已策反量</th>
+                        <th width="23%">操作</th>
+                    </tr>
+                    </thead>
+                    <tbody name="content" id="content"></tbody>
+                </table>
+                <div class="box-footer no-border">
+                    <div class="dataTables_paginate" name="pagination" id="pagination"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- 列表 -->
+<script id="TPL_getVillageList" type="text/x-handlebars-template">
+    {{#each this}}
+    <tr>
+        <td style="display:none"><input type="hidden" name="id" value="{{id}}">{{id}}</td>
+        <td style="display:none"><input type="hidden" name="property" value="{{property}}">{{property}}</td>
+        <td style="display:none"><input type="hidden" name="buildDate" value="{{buildDate}}">{{buildDate}}</td>
+        <td style="display:none"><input type="hidden" name="phone" value="{{phone}}">{{phone}}</td>
+        <td style="display:none"><input type="hidden" name="address" value="{{address}}">{{address}}</td>
+        <td style="display:none"><input type="hidden" name="contractorId" value="{{contractorId}}">{{contractorId}}</td>
+        <td><input type="hidden" name="countyName" value="{{countyName}}">{{countyName}}</td>
+        <td style="overflow:hidden;text-overflow: ellipsis;white-space: nowrap" title="{{regionName}}"><input
+                type="hidden" name="regionName" value="{{regionName}}">{{regionName}}
+        </td>
+        <td style="overflow:hidden;text-overflow: ellipsis;white-space: nowrap" title="{{villageName}}"><input
+                type="hidden" name="villageName" value="{{villageName}}">
+            <div class="text-blue" style="cursor: pointer;text-decoration:underline" type="button" data-toggle="modal"
+                 name="stock">{{villageName}}
+            </div>
+        </td>
+        <td><input type="hidden" name="contractorName" value="{{contractorName}}">{{contractorName}}</td>
+        <td><input type="hidden" name="scene" value="{{scene}}">{{scene}}</td>
+        <td><input type="hidden" name="homes" value="{{homes}}">{{homes}}</td>
+        <td><input type="hidden" name="ydkd" value="{{ydkd}}">{{ydkd}}</td>
+        <td><input type="hidden" name="rate" value="{{rate}}">{{rate}}%</td>
+        <td><input type="hidden" name="pml" value="{{pml}}">{{pml}}</td>
+        <td><input type="hidden" name="yskd" value="{{yskd}}">{{yskd}}</td>
+        <td><input type="hidden" name="uninstall" value="{{uninstall}}">{{uninstall}}</td>
+        <td><input type="hidden" name="unPml" value="{{unPml}}">{{unPml}}</td>
+        <td><input type="hidden" name="dayAmount" value="{{dayAmount}}">{{dayAmount}}</td>
+        <td><input type="hidden" name="weekAmount" value="{{weekAmount}}">{{weekAmount}}</td>
+        <td><input type="hidden" name="monthAmount" value="{{monthAmount}}">{{monthAmount}}</td>
+        <td><input type="hidden" name="cfAmout" value="{{cfAmout}}">{{cfAmout}}</td>
+        <td style="text-align: center" class="update">
+            <div class="btn-group-xs">
+                <button type="button" class="btn btn-default" name="detail" data-toggle="modal">详情</button>
+                <button type="button" class="btn btn-warning" name="update" data-toggle="modal">修改</button>
+                <button type="button" class="btn btn-success" name="building" data-toggle="modal">幢</button>
+                <button type="button" class="btn btn-primary" name="selectUser" data-toggle="modal">选择排摸人</button>
+            </div>
+        </td>
+    </tr>
+    {{/each}}
+</script>
+<!-- 小区修改模态框 -->
+<div class="modal fade" id="Modal_updateVillageListModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                        aria-hidden="true">×</span></button>
+                <h4 class="box-title">【修改:<span id="idNo"></span>】</h4>
+            </div>
+            <div class="modal-body">
+                <form id="JS_updateVillageListForm" method="post">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <label>小区名称</label>
+                            <input type="text" class="form-control readonly hide" name="id">
+                            <input type="text" class="form-control" readonly name="villageName">
+                        </div>
+                        <div class="col-md-4">
+                            <label>县区</label>
+                            <input type="text" class="form-control" readonly name="countyName">
+                        </div>
+                        <div class="col-md-4">
+                            <label>区域</label>
+                            <input class="form-control" readonly name="regionName">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <label>建设时间</label>
+                            <input type="text" class="form-control input-sm Wdate" name="buildDateStr"
+                                   onClick="WdatePicker({dateFmt:'yyyy-MM-dd'})" placeholder="建设时间">
+                        </div>
+                        <div class="col-md-4">
+                            <label>物业名称</label>
+                            <input type="text" class="form-control" name="property">
+                        </div>
+                        <div class="col-md-4">
+                            <label>物业号码</label>
+                            <input type="text" class="form-control" name="phone">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <label>小区地址</label>
+                            <input type="text" class="form-control" name="address">
+                        </div>
+                        <div class="col-md-4" id="contractorName">
+                            <label>承包人</label>
+                            <select class="input-sm combo form-control" name="contractorName" data-url="allPerson"
+                                    data-idkey="OPERATOR_ID" data-namekey="STAFF_NAME">
+                                <option value="">请选择</option>
+                            </select>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <div class="text-center">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                    <button type="button" class="btn btn-primary" name="saves">保存</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- 小区详情模态框 -->
+<div class="modal fade" id="Modal_detailVillageListModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                        aria-hidden="true">×</span></button>
+                <h4 class="box-title">【详情】</h4>
+            </div>
+            <div class="modal-body">
+                <form id="JS_detailVillageListForm" method="post">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <label>小区名称</label>
+                            <input type="text" readonly class="form-control hide" name="id">
+                            <input type="text" readonly class="form-control" name="villageName">
+                        </div>
+                        <div class="col-md-4">
+                            <label>县区</label>
+                            <input type="text" readonly class="form-control" name="countyName">
+                        </div>
+                        <div class="col-md-4">
+                            <label>区域</label>
+                            <input class="form-control" readonly name="regionName">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <label>建设时间</label>
+                            <input type="text" class="form-control" readonly name="buildDate">
+                        </div>
+                        <div class="col-md-4">
+                            <label>物业名称</label>
+                            <input type="text" class="form-control" readonly name="property">
+                        </div>
+                        <div class="col-md-4">
+                            <label>物业号码</label>
+                            <input type="text" class="form-control" readonly name="phone">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <label>小区地址</label>
+                            <input type="text" class="form-control" readonly name="address">
+                        </div>
+                        <div class="col-md-4">
+                            <label>承包人</label>
+                            <input type="text" class="form-control" readonly name="contractorName">
+                        </div>
+                        <div class="col-md-4">
+                            <label>场景</label>
+                            <input type="text" class="form-control" readonly name="scene">
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <div class="text-center">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- 幢模态框 -->
+<div class="modal fade" id="Modal_selectBuildingModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                        aria-hidden="true">×</span></button>
+                <h4 class="box-title"><span id="idUserNo"></span>【幢列表】</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="box">
+                            <form id="JS_selectBuildingForm">
+                                <div class="box-header with-border">
+                                    <div class="box-tools pull-right">
+                                        <button type="button" class="btn btn-box-tool input-sm" data-widget="collapse">
+                                            <i class="fa fa-minus"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="box-body">
+                                    <div class="row">
+                                        <div class="col-md-2">
+                                            <label>幢号</label>
+                                            <input type="text" class="form-control input-sm" name="building"
+                                                   placeholder="幢号">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="box-footer ">
+                                    <div class="text-center btn-group-sm">
+                                        <button type="reset" class="btn btn-default">重置</button>
+                                        <button type="button" class="btn btn-primary" data-toggle="modal"
+                                                name="queryUser">
+                                            查询
+                                        </button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="box" style="min-height:100px;" id="JS_getBuildingList">
+                            <div class="box-body" style="min-height: 100px;">
+                                <table class="table table-bordered table-hover text-center" style="table-layout:fixed;"
+                                       data-adjustable="true">
+                                    <thead>
+                                    <tr>
+                                        <th width="10%">幢号</th>
+                                        <th width="15%">总户数</th>
+                                        <th width="15%">移动宽带</th>
+                                        <th width="10%">接入率</th>
+                                        <th width="10%">排摸量</th>
+                                        <th width="10%">友商宽带</th>
+                                        <th width="10%">未安装数</th>
+                                        <th width="10%">未排摸量</th>
+                                        <th width="10%">已策反量</th>
+                                        <!--<th width="10%">操作</th>-->
+                                    </tr>
+                                    </thead>
+                                    <tbody name="content"></tbody>
+                                </table>
+                                <div class="box-footer no-border">
+                                    <div class="dataTables_paginate" name="pagination"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- 幢table -->
+<script id="TPL_getAllBuildingList" type="text/x-handlebars-template">
+    {{#each this}}
+    <tr>
+        <td><input type="hidden" name="building" value="{{building}}">{{building}}幢</td>
+        <td><input type="hidden" name="homes" value="{{homes}}">{{homes}}</td>
+        <td><input type="hidden" name="ydkd" value="{{ydkd}}">{{ydkd}}</td>
+        <td><input type="hidden" name="rate" value="{{rate}}">{{rate}}%</td>
+        <td><input type="hidden" name="pml" value="{{pml}}">{{pml}}</td>
+        <td><input type="hidden" name="yskd" value="{{yskd}}">{{yskd}}</td>
+        <td><input type="hidden" name="uninstall" value="{{uninstall}}">{{uninstall}}</td>
+        <td><input type="hidden" name="unPml" value="{{unPml}}">{{unPml}}</td>
+        <td><input type="hidden" name="cfAmout" value="{{cfAmout}}">{{cfAmout}}</td>
+    </tr>
+    {{/each}}
+</script>
+<!--户模态框-->
+<div class="modal fade" id="Modal_stockModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-lg" style="overflow-y:auto; overflow-x:auto; width: 1050px;height: 600px"
+         role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                        aria-hidden="true">×</span></button>
+                <h4 class="box-title"><span id="idUserNo3"></span>【户级清单】</h4>
+            </div>
+            <div class="modal-body">
+                <div class="box">
+                    <form id="JS_selectDoorForm">
+                        <div class="box-header with-border">
+                            <div class="box-tools pull-right">
+                                <button type="button" class="btn btn-box-tool input-sm" data-widget="collapse">
+                                    <i class="fa fa-minus"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="box-body">
+                            <div class="row">
+                                <div class="col-lg-1">
+                                    <label>幢号</label>
+                                    <input type="text" class="form-control input-sm" name="building"
+                                           placeholder="例：1">
+                                </div>
+                                <div class="col-lg-1">
+                                    <label>户室</label>
+                                    <input type="text" class="form-control input-sm" name="door"
+                                           placeholder="例：501">
+                                </div>
+                                <div class="col-lg-2">
+                                    <label>排摸人姓名</label>
+                                    <input type="text" class="form-control input-sm" name="rangerName"
+                                           placeholder="排摸人姓名">
+                                </div>
+                                <div class="col-lg-2">
+                                    <label>排摸状态</label>
+                                    <select class="form-control input-sm" name="state">
+                                        <option value="">全部</option>
+                                        <option value=0>未排摸</option>
+                                        <option value=1>自动匹配</option>
+                                        <option value=2>手动排摸</option>
+                                    </select>
+                                </div>
+                                <div class="col-lg-2">
+                                    <label>是否安装宽带</label>
+                                    <select class="form-control input-sm" name="ifinstallWb">
+                                        <option value="">全部</option>
+                                        <option value=0>未安装</option>
+                                        <option value=1>安装</option>
+                                    </select>
+                                </div>
+                                <div class="col-lg-2">
+                                    <label>宽带类型</label>
+                                    <select class="form-control input-sm" name="wbTypes">
+                                        <option value="">全部</option>
+                                        <option value="移动">移动</option>
+                                        <option value="联通">联通</option>
+                                        <option value="电信">电信</option>
+                                        <option value="华数">华数</option>
+                                        <option value="其他">其他</option>
+                                    </select>
+                                </div>
+                                <div class="col-lg-2 btn-group-sm" style="margin-top:22px">
+                                    <button type="reset" class="btn btn-default">重置</button>
+                                    <button type="button" class="btn btn-primary" data-toggle="modal" name="queryUser">
+                                        查询
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="box" id="JS_getDoorList" style="min-height:100px; ">
+                    <div class="box-header ">
+                        <h5 class="box-title">清单界面</h5>
+                        <div class="box-tools btn-group-sm">
+                            <!--<button type="button" class="btn btn-primary hide" data-toggle="modal"-->
+                            <!--name="addAllCard">排摸人指定-->
+                            <!--</button>-->
+                            <a class="btn btn-primary hide" id="JS_export1" name="export2">导出 </a>
+                        </div>
+                    </div>
+                    <div class="box-body" style="min-height: 100px;">
+                        <table class="table table-bordered table-hover text-center" style="table-layout:fixed;"
+                               data-adjustable="true">
+                            <thead>
+                            <tr>
+                                <th width="6%">幢</th>
+                                <th width="5%">单元</th>
+                                <th width="5%">层</th>
+                                <th width="5%">户</th>
+                                <th width="8%">排摸人</th>
+                                <th width="12%">户主电话</th>
+                                <th width="12%">是否安装宽带</th>
+                                <th width="8%">宽带类型</th>
+                                <th width="10%">宽带账号</th>
+                                <th width="10%">到期时间</th>
+                                <th width="8%">排摸状态</th>
+                                <th width="10%">排摸时间</th>
+                                <th colspan="2" width="12%">操作</th>
+                            </tr>
+                            </thead>
+                            <tbody name="content"></tbody>
+                        </table>
+                        <div class="box-footer no-border">
+                            <div class="dataTables_paginate" name="pagination"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+
+    //时间列表中显示截取
+    Handlebars.registerHelper("deadlineTimes", function (value) {
+        if (value != null) {
+            return value.substr(0, 10);
+        } else {
+            return null;
+        }
+    });
+
+
+    Handlebars.registerHelper("villageRanger", function (value) {
+        if (value === 1) {
+            return "<td><div class=\"btn-group-xs\"><button type=\"button\" class=\"btn btn-primary\"    name=\"select\" data-toggle=\"modal\">选择</button></div></td>";
+        } else {
+            return "<td><div class=\"btn-group-xs\"><button type=\"button\" class=\"btn btn-warning\"    name=\"del\" data-toggle=\"modal\">取消</button></div></td>";
+        }
+    });
+    Handlebars.registerHelper("VillageState", function (value) {
+        if (value === 0) {
+            return "未排摸";
+        } else if (value === 1) {
+            return "自动匹配";
+        } else if (value === 2) {
+            return "手动排摸";
+        }
+    });
+
+    Handlebars.registerHelper("DoorifinstallWb", function (value) {
+        if (value === 0) {
+            return "未安装";
+        } else if (value === 1) {
+            return "安装";
+        }
+    });
+    Handlebars.registerHelper("deadlineTimes", function (v) {
+        var v1 = null;
+        if (v) {
+            v1 = v.substring(0, 10);
+        }
+        return v1;
+    });
+    Handlebars.registerHelper("villageDoor", function (value) {
+        if (value) {
+            return "<td><div class=\"btn-group-xs\"><button type=\"button\" class=\"btn btn-warning\"    name=\"detail\" data-toggle=\"modal\">详情</button></div></td>" +
+                "<td><div class=\"btn-group-xs\"><button type=\"button\" class=\"btn btn-primary\"    name=\"update\" data-toggle=\"modal\">修改 </button></div></td>";
+        } else {
+            return "<td><div class=\"btn-group-xs\"><button type=\"button\" class=\"btn btn-warning\"    name=\"detail\" data-toggle=\"modal\">详情</button></div></td>";
+        }
+    });
+
+    selectAll();
+    qxSelected();
+    //主页列表展示
+    function selectAll(){
+        var _domPagination = $("#pagination");
+        getServerPage("/village/villageManage/list", "", function (json) {
+            if (json) {
+                //通过模板定义的id获取模板
+                var tpl = $("#TPL_getVillageList").html();
+                //预编译模板
+                var template = Handlebars.compile(tpl);
+                //传入需要填充的数据匹配
+                var html = template(json.data);
+                //插入模板到ul中
+                $("#content").html(html);
+                if(json){
+                    editVillageInfo();
+                    detailVillageInfo();
+                    find();
+                    stockDetail();
+                }else {
+
+                }
+            } else {
+                $.modalAlert(data.msg, modal_status.FAIL);
+            }
+        },_domPagination, 10, 6);
+    }
+
+
+    //主页查询区县下拉框
+    function qxSelected() {
+        $.ajax({
+            cache: true,
+            type: "POST",
+            url: "/village/villageManage/countyCode",
+            data: {},
+            async: false,
+            success: function (json) {
+                if (json) {
+                    var html = '';
+                    html = html + "<option value=''>" + "全部区县" + "</option>"
+                    for (var i = 0; i < json.data.length; i++) {
+                        html = html + "<option value='" + json.data[i].countyCode + "'>" + json.data[i].countyName + "</option>";
+                    }
+                    $('#countyCode').html(html);
+                    qySelected();
+                        $("#countyCode").change(function () {
+                            qySelected();//改变一次值调用一次这方法，然后又绑定一次change事件？不太合适啊
+                        });
+
+                } else {
+                    $.modalAlert(data.msg, modal_status.FAIL);
+                }
+            }
+        });
+    }
+
+    <!--主页查询区域下拉框-->
+    function qySelected(){
+        var countyCode = $("#countyCode").val();
+        $.ajax({
+            cache: true,
+            type: "POST",
+            url: "/village/villageManage/regionId/"+countyCode,
+            data: {},
+            dataType: 'json',
+            async: false,
+            success: function (json) {
+                if (json) {
+                    var html = '';
+                    html = html + "<option value=''>" + "全部区域" + "</option>"
+                    for (var i = 0; i < json.data.length; i++) {
+                        html = html + "<option value='" + json.data[i].regionId + "'>" + json.data[i].regionName + "</option>";
+                    }
+                    $('#regionId').html(html);
+                } else {
+                    $.modalAlert(data.msg, modal_status.FAIL);
+                }
+            }
+        });
+    }
+
+    //点击修改按钮弹出修改页面
+    function editVillageInfo() {
+        var dom = $("#Page_villageListHtml");
+        var update = dom.find("[name='update']");
+        var modal = $("#Modal_updateVillageListModal");
+        update.unbind('click');
+        update.bind('click', function () {
+            var _this = $(this);
+            var data = getTableOneRow(_this);
+            modal.find("[name='id']").val(data.id);
+            modal.find("[name='villageName']").val(data.villageName);
+            modal.find("[name='countyName']").val(data.countyName);
+            modal.find("[name='regionName']").val(data.regionName);
+            modal.find("[name='buildDateStr']").val(data.buildDateStr);
+            modal.find("[name='property']").val(data.property);
+            modal.find("[name='phone']").val(data.phone);
+            modal.find("[name='address']").val(data.address);
+            modal.find("[name='contractorName']").val(data.contractorName);
+            modal.modal('show');
+            editSave();
+        })
+    }
+
+    //修改页面保存按钮
+    function editSave() {
+        var modal = $("#Modal_updateVillageListModal");
+        var form = $("#JS_updateVillageListForm");
+        //保存
+        var save = modal.find("[name='saves']");
+        save.unbind('click');
+        save.bind('click', function () {
+            var cmds = form.serialize();
+            save.attr('disabled', true);
+            $.ajax({
+                cache: true,
+                type: "POST",
+                url: "/village/villageManage/editVillageInfo",
+                data: cmds,
+                async: false,
+                success: function (json,status) {
+                    if (status) {
+                        modal.modal('hide');
+                        setTimeout(function () {
+                            $("#JS_updateVillageListForm")[0].reset();
+                        }, 1000);
+                        save.attr('disabled', false);
+                        selectAll();
+                    } else {
+                        $.modalAlert(data.msg, 500);
+                    }
+                }
+            });
+        })
+    }
+
+    //点击详情按钮 弹出详情页面
+    function detailVillageInfo() {
+        var dom = $("#Page_villageListHtml");
+        var add = dom.find("[name='detail']");
+        var modal = $("#Modal_detailVillageListModal");
+        add.unbind('click');
+        add.bind('click', function () {
+            var _this = $(this)
+            var data = getTableOneRow(_this);
+            modal.find("[name='id']").val(data.id);
+            modal.find("[name='villageName']").val(data.villageName);
+            modal.find("[name='countyName']").val(data.countyName);
+            modal.find("[name='regionName']").val(data.regionName);
+            modal.find("[name='buildDate']").val(data.buildDate);
+            modal.find("[name='property']").val(data.property);
+            modal.find("[name='phone']").val(data.phone);
+            modal.find("[name='address']").val(data.address);
+            modal.find("[name='contractorName']").val(data.contractorName);
+            modal.find("[name='scene']").val(data.scene);
+            modal.modal('show');
+        })
+    }
+
+    //点击查询按钮
+    function find() {
+        var dom = $("#Page_villageListHtml");
+        var add = dom.find("[name='query']");
+        add.unbind('click');
+        add.bind('click', function () {
+            var _domPagination = $("#pagination");
+            var form = $("#JS_queryVillageListForm");
+            var cmds = form.serialize();
+            getServerPage("/village/villageManage/list",cmds, function (json) {
+                if (json) {
+                    var tpl = $("#TPL_getVillageList").html();
+                    //预编译模板
+                    var template = Handlebars.compile(tpl);
+                    //传入需要填充的数据匹配
+                    var html = template(json.data);
+                    //插入模板到ul中
+                    $("#content").html(html);
+                    editVillageInfo();
+                    detailVillageInfo();
+                } else {
+                    $.modalAlert(data.msg, modal_status.FAIL);
+                }
+            },_domPagination, 10, 6);
+        })
+    }
+
+    //点击小区显示页面
+    function stockDetail() {
+        var dom = $("#Page_villageListHtml");
+        var stock = dom.find("[name='stock']");
+        var modal = $("#Modal_selectBuildingModal");
+        var _this = $(this);
+        var data =getTableOneRow(_this);
+        stock.unbind('click');
+        stock.bind('click', function () {
+            modal.modal('show');
+            if (data) {
+                allDoorList(data);
+            }
+        })
+    }
+    function allDoorList(data) {
+        var self = this;
+        var _dom =$("#JS_getDoorList");
+        var _form =$("#JS_selectDoorForm");
+        var _domPagination = _dom.find("[name='pagination']");
+        var cmd = _form.serialize();
+        cmd = cmd + '&villageId=' + data.id;
+        exportDoorCmd = cmd;
+        getServerPage(srvMap.get('allDoorList'), cmd, function (json) {
+            var template = Handlebars.compile(Page.findTpl('getStockList'));
+            _dom.find("[name='content']").html(template(json.rows));
+            if (isAdmin || isContractor) {
+                Page.findId('getDoorList').find("[name='export2']").removeClass('hide');
+            }else if (isManager){
+                Page.findId('getDoorList').find("[name='export2']").removeClass('hide');
+                Page.findId('getDoorList').find("[name ='update']").addClass('hide')
+            }
+            self.updateDoorPlanConfigBtn(data);
+            self.detailDoorPlanConfigBtn();
+            self.exportDoors();
+            self.getAllDetailList(_data);
+        }, _domPagination, 10, 6);
+        self.queryDoorAllSoxUserList(_data);
+    }
+
+
+
+
+
+    //以下可以无视，就是一些封装方法，直接复制就行
+    function getServerPage(url, cmd, callback, obj, pageSize, displayPage) {
+        var self = this;
+        var page_index = 0;
+        var page_count = 0;
+        var items_per_page = pageSize || 10;
+        var num_display_entries = displayPage || 8;
+        var current_page = 0;
+        $(obj).html(''); // 初始化清空分页
+        function getDataList(index, jq) {
+            if ($(obj).find("li.active").length > 0) {
+                current_page = $(obj).find("li.active")[0].innerText - 1;
+            }
+            var _cmd = cmd;
+            if (typeof(_cmd) == "object") {
+                _cmd = cmd;
+                _cmd['page'] = index;
+                _cmd['rows'] = items_per_page;
+            } else {
+                _cmd = _cmd + "&page=" + (index) + '&rows=' + items_per_page;
+            }
+            $.ajax({
+                cache: true,
+                type: "POST",
+                url: url,
+                data: _cmd,
+                async: false,
+                success: function (json,status) {
+                    if (status) {
+                        callback(json);
+                        var _table = $(obj).parent().prev(".box-body").find('table');
+                        if (_table.data('adjustable')) {
+                            _table.addClass('table2');
+                            var _tableDom = _table[0];
+                            setWeithTable(_tableDom);
+                        }
+                        page_count = json.total;
+                        if ($(obj).html() == '') {
+                            $(obj).pagination(json.total, {
+                                items_per_page: items_per_page, //每页显示的条目数
+                                num_display_entries: num_display_entries, //连续分页主体部分显示的分页条目数
+                                num_edge_entries: 2, //两侧显示的首尾分页的条目数
+                                current_page: current_page,
+                                prev_text: "上页",
+                                next_text: "下页",
+                                callback: pageselectCallback
+                            });
+                            setPageInfo(index);
+                        }
+                    }
+                }
+            });
+        }
+        // 回调方法
+        function pageselectCallback(page_index, jq) {
+            getDataList(page_index, jq);
+            setPageInfo(page_index);
+        }
+        // 初始化
+        getDataList(current_page);
+        function setPageInfo(pageIndex) {
+            var _startSize = pageIndex == 0 ? 0 : pageIndex * items_per_page;
+            var _endSize = (pageIndex + 1) * items_per_page > page_count ? page_count : (pageIndex + 1) * items_per_page;
+            if (page_count == 0) {
+                var _html = "<div class='dataTables_info pull-left'>第" + 0 + "-" + 0 + "，共" + 0 + "</div>";
+                $(obj).prepend(_html);
+            } else {
+                var _html = "<div class='dataTables_info pull-right pagination'>第" + (_startSize + 1) + "-" + _endSize + "，共" + page_count + "</div>";
+                $(obj).prepend(_html);
+            }
+        }
+    }
+    /**
+     * 设置表格列宽度的可调节
+     * @param table 表格的Dom对象 必须要用js来获取，不能用jquery
+     *
+     */
+    function setWeithTable(table) {
+        var tTD; //用来存储当前更改宽度的Table Cell,避免快速移动鼠标的问题
+
+        for (j = 0; j < table.rows[0].cells.length; j++) {
+            table.rows[0].cells[j].onmousedown = function () {
+                //记录单元格
+                tTD = this;
+                if (event.offsetX > tTD.offsetWidth - 10) {
+                    tTD.mouseDown = true;
+                    tTD.oldX = event.x;
+                    tTD.oldWidth = tTD.offsetWidth;
+                }
+            };
+            table.rows[0].cells[j].onmouseup = function () {
+                //结束宽度调整
+                if (tTD == undefined) tTD = this;
+                tTD.mouseDown = false;
+                tTD.style.cursor = 'default';
+            };
+            table.rows[0].cells[j].onmousemove = function () {
+                //更改鼠标样式
+                if (event.offsetX > this.offsetWidth - 10)
+                    this.style.cursor = 'col-resize';
+                else
+                    this.style.cursor = 'default';
+                //取出暂存的Table Cell
+                if (tTD == undefined) tTD = this;
+                //调整宽度
+                if (tTD.mouseDown != null && tTD.mouseDown == true) {
+                    tTD.style.cursor = 'default';
+                    if (tTD.oldWidth + (event.x - tTD.oldX) > 0)
+                        tTD.width = tTD.oldWidth + (event.x - tTD.oldX);
+                    //调整列宽
+                    tTD.style.width = tTD.width;
+                    tTD.style.cursor = 'col-resize';
+                    //调整该列中的每个Cell
+                    table = tTD;
+                    while (table.tagName != 'TABLE') table = table.parentElement;
+                    for (j = 0; j < table.rows.length; j++) {
+                        table.rows[j].cells[tTD.cellIndex].width = tTD.width;
+                    }
+                }
+            };
+        }
+        table.onmouseup = function (event) {
+            /* Act on the event */
+            if (tTD == undefined) {
+            } else {
+                tTD.mouseDown = false;
+                tTD.style.cursor = 'default';
+            }
+        };
+    }
+    /**
+     * 获取一行数据
+     * @param obj
+     * @param message
+     * @returns {{}}
+     */
+    function getTableOneRow(obj) {
+        var data = {};
+        obj.parents("tr").find("input").each(function () {
+            var key = $(this).attr("name");
+            var value = $(this).val();
+            data[key] = value;
+        });
+        return data;
+    }
+</script>

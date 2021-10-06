@@ -1,0 +1,400 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.rzspider.project.village.villageManage.mapper.VillageDetailMapper">
+  <resultMap id="BaseResultMap" type="com.rzspider.project.village.villageManage.domain.VillageDetail">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="villageId" jdbcType="VARCHAR" property="villageId" />
+    <result column="building" jdbcType="VARCHAR" property="building" />
+    <result column="unit" jdbcType="VARCHAR" property="unit" />
+    <result column="floor" jdbcType="VARCHAR" property="floor" />
+    <result column="door" jdbcType="VARCHAR" property="door" />
+    <result column="state" jdbcType="BIGINT" property="state" />
+    <result column="phone" jdbcType="VARCHAR" property="phone" />
+    <result column="stateStr" jdbcType="VARCHAR" property="stateStr" />
+    <result column="ifinstallWbStr" jdbcType="VARCHAR" property="ifinstallWbStr" />
+    <result column="surname" jdbcType="VARCHAR" property="surname" />
+    <result column="ifinstallWb" jdbcType="VARCHAR" property="ifinstallWb" />
+    <result column="wbTypes" jdbcType="VARCHAR" property="wbTypes" />
+    <result column="wbNumber" jdbcType="BIGINT" property="wbNumber" />
+    <result column="expirationTime" jdbcType="TIMESTAMP" property="expirationTime" />
+    <result column="cost" jdbcType="VARCHAR" property="cost" />
+    <result column="mixWb" jdbcType="VARCHAR" property="mixWb" />
+    <result column="wbTv" jdbcType="BIGINT" property="wbTv" />
+    <result column="remarks" jdbcType="VARCHAR" property="remarks" />
+    <result column="rangerId" jdbcType="VARCHAR" property="rangerId" />
+    <result column="rangerName" jdbcType="VARCHAR" property="rangerName" />
+    <result column="rangerTime" jdbcType="TIMESTAMP" property="rangerTime" />
+    <result column="threemonthAvgarpu" jdbcType="VARCHAR" property="threemonthAvgarpu" />
+    <result column="nakedwbTime" jdbcType="TIMESTAMP" property="nakedwbTime" />
+    <result column="ifrenewable" jdbcType="VARCHAR" property="ifrenewable" />
+    <result column="mixHost" jdbcType="VARCHAR" property="mixHost" />
+    <result column="mixMin" jdbcType="VARCHAR" property="mixMin" />
+    <result column="insertWay" jdbcType="VARCHAR" property="insertWay" />
+    <result column="ifwbSilent" jdbcType="VARCHAR" property="ifwbSilent" />
+    <result column="iftvSilent" jdbcType="VARCHAR" property="iftvSilent" />
+    <result column="cfFlag" jdbcType="VARCHAR" property="cfFlag" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, villageId, building, unit, floor, door, state, phone, stateStr, ifinstallWbStr, 
+    surname, ifinstallWb, wbTypes, wbNumber, expirationTime, cost, mixWb, wbTv, remarks, 
+    rangerId, rangerName, rangerTime, threemonthAvgarpu, nakedwbTime, ifrenewable, mixHost, 
+    mixMin, insertWay, ifwbSilent, iftvSilent, cfFlag
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from villagedetail
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from villagedetail
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.rzspider.project.village.villageManage.domain.VillageDetail">
+    insert into villagedetail (id, villageId, building, 
+      unit, floor, door, 
+      state, phone, stateStr, 
+      ifinstallWbStr, surname, ifinstallWb, 
+      wbTypes, wbNumber, expirationTime, 
+      cost, mixWb, wbTv, remarks, 
+      rangerId, rangerName, rangerTime, 
+      threemonthAvgarpu, nakedwbTime, ifrenewable, 
+      mixHost, mixMin, insertWay, 
+      ifwbSilent, iftvSilent, cfFlag
+      )
+    values (#{id,jdbcType=BIGINT}, #{villageId,jdbcType=VARCHAR}, #{building,jdbcType=VARCHAR}, 
+      #{unit,jdbcType=VARCHAR}, #{floor,jdbcType=VARCHAR}, #{door,jdbcType=VARCHAR}, 
+      #{state,jdbcType=BIGINT}, #{phone,jdbcType=VARCHAR}, #{stateStr,jdbcType=VARCHAR}, 
+      #{ifinstallWbStr,jdbcType=VARCHAR}, #{surname,jdbcType=VARCHAR}, #{ifinstallWb,jdbcType=VARCHAR}, 
+      #{wbTypes,jdbcType=VARCHAR}, #{wbNumber,jdbcType=BIGINT}, #{expirationTime,jdbcType=TIMESTAMP}, 
+      #{cost,jdbcType=VARCHAR}, #{mixWb,jdbcType=VARCHAR}, #{wbTv,jdbcType=BIGINT}, #{remarks,jdbcType=VARCHAR}, 
+      #{rangerId,jdbcType=VARCHAR}, #{rangerName,jdbcType=VARCHAR}, #{rangerTime,jdbcType=TIMESTAMP}, 
+      #{threemonthAvgarpu,jdbcType=VARCHAR}, #{nakedwbTime,jdbcType=TIMESTAMP}, #{ifrenewable,jdbcType=VARCHAR}, 
+      #{mixHost,jdbcType=VARCHAR}, #{mixMin,jdbcType=VARCHAR}, #{insertWay,jdbcType=VARCHAR}, 
+      #{ifwbSilent,jdbcType=VARCHAR}, #{iftvSilent,jdbcType=VARCHAR}, #{cfFlag,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.rzspider.project.village.villageManage.domain.VillageDetail">
+    insert into villagedetail
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="villageId != null">
+        villageId,
+      </if>
+      <if test="building != null">
+        building,
+      </if>
+      <if test="unit != null">
+        unit,
+      </if>
+      <if test="floor != null">
+        floor,
+      </if>
+      <if test="door != null">
+        door,
+      </if>
+      <if test="state != null">
+        state,
+      </if>
+      <if test="phone != null">
+        phone,
+      </if>
+      <if test="stateStr != null">
+        stateStr,
+      </if>
+      <if test="ifinstallWbStr != null">
+        ifinstallWbStr,
+      </if>
+      <if test="surname != null">
+        surname,
+      </if>
+      <if test="ifinstallWb != null">
+        ifinstallWb,
+      </if>
+      <if test="wbTypes != null">
+        wbTypes,
+      </if>
+      <if test="wbNumber != null">
+        wbNumber,
+      </if>
+      <if test="expirationTime != null">
+        expirationTime,
+      </if>
+      <if test="cost != null">
+        cost,
+      </if>
+      <if test="mixWb != null">
+        mixWb,
+      </if>
+      <if test="wbTv != null">
+        wbTv,
+      </if>
+      <if test="remarks != null">
+        remarks,
+      </if>
+      <if test="rangerId != null">
+        rangerId,
+      </if>
+      <if test="rangerName != null">
+        rangerName,
+      </if>
+      <if test="rangerTime != null">
+        rangerTime,
+      </if>
+      <if test="threemonthAvgarpu != null">
+        threemonthAvgarpu,
+      </if>
+      <if test="nakedwbTime != null">
+        nakedwbTime,
+      </if>
+      <if test="ifrenewable != null">
+        ifrenewable,
+      </if>
+      <if test="mixHost != null">
+        mixHost,
+      </if>
+      <if test="mixMin != null">
+        mixMin,
+      </if>
+      <if test="insertWay != null">
+        insertWay,
+      </if>
+      <if test="ifwbSilent != null">
+        ifwbSilent,
+      </if>
+      <if test="iftvSilent != null">
+        iftvSilent,
+      </if>
+      <if test="cfFlag != null">
+        cfFlag,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="villageId != null">
+        #{villageId,jdbcType=VARCHAR},
+      </if>
+      <if test="building != null">
+        #{building,jdbcType=VARCHAR},
+      </if>
+      <if test="unit != null">
+        #{unit,jdbcType=VARCHAR},
+      </if>
+      <if test="floor != null">
+        #{floor,jdbcType=VARCHAR},
+      </if>
+      <if test="door != null">
+        #{door,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null">
+        #{state,jdbcType=BIGINT},
+      </if>
+      <if test="phone != null">
+        #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="stateStr != null">
+        #{stateStr,jdbcType=VARCHAR},
+      </if>
+      <if test="ifinstallWbStr != null">
+        #{ifinstallWbStr,jdbcType=VARCHAR},
+      </if>
+      <if test="surname != null">
+        #{surname,jdbcType=VARCHAR},
+      </if>
+      <if test="ifinstallWb != null">
+        #{ifinstallWb,jdbcType=VARCHAR},
+      </if>
+      <if test="wbTypes != null">
+        #{wbTypes,jdbcType=VARCHAR},
+      </if>
+      <if test="wbNumber != null">
+        #{wbNumber,jdbcType=BIGINT},
+      </if>
+      <if test="expirationTime != null">
+        #{expirationTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="cost != null">
+        #{cost,jdbcType=VARCHAR},
+      </if>
+      <if test="mixWb != null">
+        #{mixWb,jdbcType=VARCHAR},
+      </if>
+      <if test="wbTv != null">
+        #{wbTv,jdbcType=BIGINT},
+      </if>
+      <if test="remarks != null">
+        #{remarks,jdbcType=VARCHAR},
+      </if>
+      <if test="rangerId != null">
+        #{rangerId,jdbcType=VARCHAR},
+      </if>
+      <if test="rangerName != null">
+        #{rangerName,jdbcType=VARCHAR},
+      </if>
+      <if test="rangerTime != null">
+        #{rangerTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="threemonthAvgarpu != null">
+        #{threemonthAvgarpu,jdbcType=VARCHAR},
+      </if>
+      <if test="nakedwbTime != null">
+        #{nakedwbTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="ifrenewable != null">
+        #{ifrenewable,jdbcType=VARCHAR},
+      </if>
+      <if test="mixHost != null">
+        #{mixHost,jdbcType=VARCHAR},
+      </if>
+      <if test="mixMin != null">
+        #{mixMin,jdbcType=VARCHAR},
+      </if>
+      <if test="insertWay != null">
+        #{insertWay,jdbcType=VARCHAR},
+      </if>
+      <if test="ifwbSilent != null">
+        #{ifwbSilent,jdbcType=VARCHAR},
+      </if>
+      <if test="iftvSilent != null">
+        #{iftvSilent,jdbcType=VARCHAR},
+      </if>
+      <if test="cfFlag != null">
+        #{cfFlag,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.rzspider.project.village.villageManage.domain.VillageDetail">
+    update villagedetail
+    <set>
+      <if test="villageId != null">
+        villageId = #{villageId,jdbcType=VARCHAR},
+      </if>
+      <if test="building != null">
+        building = #{building,jdbcType=VARCHAR},
+      </if>
+      <if test="unit != null">
+        unit = #{unit,jdbcType=VARCHAR},
+      </if>
+      <if test="floor != null">
+        floor = #{floor,jdbcType=VARCHAR},
+      </if>
+      <if test="door != null">
+        door = #{door,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null">
+        state = #{state,jdbcType=BIGINT},
+      </if>
+      <if test="phone != null">
+        phone = #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="stateStr != null">
+        stateStr = #{stateStr,jdbcType=VARCHAR},
+      </if>
+      <if test="ifinstallWbStr != null">
+        ifinstallWbStr = #{ifinstallWbStr,jdbcType=VARCHAR},
+      </if>
+      <if test="surname != null">
+        surname = #{surname,jdbcType=VARCHAR},
+      </if>
+      <if test="ifinstallWb != null">
+        ifinstallWb = #{ifinstallWb,jdbcType=VARCHAR},
+      </if>
+      <if test="wbTypes != null">
+        wbTypes = #{wbTypes,jdbcType=VARCHAR},
+      </if>
+      <if test="wbNumber != null">
+        wbNumber = #{wbNumber,jdbcType=BIGINT},
+      </if>
+      <if test="expirationTime != null">
+        expirationTime = #{expirationTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="cost != null">
+        cost = #{cost,jdbcType=VARCHAR},
+      </if>
+      <if test="mixWb != null">
+        mixWb = #{mixWb,jdbcType=VARCHAR},
+      </if>
+      <if test="wbTv != null">
+        wbTv = #{wbTv,jdbcType=BIGINT},
+      </if>
+      <if test="remarks != null">
+        remarks = #{remarks,jdbcType=VARCHAR},
+      </if>
+      <if test="rangerId != null">
+        rangerId = #{rangerId,jdbcType=VARCHAR},
+      </if>
+      <if test="rangerName != null">
+        rangerName = #{rangerName,jdbcType=VARCHAR},
+      </if>
+      <if test="rangerTime != null">
+        rangerTime = #{rangerTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="threemonthAvgarpu != null">
+        threemonthAvgarpu = #{threemonthAvgarpu,jdbcType=VARCHAR},
+      </if>
+      <if test="nakedwbTime != null">
+        nakedwbTime = #{nakedwbTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="ifrenewable != null">
+        ifrenewable = #{ifrenewable,jdbcType=VARCHAR},
+      </if>
+      <if test="mixHost != null">
+        mixHost = #{mixHost,jdbcType=VARCHAR},
+      </if>
+      <if test="mixMin != null">
+        mixMin = #{mixMin,jdbcType=VARCHAR},
+      </if>
+      <if test="insertWay != null">
+        insertWay = #{insertWay,jdbcType=VARCHAR},
+      </if>
+      <if test="ifwbSilent != null">
+        ifwbSilent = #{ifwbSilent,jdbcType=VARCHAR},
+      </if>
+      <if test="iftvSilent != null">
+        iftvSilent = #{iftvSilent,jdbcType=VARCHAR},
+      </if>
+      <if test="cfFlag != null">
+        cfFlag = #{cfFlag,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.rzspider.project.village.villageManage.domain.VillageDetail">
+    update villagedetail
+    set villageId = #{villageId,jdbcType=VARCHAR},
+      building = #{building,jdbcType=VARCHAR},
+      unit = #{unit,jdbcType=VARCHAR},
+      floor = #{floor,jdbcType=VARCHAR},
+      door = #{door,jdbcType=VARCHAR},
+      state = #{state,jdbcType=BIGINT},
+      phone = #{phone,jdbcType=VARCHAR},
+      stateStr = #{stateStr,jdbcType=VARCHAR},
+      ifinstallWbStr = #{ifinstallWbStr,jdbcType=VARCHAR},
+      surname = #{surname,jdbcType=VARCHAR},
+      ifinstallWb = #{ifinstallWb,jdbcType=VARCHAR},
+      wbTypes = #{wbTypes,jdbcType=VARCHAR},
+      wbNumber = #{wbNumber,jdbcType=BIGINT},
+      expirationTime = #{expirationTime,jdbcType=TIMESTAMP},
+      cost = #{cost,jdbcType=VARCHAR},
+      mixWb = #{mixWb,jdbcType=VARCHAR},
+      wbTv = #{wbTv,jdbcType=BIGINT},
+      remarks = #{remarks,jdbcType=VARCHAR},
+      rangerId = #{rangerId,jdbcType=VARCHAR},
+      rangerName = #{rangerName,jdbcType=VARCHAR},
+      rangerTime = #{rangerTime,jdbcType=TIMESTAMP},
+      threemonthAvgarpu = #{threemonthAvgarpu,jdbcType=VARCHAR},
+      nakedwbTime = #{nakedwbTime,jdbcType=TIMESTAMP},
+      ifrenewable = #{ifrenewable,jdbcType=VARCHAR},
+      mixHost = #{mixHost,jdbcType=VARCHAR},
+      mixMin = #{mixMin,jdbcType=VARCHAR},
+      insertWay = #{insertWay,jdbcType=VARCHAR},
+      ifwbSilent = #{ifwbSilent,jdbcType=VARCHAR},
+      iftvSilent = #{iftvSilent,jdbcType=VARCHAR},
+      cfFlag = #{cfFlag,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

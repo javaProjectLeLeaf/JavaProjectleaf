@@ -1,0 +1,305 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.rzspider.project.village.villageManage.mapper.VillageMapper">
+  <resultMap id="BaseResultMap" type="com.rzspider.project.village.villageManage.domain.Village">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="villageSceneid" jdbcType="BIGINT" property="villageSceneid" />
+    <result column="villageName" jdbcType="VARCHAR" property="villageName" />
+    <result column="countyCode" jdbcType="VARCHAR" property="countyCode" />
+    <result column="countyName" jdbcType="VARCHAR" property="countyName" />
+    <result column="regionId" jdbcType="VARCHAR" property="regionId" />
+    <result column="regionName" jdbcType="VARCHAR" property="regionName" />
+    <result column="gridName" jdbcType="VARCHAR" property="gridName" />
+    <result column="gridId" jdbcType="VARCHAR" property="gridId" />
+    <result column="contractorId" jdbcType="BIGINT" property="contractorId" />
+    <result column="contractorName" jdbcType="VARCHAR" property="contractorName" />
+    <result column="longitude" jdbcType="DECIMAL" property="longitude" />
+    <result column="latitude" jdbcType="DECIMAL" property="latitude" />
+    <result column="boundary" jdbcType="VARCHAR" property="boundary" />
+    <result column="accessMode" jdbcType="VARCHAR" property="accessMode" />
+    <result column="buildDate" jdbcType="TIMESTAMP" property="buildDate" />
+    <result column="property" jdbcType="VARCHAR" property="property" />
+    <result column="phone" jdbcType="VARCHAR" property="phone" />
+    <result column="address" jdbcType="VARCHAR" property="address" />
+    <result column="scale" jdbcType="VARCHAR" property="scale" />
+    <result column="userNumber" jdbcType="VARCHAR" property="userNumber" />
+    <result column="occupancyRate" jdbcType="VARCHAR" property="occupancyRate" />
+    <result column="opId" jdbcType="BIGINT" property="opId" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, villageSceneid, villageName, countyCode, countyName, regionId, regionName, gridName, 
+    gridId, contractorId, contractorName, longitude, latitude, boundary, accessMode, 
+    buildDate, property, phone, address, scale, userNumber, occupancyRate, opId
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_village
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from t_village
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.rzspider.project.village.villageManage.domain.Village">
+    insert into t_village (id, villageSceneid, villageName, 
+      countyCode, countyName, regionId, 
+      regionName, gridName, gridId, 
+      contractorId, contractorName, longitude, 
+      latitude, boundary, accessMode, 
+      buildDate, property, phone, 
+      address, scale, userNumber, 
+      occupancyRate, opId)
+    values (#{id,jdbcType=BIGINT}, #{villageSceneid,jdbcType=BIGINT}, #{villageName,jdbcType=VARCHAR}, 
+      #{countyCode,jdbcType=VARCHAR}, #{countyName,jdbcType=VARCHAR}, #{regionId,jdbcType=VARCHAR}, 
+      #{regionName,jdbcType=VARCHAR}, #{gridName,jdbcType=VARCHAR}, #{gridId,jdbcType=VARCHAR}, 
+      #{contractorId,jdbcType=BIGINT}, #{contractorName,jdbcType=VARCHAR}, #{longitude,jdbcType=DECIMAL}, 
+      #{latitude,jdbcType=DECIMAL}, #{boundary,jdbcType=VARCHAR}, #{accessMode,jdbcType=VARCHAR}, 
+      #{buildDate,jdbcType=TIMESTAMP}, #{property,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, 
+      #{address,jdbcType=VARCHAR}, #{scale,jdbcType=VARCHAR}, #{userNumber,jdbcType=VARCHAR}, 
+      #{occupancyRate,jdbcType=VARCHAR}, #{opId,jdbcType=BIGINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.rzspider.project.village.villageManage.domain.Village">
+    insert into t_village
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="villageSceneid != null">
+        villageSceneid,
+      </if>
+      <if test="villageName != null">
+        villageName,
+      </if>
+      <if test="countyCode != null">
+        countyCode,
+      </if>
+      <if test="countyName != null">
+        countyName,
+      </if>
+      <if test="regionId != null">
+        regionId,
+      </if>
+      <if test="regionName != null">
+        regionName,
+      </if>
+      <if test="gridName != null">
+        gridName,
+      </if>
+      <if test="gridId != null">
+        gridId,
+      </if>
+      <if test="contractorId != null">
+        contractorId,
+      </if>
+      <if test="contractorName != null">
+        contractorName,
+      </if>
+      <if test="longitude != null">
+        longitude,
+      </if>
+      <if test="latitude != null">
+        latitude,
+      </if>
+      <if test="boundary != null">
+        boundary,
+      </if>
+      <if test="accessMode != null">
+        accessMode,
+      </if>
+      <if test="buildDate != null">
+        buildDate,
+      </if>
+      <if test="property != null">
+        property,
+      </if>
+      <if test="phone != null">
+        phone,
+      </if>
+      <if test="address != null">
+        address,
+      </if>
+      <if test="scale != null">
+        scale,
+      </if>
+      <if test="userNumber != null">
+        userNumber,
+      </if>
+      <if test="occupancyRate != null">
+        occupancyRate,
+      </if>
+      <if test="opId != null">
+        opId,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="villageSceneid != null">
+        #{villageSceneid,jdbcType=BIGINT},
+      </if>
+      <if test="villageName != null">
+        #{villageName,jdbcType=VARCHAR},
+      </if>
+      <if test="countyCode != null">
+        #{countyCode,jdbcType=VARCHAR},
+      </if>
+      <if test="countyName != null">
+        #{countyName,jdbcType=VARCHAR},
+      </if>
+      <if test="regionId != null">
+        #{regionId,jdbcType=VARCHAR},
+      </if>
+      <if test="regionName != null">
+        #{regionName,jdbcType=VARCHAR},
+      </if>
+      <if test="gridName != null">
+        #{gridName,jdbcType=VARCHAR},
+      </if>
+      <if test="gridId != null">
+        #{gridId,jdbcType=VARCHAR},
+      </if>
+      <if test="contractorId != null">
+        #{contractorId,jdbcType=BIGINT},
+      </if>
+      <if test="contractorName != null">
+        #{contractorName,jdbcType=VARCHAR},
+      </if>
+      <if test="longitude != null">
+        #{longitude,jdbcType=DECIMAL},
+      </if>
+      <if test="latitude != null">
+        #{latitude,jdbcType=DECIMAL},
+      </if>
+      <if test="boundary != null">
+        #{boundary,jdbcType=VARCHAR},
+      </if>
+      <if test="accessMode != null">
+        #{accessMode,jdbcType=VARCHAR},
+      </if>
+      <if test="buildDate != null">
+        #{buildDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="property != null">
+        #{property,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null">
+        #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null">
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="scale != null">
+        #{scale,jdbcType=VARCHAR},
+      </if>
+      <if test="userNumber != null">
+        #{userNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="occupancyRate != null">
+        #{occupancyRate,jdbcType=VARCHAR},
+      </if>
+      <if test="opId != null">
+        #{opId,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.rzspider.project.village.villageManage.domain.Village">
+    update t_village
+    <set>
+      <if test="villageSceneid != null">
+        villageSceneid = #{villageSceneid,jdbcType=BIGINT},
+      </if>
+      <if test="villageName != null">
+        villageName = #{villageName,jdbcType=VARCHAR},
+      </if>
+      <if test="countyCode != null">
+        countyCode = #{countyCode,jdbcType=VARCHAR},
+      </if>
+      <if test="countyName != null">
+        countyName = #{countyName,jdbcType=VARCHAR},
+      </if>
+      <if test="regionId != null">
+        regionId = #{regionId,jdbcType=VARCHAR},
+      </if>
+      <if test="regionName != null">
+        regionName = #{regionName,jdbcType=VARCHAR},
+      </if>
+      <if test="gridName != null">
+        gridName = #{gridName,jdbcType=VARCHAR},
+      </if>
+      <if test="gridId != null">
+        gridId = #{gridId,jdbcType=VARCHAR},
+      </if>
+      <if test="contractorId != null">
+        contractorId = #{contractorId,jdbcType=BIGINT},
+      </if>
+      <if test="contractorName != null">
+        contractorName = #{contractorName,jdbcType=VARCHAR},
+      </if>
+      <if test="longitude != null">
+        longitude = #{longitude,jdbcType=DECIMAL},
+      </if>
+      <if test="latitude != null">
+        latitude = #{latitude,jdbcType=DECIMAL},
+      </if>
+      <if test="boundary != null">
+        boundary = #{boundary,jdbcType=VARCHAR},
+      </if>
+      <if test="accessMode != null">
+        accessMode = #{accessMode,jdbcType=VARCHAR},
+      </if>
+      <if test="buildDate != null">
+        buildDate = #{buildDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="property != null">
+        property = #{property,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null">
+        phone = #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null">
+        address = #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="scale != null">
+        scale = #{scale,jdbcType=VARCHAR},
+      </if>
+      <if test="userNumber != null">
+        userNumber = #{userNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="occupancyRate != null">
+        occupancyRate = #{occupancyRate,jdbcType=VARCHAR},
+      </if>
+      <if test="opId != null">
+        opId = #{opId,jdbcType=BIGINT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.rzspider.project.village.villageManage.domain.Village">
+    update t_village
+    set villageSceneid = #{villageSceneid,jdbcType=BIGINT},
+      villageName = #{villageName,jdbcType=VARCHAR},
+      countyCode = #{countyCode,jdbcType=VARCHAR},
+      countyName = #{countyName,jdbcType=VARCHAR},
+      regionId = #{regionId,jdbcType=VARCHAR},
+      regionName = #{regionName,jdbcType=VARCHAR},
+      gridName = #{gridName,jdbcType=VARCHAR},
+      gridId = #{gridId,jdbcType=VARCHAR},
+      contractorId = #{contractorId,jdbcType=BIGINT},
+      contractorName = #{contractorName,jdbcType=VARCHAR},
+      longitude = #{longitude,jdbcType=DECIMAL},
+      latitude = #{latitude,jdbcType=DECIMAL},
+      boundary = #{boundary,jdbcType=VARCHAR},
+      accessMode = #{accessMode,jdbcType=VARCHAR},
+      buildDate = #{buildDate,jdbcType=TIMESTAMP},
+      property = #{property,jdbcType=VARCHAR},
+      phone = #{phone,jdbcType=VARCHAR},
+      address = #{address,jdbcType=VARCHAR},
+      scale = #{scale,jdbcType=VARCHAR},
+      userNumber = #{userNumber,jdbcType=VARCHAR},
+      occupancyRate = #{occupancyRate,jdbcType=VARCHAR},
+      opId = #{opId,jdbcType=BIGINT}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

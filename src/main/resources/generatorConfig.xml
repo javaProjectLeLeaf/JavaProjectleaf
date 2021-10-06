@@ -19,29 +19,40 @@
         <jdbcConnection driverClass="com.mysql.jdbc.Driver"
                         connectionURL="jdbc:mysql://127.0.0.1:3306/javaProject?useUnicode=true&amp;characterEncoding=utf8&amp;zeroDateTimeBehavior=convertToNull&amp;useSSL=false"
                         userId="root"
-                        password="123456">
+                        password="root">
         </jdbcConnection>
 
         <javaTypeResolver>
             <property name="forceBigDecimals" value="false"/>
         </javaTypeResolver>
 
-        <javaModelGenerator targetPackage="com.rzspider.project.salary.salarymanage.domain" targetProject=".\src\main\java">
+        <javaModelGenerator targetPackage="com.rzspider.project.village.villageManage.domain" targetProject=".\src\main\java">
             <property name="enableSubPackages" value="true"/>
             <property name="trimStrings" value="true"/>
         </javaModelGenerator>
 
-        <sqlMapGenerator targetPackage="mybatis.salary" targetProject=".\src\main\resources">
+        <sqlMapGenerator targetPackage="mybatis.village" targetProject=".\src\main\resources">
             <property name="enableSubPackages" value="true"/>
         </sqlMapGenerator>
 
-        <javaClientGenerator type="XMLMAPPER" targetPackage="com.rzspider.project.salary.salarymanage.mapper"
+        <javaClientGenerator type="XMLMAPPER" targetPackage="com.rzspider.project.village.villageManage.mapper"
                              targetProject=".\src\main\java">
             <property name="enableSubPackages" value="true"/>
         </javaClientGenerator>
-        <table tableName="salary" domainObjectName="Salary" enableCountByExample="false"
+        <table tableName="t_village" domainObjectName="Village" enableCountByExample="false"
                enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false"
                selectByExampleQueryId="false">
+            <property name="useActualColumnNames" value="true"/>
+        </table>
+        <table tableName="longList" domainObjectName="VillagePCList" enableCountByExample="false"
+               enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false"
+               selectByExampleQueryId="false">
+            <property name="useActualColumnNames" value="true"/>
+        </table>
+        <table tableName="villageDetail" domainObjectName="VillageDetail" enableCountByExample="false"
+               enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false"
+               selectByExampleQueryId="false">
+            <property name="useActualColumnNames" value="true"/>
         </table>
 
 
